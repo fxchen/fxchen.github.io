@@ -4,13 +4,27 @@
 
 body {
     margin: 0;
-    font-family: "Open Sans" "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 h1 { font-weight: 400; }
 h2 { font-weight: 300; }
 h3 { font-weight: 300; }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Avenir','Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+body, a {
+    font-family: 'Avenir', 'Lora', 'Times New Roman', serif;
+}
+
+.intro-header .page-heading .page-subheading, .post-preview .post-meta, .post-heading .post-meta {
+    font-family: 'Avenir', 'Lora', 'Times New Roman', serif;
+}
+
+.post-preview .post-meta {
+   font-size: 14px;
+   font-style: normal;
+}
 .intro-header .post-heading .post-subheading {
    font-size: 20px;
 }
