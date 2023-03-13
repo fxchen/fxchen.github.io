@@ -1,7 +1,7 @@
 ---
 layout: post
-Title: The AI Sea Change for the Future of Work
-Subtitle: Examples from human-computer collaboration
+title: The AI Sea Change for the Future of Work
+subtitle: Examples from human-computer collaboration
 permalink: ai-sea-change
 ---
 
