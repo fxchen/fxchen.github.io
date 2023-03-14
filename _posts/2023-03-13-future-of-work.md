@@ -1,11 +1,10 @@
 ---
 layout: post
 title: The AI Sea Change for the Future of Work
-subtitle: Examples from human-computer collaboration
+subtitle: Examples from Human-computer Collaboration
 permalink: ai-sea-change
+image: /img-posts/future-of-work-centaur-office-worker.png
 ---
-
-### Intro
 
 Many of today's headlines are dominated by Artificial Intelligence (AI) and ChatGPT. The last few months have represented a clear sea change in public belief in the power of the large language model (LLM).
 
