@@ -105,7 +105,7 @@ Just like chess players. Find ways for specific analysis and generation of ideas
 In the next months I plan to build and play with LLMs to generate code (for engineering productivity).
 
 ![https://user-images.githubusercontent.com/178719/224814437-e9dc6811-048d-4524-b889-1016033c7a35.png](https://user-images.githubusercontent.com/178719/224814437-e9dc6811-048d-4524-b889-1016033c7a35.png)
-
+<center>Categorization for Human-AI collaboration. Source: [AI Superpowers](https://www.amazon.com/AI-Superpowers-China-Silicon-Valley/dp/0358105587)</center>
 
 Yann LeCun has this excellent model (shown above) to describe [this phenomena](https://twitter.com/ylecun/status/1625127902890151943). "Why do LLMs appear much better at generating code than generating general text? Because, unlike the real world, the universe that a program manipulates (the state of the variables) is limited, discrete, deterministic, and fully observable. The real world is none of that"
 
