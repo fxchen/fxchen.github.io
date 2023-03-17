@@ -41,7 +41,7 @@ One field to look at is the progression of chess over the last few decades and i
 In the past, chess was a purely human game, with players relying on their own strategy and tactics to win. However, with the advent of computer chess engines, the game has evolved into what is known as "centaur chess." In centaur chess, human players team up with computer engines to analyze outcomes, resulting in a new and unconventional way of playing the game.
 
 ![../img-posts/future-of-work-deep-blue.jpg](../img-posts/future-of-work-deep-blue.jpg)
-<p class="text-muted">Generated via dalle</p>
+<p class="text-muted">Photo from Deep Blue and Garry Kasparov tournament (1997)</p>
 
 In 1997, IBM's supercomputer Deep Blue famously beat world chess champion Garry Kasparov in six games. Starting in 1998, Kasparov founded ["Advanced" chess tournaments](https://historyofinformation.com/detail.php?entryid=4724) centered on human-computer teams playing chess against each other (also called freestyle chess).
 
@@ -52,6 +52,7 @@ I find this space fascinating to study how human experts and human amateurs coll
 The full play-by-play can be found in the link. In individual measurements, the amateur group seemed to be the underdog in Chess Elo (players on average had 1000 fewer Elo points) and AI (both hardware and software were inferior). Yet, the amateur group prevailed - potentially due to their efficacy on using AI.
 
 ![../img-posts/future-of-work-centaur-office-worker.png](../img-posts/future-of-work-centaur-office-worker.png)
+<p class="text-muted">Generated via dalle</p>
 
 Magnus Carlsen, the current world chess champion, has spoken about how he uses AI in his own chess practice, saying that it "opens up new avenues for analyzing games and potential outcomes." This is just one example of how AI can be used to augment human abilities rather than replacing them.
 
@@ -105,7 +106,7 @@ Just like chess players. Find ways for specific analysis and generation of ideas
 In the next months I plan to build and play with LLMs to generate code (for engineering productivity).
 
 ![https://user-images.githubusercontent.com/178719/224814437-e9dc6811-048d-4524-b889-1016033c7a35.png](https://user-images.githubusercontent.com/178719/224814437-e9dc6811-048d-4524-b889-1016033c7a35.png)
-<p class="text-muted">Categorization for Human-AI collaboration. Source: [AI Superpowers](https://www.amazon.com/AI-Superpowers-China-Silicon-Valley/dp/0358105587)</p>
+<p class="text-muted">Categorization for Human-AI collaboration. Source: <a href="https://www.amazon.com/AI-Superpowers-China-Silicon-Valley/dp/0358105587">AI Superpowers</a></p>
 
 Yann LeCun has this excellent model (shown above) to describe [this phenomena](https://twitter.com/ylecun/status/1625127902890151943). "Why do LLMs appear much better at generating code than generating general text? Because, unlike the real world, the universe that a program manipulates (the state of the variables) is limited, discrete, deterministic, and fully observable. The real world is none of that"
 
