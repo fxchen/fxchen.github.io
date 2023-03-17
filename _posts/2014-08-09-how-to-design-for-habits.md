@@ -73,7 +73,7 @@ The most innovative and useful products of the future will be those that create 
 
 Now I want to ask you all a question:
 <ul>
-  <li>What tools do you use do you use everyday? What makes them indispensible? (Extra credit: Is it for the same reason you used it in the first place?)</li>
+  <li>What tools do you use do you use everyday? What makes them indispensible? (Extra credit: Is it for the same reason you used it in the first place?)</li>
 </ul>
 
 Email me! hello [at] frankc.net

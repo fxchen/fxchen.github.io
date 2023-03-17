@@ -60,7 +60,7 @@ Here are some iterations that were less optimal:
 <ul>
   <li><strong>Check email/social media</strong> These two types of applications are incredible time sinks when I need to get moving in the morning. In each of the steps above, I minimize my time on my phone.</li>
   <li><strong>Meditation sequencing</strong> When I first started meditation, I tried to do this as soon as I got out of bed but found myself too groggy to really focus on my breath for ten minutes. Similarly, I tried meditating before breakfast and found that my stomach growled way too much. When I did not boil water early, my water pot would typically start screaming midway into my meditation.</li>
-  <li><strong>Falling off the wagon for meditation</strong> In the past, I would consistently meditate for months then fall off the wagon for a few months and return. Thus far, this playlist has kept me on the wagon.</li>
+  <li><strong>Falling off the wagon for meditation</strong>In the past, I would consistently meditate for months then fall off the wagon for a few months and return. Thus far, this playlist has kept me on the wagon.</li>
   <li><strong>Fractured toes</strong> In the past two weeks, I’ve fractured two toes. Before I sit down for writing, I have to clean and re-bandage my foot.</li>
   <li><strong>Pager duty</strong> Every couple of months, I go on pager duty for work as a Software engineer. This results in a rough two-week period where I really have to focus on individual playlist steps because my sleep may be punctuated by a midnight page. Read more about pagers: [7]</li>
 </ul>

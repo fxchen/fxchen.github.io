@@ -11,8 +11,7 @@ Many of today's headlines are dominated by Artificial Intelligence (AI) and Chat
 I'll share some of my own experiments and where I believe this technology is going.
 
 ![../img-posts/future-of-work-robotic-sea-change.png](../img-posts/future-of-work-robotic-sea-change.png)
-
----
+<p class="text-muted">Generated via dalle</p
 
 ### Sea change
 
@@ -42,6 +41,7 @@ One field to look at is the progression of chess over the last few decades and i
 In the past, chess was a purely human game, with players relying on their own strategy and tactics to win. However, with the advent of computer chess engines, the game has evolved into what is known as "centaur chess." In centaur chess, human players team up with computer engines to analyze outcomes, resulting in a new and unconventional way of playing the game.
 
 ![../img-posts/future-of-work-deep-blue.jpg](../img-posts/future-of-work-deep-blue.jpg)
+<p class="text-muted">Generated via dalle</p
 
 In 1997, IBM's supercomputer Deep Blue famously beat world chess champion Garry Kasparov in six games. Starting in 1998, Kasparov founded ["Advanced" chess tournaments](https://historyofinformation.com/detail.php?entryid=4724) centered on human-computer teams playing chess against each other (also called freestyle chess).
 
@@ -105,7 +105,7 @@ Just like chess players. Find ways for specific analysis and generation of ideas
 In the next months I plan to build and play with LLMs to generate code (for engineering productivity).
 
 ![https://user-images.githubusercontent.com/178719/224814437-e9dc6811-048d-4524-b889-1016033c7a35.png](https://user-images.githubusercontent.com/178719/224814437-e9dc6811-048d-4524-b889-1016033c7a35.png)
-<center>Categorization for Human-AI collaboration. Source: [AI Superpowers](https://www.amazon.com/AI-Superpowers-China-Silicon-Valley/dp/0358105587)</center>
+<p class="text-muted">Categorization for Human-AI collaboration. Source: [AI Superpowers](https://www.amazon.com/AI-Superpowers-China-Silicon-Valley/dp/0358105587)</p>
 
 Yann LeCun has this excellent model (shown above) to describe [this phenomena](https://twitter.com/ylecun/status/1625127902890151943). "Why do LLMs appear much better at generating code than generating general text? Because, unlike the real world, the universe that a program manipulates (the state of the variables) is limited, discrete, deterministic, and fully observable. The real world is none of that"
 
