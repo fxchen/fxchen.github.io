@@ -9,6 +9,8 @@ This article accompanies the talk at CraftConf 2023.
 
 <h2><strong>🎉🍿 Here from Craft Conference? <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=I%27m%20listening%20to%20@frankc%20talk%20about%20generative%20agents%20More%3A%20https://frankc.net/ai-entered-chat" data-size="large">Tweet</a> and share how I'm wrong</strong></h2>
 
+<h3>🎯 Are you up to try this yourself? <a href="https://forms.gle/gYATDmrPmnCxGGoaA">Fill out this form</a></h3>
+
 [ai-entered-chat-intro]: /img-posts/ai-entered-chat-intro.png
 
 **💡 Abstract**
@@ -22,8 +24,6 @@ My motivation for this talk stems from my desire to help people make better deci
 Please note that this talk is separate from my software development and leadership roles at Slack.
 
 [![How should we introduce this topic?][ai-entered-chat-intro]](/img-posts/ai-entered-chat-intro.png)
-
-<h3>🎯 Are you up to try this yourself? https://forms.gle/gYATDmrPmnCxGGoaA</h3>
 
 **🔗 References**
 
