@@ -12,6 +12,7 @@ This article accompanies the talk at CraftConf 2023.
 <h3>🎯 Are you up to try this yourself? <a href="https://forms.gle/gYATDmrPmnCxGGoaA">Fill out this form</a></h3>
 
 [ai-entered-chat-intro]: /img-posts/ai-entered-chat-intro.png
+[ai-entered-chat-stream]: /img-posts/ai-entered-chat-stream.png
 
 **💡 Abstract**
 
@@ -24,6 +25,8 @@ My motivation for this talk stems from my desire to help people make better deci
 Please note that this talk is separate from my software development and leadership roles at Slack.
 
 [![How should we introduce this topic?][ai-entered-chat-intro]](/img-posts/ai-entered-chat-intro.png)
+
+[![Stream of consciousness][ai-entered-chat-stream]](/img-posts/ai-entered-chat-stream.png)
 
 **🔗 References**
 
