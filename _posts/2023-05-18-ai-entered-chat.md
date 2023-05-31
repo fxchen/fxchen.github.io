@@ -5,11 +5,11 @@ subtitle: Humans, AI and the Art of Collaboration
 permalink: ai-entered-chat
 ---
 
-This article accompanies the talk at CraftConf 2023.
+This article accompanies the talk at CraftConf 2023 ([link](https://craft-conf.com/2023/talk/frank-chens-talk)).
 
-<h2><strong>🎉🍿 Here from Craft Conference? <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=I%27m%20listening%20to%20@frankc%20talk%20about%20generative%20agents%20More%3A%20https://frankc.net/ai-entered-chat" data-size="large">Tweet</a> and share how I'm wrong</strong></h2>
+[**🎞️ Slides**](/assets/2023-05-18-craftconf.pdf)
 
-<h3>🎯 Are you up to try this yourself? <a href="https://forms.gle/gYATDmrPmnCxGGoaA">Fill out this form</a></h3>
+---
 
 [ai-entered-chat-intro]: /img-posts/ai-entered-chat-intro.png
 [ai-entered-chat-stream]: /img-posts/ai-entered-chat-stream.png
