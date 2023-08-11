@@ -36,7 +36,7 @@ Here is a list of links mentioned in the document with their corresponding title
 - [https://lilianweng.github.io/posts/2023-06-23-agent/](https://lilianweng.github.io/posts/2023-06-23-agent/) - I particularly like this walk through of planning and memory "Building agents with LLM (large language model) as its core controller is a cool concept. Several proof-of-concepts demos, such as AutoGPT, GPT-Engineer and BabyAGI, serve as inspiring examples"
 
 
-**🔗 Appendix References**
+**🔗 Appendix References (also - [building bots](https://frankc.net/ai-entered-chat))**
 
 - [https://arxiv.org/abs/2210.03629](https://arxiv.org/abs/2210.03629) - "ReAct: Reasoning and Acting with Language Models" is a paper about a new method that uses large language models to generate reasoning traces and task-specific actions in an interleaved manner, demonstrating improved performance on a diverse set of tasks.
 - [https://arxiv.org/abs/2205.00445](https://arxiv.org/abs/2205.00445) - "Modular Reasoning, Knowledge, and Language" is a paper about a new architecture for artificial intelligence that uses modular components to enable agents to reason and interact in complex environments.
