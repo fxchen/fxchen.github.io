@@ -5,12 +5,15 @@ subtitle: Sharing initial experiments with generative models and their challenge
 permalink: ai-dev
 ---
 
-This article accompanies the talk at the Developer Experience Summit (August 2023)
+This article accompanies the talk at the Developer Experience Summit (August 2023).
+
+**🤖 Github Action Code Review**: [**Install link**](https://github.com/marketplace/actions/code-review-github-action). Currently supports models from OpenAI, Anthropic, plug-and-play with your own LLM!
+
+**💬 Example Code Review**: [![Example review][kaldb-review]](/img-posts/ai-code-review-kaldb-review.png)
 
 **🎞️ Slides** (soon)
 
-[![Tweet: Kent Beck][kent-beck]](/img-posts/ai-code-review-kent-beck.png)
-
+[kaldb-review]: /img-posts/ai-code-review-kaldb-review.png
 [kent-beck]: /img-posts/ai-code-review-kent-beck.png
 [review-oracle]: /img-posts/ai-code-review-oracle.png
 [oracle-yet]: /img-posts/ai-code-review-oracle-yet.png
@@ -19,15 +22,19 @@ This article accompanies the talk at the Developer Experience Summit (August 202
 
 In this talk, I will delve into the next frontier of software development: the integration of generative artificial intelligence (AI) models into the developer workflow. We'll explore initial experiments with AI powered code review in open source repositories at Slack.
 
-I will provide a detailed examination of where these experiments are limited - discussing the benefits, challenges, and future opportunities of strategic bets in this space. This includes an exploration of how these technologies can be tailored to various developer workflows, ranging from automated testing to code comprehension, all while maintaining the human-in-the-loop principle.
+I will provide a detailed examination of these experiments—discussing the benefits, challenges, and future opportunities of strategic bets in this space. This includes an exploration of how these technologies can be tailored to various developer workflows, ranging from automated testing to code comprehension, all while maintaining the human-in-the-loop principle.
 
-My motivation for this talk is rooted in my commitment to advancing technologies that empower developers to make better decisions about investing their time and energy in this space.
+My motivation for this talk is rooted in my commitment to advancing technologies that empower developers to make better decisions. I believe AI powered developer tools present tremendous leverage for engineers across a variety of developer workflows.
+
+[![Tweet: Kent Beck][kent-beck]](/img-posts/ai-code-review-kent-beck.png)
 
 **🔗 References**
 
 Here is a list of links mentioned in the document with their corresponding titles and short summaries:
 
 - [https://github.com/fxchen/code-review/](https://github.com/fxchen/code-review/) - This github action improves your pull requests and code base by performing AI-assisted code reviews. It can analyze your pull requests and provide intelligent and insightful comments to help you maintain high code quality. Example: [https://github.com/slackhq/kaldb/pull/646](https://github.com/slackhq/kaldb/pull/646)
+- [https://arxiv.org/abs/2306.08302](https://arxiv.org/abs/2306.08302) - This study presents a roadmap for unifying Large Language Models (LLMs) and Knowledge Graphs (KGs), emphasizing the complementary nature of LLMs' generalizability and KGs' structured factual knowledge. The proposed unification consists of three frameworks: KG-enhanced LLMs for improved understanding and inference, LLM-augmented KGs for diverse tasks like construction and question answering, and Synergized LLMs + KGs that combine both in a mutually beneficial way to enhance bidirectional reasoning.
+- [https://arxiv.org/abs/2305.12050](https://arxiv.org/abs/2305.12050) - CodeCompose. The paper introduces CodeCompose, an AI-assisted code authoring tool developed and deployed at Meta, based on the InCoder LLM, which has been scaled to serve tens of thousands of developers across multiple languages. It outlines the unique challenges of large-scale industrial deployment, design decisions, and metrics from its use, highlighting a 22% acceptance rate for suggestions and 91.5% positive reception, along with additional positive side effects like encouraging more in-code documentation and API discovery.
 - [https://tidyfirst.substack.com/p/90-of-my-skills-are-now-worth-0](https://tidyfirst.substack.com/p/90-of-my-skills-are-now-worth-0) Article by Kent Beck further describing his tweet "I’ve been reluctant to try ChatGPT. Today I got over that reluctance. Now I understand why I was reluctant. The value of 90% of my skills just dropped to $0. The leverage for the remaining 10% went up 1000x. I need to recalibrate."
 - [https://historyofinformation.com/detail.php?entryid=4724](https://historyofinformation.com/detail.php?entryid=4724) - A brief history of advanced chess tournaments that centered on human-computer teams playing chess against each other.
 - [https://en.chessbase.com/post/dark-horse-zacks-wins-freestyle-che-tournament](https://en.chessbase.com/post/dark-horse-zacks-wins-freestyle-che-tournament) - A Chessbase article about an example of amateur chess players with lower-end chess software beating grand masters with high-end chess software in a freestyle chess tournament.
@@ -36,7 +43,7 @@ Here is a list of links mentioned in the document with their corresponding title
 - [https://lilianweng.github.io/posts/2023-06-23-agent/](https://lilianweng.github.io/posts/2023-06-23-agent/) - I particularly like this walk through of planning and memory "Building agents with LLM (large language model) as its core controller is a cool concept. Several proof-of-concepts demos, such as AutoGPT, GPT-Engineer and BabyAGI, serve as inspiring examples"
 
 
-**🔗 Appendix References (also - [building bots](https://frankc.net/ai-entered-chat))**
+**🔗 Appendix References (also see - [building bots](https://frankc.net/ai-entered-chat))**
 
 - [https://arxiv.org/abs/2210.03629](https://arxiv.org/abs/2210.03629) - "ReAct: Reasoning and Acting with Language Models" is a paper about a new method that uses large language models to generate reasoning traces and task-specific actions in an interleaved manner, demonstrating improved performance on a diverse set of tasks.
 - [https://arxiv.org/abs/2205.00445](https://arxiv.org/abs/2205.00445) - "Modular Reasoning, Knowledge, and Language" is a paper about a new architecture for artificial intelligence that uses modular components to enable agents to reason and interact in complex environments.
