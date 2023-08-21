@@ -24,7 +24,9 @@ description: "Explorer, Software Architect, Behavior Designer"
 # List of links in the navigation bar
 navbar-links:
   Home: ""
+  Media: "media"
   Writing: "writing"
+
 
 # --- Google custom search config --- #
 # search page name search -> /seach.md
