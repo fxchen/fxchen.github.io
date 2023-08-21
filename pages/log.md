@@ -1,9 +1,13 @@
 ---
 layout: default
-permalink: log
-title: Log
+permalink: media
+title: Media
 subtitle: A very incomplete list of projects, references, etc
 ---
+
+# Media
+
+A very incomplete list of projects, references, etc. Roughly ordered chronologically.
 
 ## 2023
 
