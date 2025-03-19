@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light only" />
+    <meta name="language" content="en-US" />
+    <link
+        href="https://fonts.googleapis.com/css2?display=swap&family=Inter:ital,wght@0,300;0,500;0,700;1,300;1,500;1,700"
+        rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script>
+        let particles = [];
+        let t = 0;
+
+        // Adjustable variables for timing (in frames)
+        let arrivalDuration = 80; // Time particles move organically before returning
+        let settlingDuration = 280; // Time particles stay at targets
+        let greenChangeFrequency = 0.85; // Probability of changing to green when settling
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            background(255);
+            noStroke();
+            t = 0;
+            initializeParticles();
+        }
+
+        function initializeParticles() {
+            particles = []; // Reset the particles array
+
+            // Define the row positions
+            let marginY = height / 4;
+            let ySpacing = 40;
+            let rows = 10; // Number of rows
+
+            // Define the segment lengths
+            let shortLength = 70;
+            let longLength = 200;
+            let gap = 20; // Gap between segments
+
+            // Create particles for each row
+            for (let i = 0; i < rows; i++) {
+                let y = marginY + i * ySpacing;
+
+                // Starting x position for each row
+                let xStart = width / 4;
+
+                // Positions of the segments within the row
+                let segmentPositions = [];
+
+                // First three short segments
+                for (let j = 0; j < 3; j++) {
+                    let x1 = xStart + (shortLength + gap) * j;
+                    let x2 = x1 + shortLength;
+                    segmentPositions.push({ x1, x2 });
+                }
+
+                // Fourth long segment
+                let x1 = xStart + (shortLength + gap) * 3;
+                let x2 = x1 + longLength;
+                segmentPositions.push({ x1, x2 });
+
+                // Create particles along each segment
+                let particleSpacing = 10; // Spacing between particles on a segment
+                for (let segment of segmentPositions) {
+                    for (let x = segment.x1; x <= segment.x2; x += particleSpacing) {
+                        particles.push(new Particle(random(width), random(height), x, y));
+                    }
+                }
+            }
+        }
+
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+            background(255);
+            initializeParticles(); // Reinitialize particles based on new canvas size
+        }
+
+        function draw() {
+            background(255, 20); // Add slight transparency for trail effect
+            for (let p of particles) {
+                p.behaviors();
+                p.update();
+                p.show();
+            }
+            t += 1;
+        }
+
+        class Particle {
+            constructor(x, y, tx, ty) {
+                this.pos = createVector(x, y);
+                this.target = createVector(tx, ty); // Target position on the segment
+                this.vel = p5.Vector.random2D();
+                this.acc = createVector();
+                this.maxSpeed = 5;
+                this.maxForce = 0.1;
+                this.movingToTarget = true;
+                this.waitTime = 0;
+                this.arrived = false; // Flag to check if particle has arrived
+                this.color = color(0); // Default color is black
+                this.isGreen = false; // New flag to track if the particle is green
+            }
+
+            behaviors() {
+                if (this.movingToTarget) {
+                    let arrive = this.arrive(this.target);
+                    this.applyForce(arrive);
+                } else {
+                    // Move organically using Perlin noise
+                    let n = noise(this.pos.x * 0.01, this.pos.y * 0.01, t * 0.005);
+                    let angle = n * TWO_PI * 4;
+                    let dir = p5.Vector.fromAngle(angle);
+                    dir.setMag(0.5);
+                    this.applyForce(dir);
+                }
+            }
+
+            applyForce(f) {
+                this.acc.add(f);
+            }
+
+            update() {
+                this.vel.add(this.acc);
+                this.pos.add(this.vel);
+                this.acc.mult(0);
+
+                if (this.movingToTarget) {
+                    if (!this.arrived && p5.Vector.dist(this.pos, this.target) < 1) {
+                        this.arrived = true;
+                        this.waitTime = 0;
+                        // Randomly change color when settling
+                        if (random() < greenChangeFrequency) {
+                            this.color = color('#aecbae');
+                            this.isGreen = true;
+                        }
+                    }
+                    if (this.arrived) {
+                        this.waitTime++;
+                        if (this.waitTime > settlingDuration) {
+                            this.movingToTarget = false;
+                            this.waitTime = 0;
+                            this.arrived = false;
+                            // Change back to black when starting to move organically
+                            if (this.isGreen) {
+                                this.color = color(0);
+                                this.isGreen = false;
+                            }
+                        }
+                    }
+                } else {
+                    this.waitTime++;
+                    if (this.waitTime > arrivalDuration) {
+                        this.movingToTarget = true;
+                        this.waitTime = 0;
+                    }
+                }
+            }
+
+            show() {
+                if (this.movingToTarget) {
+                    fill(this.color); // Use the particle's color
+                } else {
+                    fill(red(this.color), green(this.color), blue(this.color), 50); // Lighter opacity when moving organically
+                }
+                ellipse(this.pos.x, this.pos.y, 4, 4);
+            }
+
+            arrive(target) {
+                let desired = p5.Vector.sub(target, this.pos);
+                let d = desired.mag();
+                let speed = this.maxSpeed;
+                if (d < 100) {
+                    speed = map(d, 0, 100, 0, this.maxSpeed);
+                }
+                desired.setMag(speed);
+                let steer = p5.Vector.sub(desired, this.vel);
+                steer.limit(this.maxForce);
+                return steer;
+            }
+        }
+    </script>
+    <script>
+        // Add this code after the existing p5.js script
+        document.addEventListener('DOMContentLoaded', function () {
+            const learnMoreLink = document.querySelector('.learn-more-link');
+            if (learnMoreLink) {
+                learnMoreLink.addEventListener('click', function (e) {
+                    console.log('Learn more link clicked');
+                    // Allow the default link behavior
+                    e.stopPropagation();
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
