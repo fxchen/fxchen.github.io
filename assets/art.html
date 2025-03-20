@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light only" />
+  <meta name="language" content="en-US" />
+  <link href="https://fonts.googleapis.com/css2?display=swap&family=Inter:ital,wght@0,300;0,500;0,700;1,300;1,500;1,700"
+    rel="stylesheet" type="text/css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Dropdown styles */
+    .dropdown {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+    }
+
+    .dropdown-button {
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      min-width: 250px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      padding: 8px 0;
+      z-index: 1;
+    }
+
+    .dropdown-content.show {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 10px 16px;
+      text-decoration: none;
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Dropdown menu for links -->
+  <div class="dropdown">
+    <button class="dropdown-button">Article Links ▾</button>
+    <div class="dropdown-content">
+      <!-- Dropdown items will be populated dynamically from the articles array -->
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+
+  <script>
+    // Array of links to assign to particles
+    // Define our articles as JSON objects
+    let articles = [
+      {
+        link: "https://www.npr.org/sections/shots-health-news/2025/03/18/nx-s1-5326118/segregation-federal-contracts-far-regulation-trump",
+        title: "NPR: Segregation Federal Contracts",
+        icon: "",
+        image: "",
+      },
+      {
+        link: "https://deadline.com/2025/03/miami-beach-no-other-land-cinema-threatened-with-closure-1236326175/",
+        title: "Deadline: Miami Beach Cinema",
+        icon: "",
+        image: "",
+      },
+      {
+        link: "https://apnews.com/article/dei-purge-images-pentagon-diversity-women-black-8efcfaec909954f4a24bad0d49c78074",
+        title: "AP News: DEI Purge Images",
+        icon: "",
+        image: "",
+      },
+      {
+        link: "https://www.forbes.com/sites/conormurray/2025/03/07/enola-gay-aircraft-and-other-historic-items-inaccurately-targeted-under-pentagons-anti-dei-purge/",
+        title: "Forbes: Enola Gay Aircraft",
+        icon: "",
+        image: "",
+      },
+      {
+        link: "https://www.cjr.org/the_media_today/border_journalists_secret_database.php",
+        title: "CJR: Border Journalists",
+        icon: "",
+        image: "",
+      },
+      {
+        link: "https://edition.cnn.com/2019/03/06/politics/trump-executive-order-revocation-terror-strike-civilian-deaths/index.html",
+        title: "CNN: Executive Order Revocation",
+        icon: "",
+        image: "",
+      }
+    ];
+    articles = articles.concat(articles).concat(articles); articles = articles.concat(articles).concat(articles); articles = articles.concat(articles).concat(articles); articles = articles.concat(articles).concat(articles);
+
+    // Define 20 bright colors to cycle through
+    const brightColors = [
+      "#FF0000", "#FF5722", "#FFC107", "#FFEB3B", "#CDDC39", "#8BC34A", "#4CAF50", "#009688", "#00BCD4", "#2196F3", "#3F51B5", "#673AB7", "#9C27B0", "#E91E63", "#F44336", "#FF9800", "#795548", "#4E342E", "#607D8B", "#1B5E20"
+    ];
+
+    // We'll store loaded icons here if available
+    let icons = [];
+    // We'll store loaded images here
+    let articleImages = [];
+    // Pastel colors to fade between when "not in motion"
+    const pastelColors = [
+      "#F5E1E1",
+      "#E1F5E3",
+      "#E1E9F5",
+      "#F5F1E1",
+      "#F5E1F3"
+    ];
+
+    let particles = [];
+    let t = 0;
+
+    // Make wait periods longer
+    let arrivalDuration = 200;
+    let settlingDuration = 600;
+
+    // For background fading
+    let currentBg;
+    let targetBg;
+    let bgLerpAmt = 0;
+
+    // Detect mouse movement to prevent next motion
+    let lastMoveTime = 0;
+    function mouseMoved() {
+      lastMoveTime = millis();
+    }
+
+    function isMouseMoving() {
+      // If the mouse has moved within the last 350ms, we consider it "moving"
+      return (millis() - lastMoveTime < 350);
+    }
+    // function preload() {
+    //   // Attempt to load each article's icon and image
+    //   for (let i = 0; i < articles.length; i++) {
+    //     if (articles[i].icon) {
+    //       icons[i] = loadImage(articles[i].icon);
+    //     } else {
+    //       icons[i] = null;
+    //     }
+
+    //     if (articles[i].image) {
+    //       articleImages[i] = loadImage(articles[i].image);
+    //     } else {
+    //       articleImages[i] = null;
+    //     }
+    //   }
+    // }
+        function preload() {
+            // Attempt to load each article's icon and image
+            for (let i = 0; i < articles.length; i++) {
+              if (articles[i].icon) {
+                icons[i] = loadImage(articles[i].icon,
+                  // Success callback
+                  () => console.log(`Icon ${i} loaded successfully`),
+                  // Error callback
+                  () => {
+                    console.log(`Failed to load icon ${i}`);
+                    icons[i] = null;
+                  }
+                );
+              } else {
+                icons[i] = null;
+              }
+
+              if (articles[i].image) {
+                try {
+                  // Add CORS attribute to help with cross-origin loading
+                  articleImages[i] = loadImage(
+                    articles[i].image,
+                    // Success callback 
+                    () => console.log(`Image ${i} loaded successfully`),
+                    // Error callback
+                    () => {
+                      console.log(`Failed to load image ${i}, using fallback color`);
+                      articleImages[i] = null;
+                    }
+                  );
+                  // Request CORS permissions - tell p5.js to request permission
+                  articleImages[i].crossOrigin = "";
+                } catch (e) {
+                  console.error(`Error loading image ${i}:`, e);
+                  articleImages[i] = null;
+                }
+              } else {
+                articleImages[i] = null;
+              }
+            }
+          }
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      noStroke();
+      t = 0;
+      initializeParticles();
+
+      // Initialize background colors
+      currentBg = color(255);
+      targetBg = color(pastelColors[0]);
+      bgLerpAmt = 0;
+
+      // Populate the dropdown menu
+      populateDropdown();
+    }
+
+    // Function to populate the dropdown with articles
+    function populateDropdown() {
+      const dropdownContent = document.querySelector('.dropdown-content');
+
+      // Clear any existing content
+      dropdownContent.innerHTML = '';
+
+      // Add each article as a link
+      articles.forEach(article => {
+        if (article.link && article.title) {
+          const linkElement = document.createElement('a');
+          linkElement.href = article.link;
+          linkElement.target = "_blank";
+          linkElement.textContent = article.title;
+          dropdownContent.appendChild(linkElement);
+        }
+      });
+    }
+
+    function initializeParticles() {
+      particles = [];
+
+      // Calculate grid dimensions based on the number of articles
+      const itemsPerRow = Math.ceil(Math.sqrt(articles.length)); // Approximate square grid
+      const numRows = Math.ceil(articles.length / itemsPerRow);
+
+      // Calculate spacing
+      const horizontalMargin = width * 0.1; // 10% margin on each side
+      const verticalMargin = height * 0.15; // 15% margin on top and bottom
+      const availableWidth = width - (horizontalMargin * 2);
+      const availableHeight = height - (verticalMargin * 2);
+
+      const colGap = availableWidth / (itemsPerRow - 1 || 1);
+      const rowGap = availableHeight / (numRows - 1 || 1);
+
+      for (let i = 0; i < articles.length; i++) {
+        const a = articles[i];
+        // skip if no link
+        if (!a.link) continue;
+
+        // Calculate row and column for this item
+        const row = Math.floor(i / itemsPerRow);
+        const col = i % itemsPerRow;
+
+        // Calculate target x and y position
+        const tx = horizontalMargin + (col * colGap);
+        const ty = verticalMargin + (row * rowGap);
+
+        // Random starting position anywhere on screen
+        const startX = random(width);
+        const startY = random(height);
+
+        const colorIndex = i % brightColors.length;
+        particles.push(new Particle(startX, startY, tx, ty, a.link, a.title, icons[i], articleImages[i], brightColors[colorIndex]));
+      }
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+      initializeParticles();
+    }
+
+    function draw() {
+      // Fade background toward targetBg
+      if (bgLerpAmt < 1) {
+        bgLerpAmt += 0.01;
+      }
+      let lerpedCol = lerpColor(currentBg, targetBg, bgLerpAmt);
+      background(lerpedCol);
+
+      for (let p of particles) {
+        p.behaviors();
+        p.update();
+        p.show();
+      }
+      t += 1;
+
+      // Check if all particles are arrived (i.e. in settling phase)
+      // If so, pick a new pastel background to fade into
+      if (allParticlesArrived()) {
+        if (bgLerpAmt >= 1) {
+          bgLerpAmt = 0;
+          currentBg = lerpedCol;
+          // pick a new color different from current
+          let newCol = color(random(pastelColors));
+          // ensure it's not the same by reroll if needed
+          while (newCol.toString() === currentBg.toString()) {
+            newCol = color(random(pastelColors));
+          }
+          targetBg = newCol;
+        }
+      }
+    }
+
+    function allParticlesArrived() {
+      // "Arrived" means they're in the settling phase, i.e. movingToTarget and arrived==true
+      // But let's say if they have *all* become arrived at the same time
+      for (let p of particles) {
+        if (!p.movingToTarget || !p.arrived) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    // ========== PARTICLE CLASS ==========
+
+    class Particle {
+      constructor(x, y, tx, ty, link, title, iconImg, articleImg, c) {
+        this.pos = createVector(x, y);
+        this.target = createVector(tx, ty);
+        this.vel = p5.Vector.random2D();
+        this.acc = createVector();
+        this.maxSpeed = 5;
+        this.maxForce = 0.1;
+
+        this.link = link;           // store the link
+        this.title = title;         // store the title
+        this.iconImg = iconImg;     // store the icon image
+        this.articleImg = articleImg; // store the article image
+        this.movingToTarget = true;
+        this.waitTime = 0;
+        this.arrived = false;
+        this.color = color(c);
+        this.size = 12;             // default size
+        this.imgSize = 30;          // size for images
+        this.showImage = false;     // Whether to show the image or the circle
+      }
+
+      behaviors() {
+        if (this.movingToTarget) {
+          let arrive = this.arrive(this.target);
+          this.applyForce(arrive);
+        } else {
+          // Move organically using Perlin noise
+          let n = noise(this.pos.x * 0.01, this.pos.y * 0.01, t * 0.005);
+          let angle = n * TWO_PI * 4;
+          let dir = p5.Vector.fromAngle(angle);
+          dir.setMag(0.5);
+          this.applyForce(dir);
+        }
+      }
+
+      applyForce(f) {
+        this.acc.add(f);
+      }
+
+      update() {
+        this.vel.add(this.acc);
+        this.pos.add(this.vel);
+        this.acc.mult(0);
+
+        // Arriving at the target
+        if (this.movingToTarget) {
+          if (!this.arrived && p5.Vector.dist(this.pos, this.target) < 1) {
+            this.arrived = true;
+            this.waitTime = 0;
+
+            // Randomly decide whether to show the image if available
+            if (this.articleImg && random() < 0.5) {
+              this.showImage = true;
+            } else {
+              this.showImage = false;
+            }
+          }
+          if (this.arrived) {
+            this.waitTime++;
+            // Don't switch state if mouse is moving
+            if (this.waitTime > settlingDuration && !isMouseMoving()) {
+              this.movingToTarget = false; // done "resting," start organic
+              this.waitTime = 0;
+              this.arrived = false;
+              this.showImage = false; // Hide image when moving organically
+            }
+          }
+        }
+        // Organic movement
+        else {
+          this.waitTime++;
+          // Don't switch state if mouse is moving
+          if (this.waitTime > arrivalDuration && !isMouseMoving()) {
+            this.movingToTarget = true;
+            this.waitTime = 0;
+          }
+        }
+      }
+
+      show() {
+        if (this.movingToTarget) {
+          if (this.showImage && this.articleImg) {
+            // Draw the article image if available and selected to show
+            imageMode(CENTER);
+            // Calculate opacity based on arrival time
+            let opacity = map(this.waitTime, 0, settlingDuration / 2, 100, 255);
+            tint(255, opacity);
+            image(this.articleImg, this.pos.x, this.pos.y, this.imgSize, this.imgSize);
+            noTint();
+          } else if (this.iconImg) {
+            // Draw the icon
+            imageMode(CENTER);
+            image(this.iconImg, this.pos.x, this.pos.y, this.size * 2, this.size * 2);
+          } else {
+            // Draw a colored circle
+            fill(this.color);
+            ellipse(this.pos.x, this.pos.y, this.size, this.size);
+          }
+        } else {
+          // When in organic movement, show faded versions
+          if (this.iconImg) {
+            imageMode(CENTER);
+            tint(255, 100);
+            image(this.iconImg, this.pos.x, this.pos.y, this.size * 2, this.size * 2);
+            noTint();
+          } else {
+            fill(red(this.color), green(this.color), blue(this.color), 50);
+            ellipse(this.pos.x, this.pos.y, this.size, this.size);
+          }
+        }
+      }
+
+      arrive(target) {
+        let desired = p5.Vector.sub(target, this.pos);
+        let d = desired.mag();
+        let speed = this.maxSpeed;
+        if (d < 100) {
+          speed = map(d, 0, 100, 0, this.maxSpeed);
+        }
+        desired.setMag(speed);
+        let steer = p5.Vector.sub(desired, this.vel);
+        steer.limit(this.maxForce);
+        return steer;
+      }
+    }
+
+    // ========== CLICK HANDLING ==========
+
+    function mousePressed() {
+      // If we click near a particle, open its link
+      for (let p of particles) {
+        let d = dist(mouseX, mouseY, p.pos.x, p.pos.y);
+        if (d < 10) {
+          // open link in new tab
+          window.open(p.link, "_blank");
+          break;
+        }
+      }
+    }
+  </script>
+
+  <!-- Only used if you have a "Learn more" button or something else -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Dropdown toggle functionality
+      const dropdownButton = document.querySelector('.dropdown-button');
+      const dropdownContent = document.querySelector('.dropdown-content');
+
+      if (dropdownButton) {
+        dropdownButton.addEventListener('click', function () {
+          dropdownContent.classList.toggle('show');
+        });
+
+        // Close the dropdown if clicked outside
+        window.addEventListener('click', function (event) {
+          if (!event.target.matches('.dropdown-button')) {
+            if (dropdownContent.classList.contains('show')) {
+              dropdownContent.classList.remove('show');
+            }
+          }
+        });
+      }
+
+      const learnMoreLink = document.querySelector('.learn-more-link');
+      if (learnMoreLink) {
+        learnMoreLink.addEventListener('click', function (e) {
+          console.log('Learn more link clicked');
+          e.stopPropagation();
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>
