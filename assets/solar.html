@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Earth's Energy Consumption</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #f0f2f5;
+      color: #1f2937;
+      margin: 0;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+
+    .chart-container {
+      position: relative;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .tooltip {
+      position: absolute;
+      text-align: center;
+      padding: 0.75rem;
+      background: #111827;
+      color: #fff;
+      border-radius: 0.5rem;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+      font-size: 0.875rem;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      z-index: 10;
+    }
+
+    .legend {
+      display: flex;
+      flex-direction: column;
+      /* Stack items vertically */
+      align-items: flex-start;
+      /* Align items to the left */
+      margin-top: 1.5rem;
+      gap: 0.75rem;
+      /* Adjust gap for vertical list */
+      width: 100%;
+      padding-left: 1rem;
+      box-sizing: border-box;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.5rem;
+    }
+
+    .legend-item:hover {
+      background-color: #f3f4f6;
+    }
+
+    .legend-color {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 0.25rem;
+      margin-right: 0.5rem;
+    }
+
+    .arc path {
+      stroke: #fff;
+      stroke-width: 2px;
+      transition: opacity 0.3s;
+    }
+
+    /* Ensure outer ring slivers are truly 1px wide by removing stroke expansion */
+    .arc-outer path {
+      stroke-width: 0;
+    }
+
+    .arc:hover path {
+      opacity: 0.85;
+    }
+
+    .center-text-group text {
+      text-anchor: middle;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .total-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      fill: #1f2937;
+    }
+
+    .total-label {
+      font-size: 0.875rem;
+      fill: #6b7280;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .dropdown {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      padding: 0.25rem 2.5rem 0.25rem 0.75rem;
+      border-radius: 0.5rem;
+      border: 1px solid transparent;
+      background-color: #f3f4f6;
+      color: #6b7280;
+      font-size: 0.875rem;
+      cursor: pointer;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 0.5rem center;
+      background-repeat: no-repeat;
+      background-size: 1.5em 1.5em;
+      transition: background-color 0.2s;
+    }
+
+    .dropdown:hover {
+      background-color: #e5e7eb;
+    }
+
+    #details-container {
+      text-align: center;
+      margin-top: 1.5rem;
+      min-height: 4em;
+      /* Reserve space */
+      transition: opacity 0.5s;
+    }
+
+    .details-value {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .details-label {
+      font-size: 1rem;
+      color: #4b5563;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100">
+
+  <div class="chart-container">
+    <div class="header">
+      <h1 id="chart-title" class="text-2xl md:text-3xl font-bold text-gray-800 mb-2"></h1>
+      <p id="chart-description" class="text-gray-500"></p>
+    </div>
+    <div id="chart"></div>
+    <div id="details-container"></div>
+    <div class="tooltip"></div>
+    <div id="legend" class="legend"></div>
+    <select id="dataset-selector" class="dropdown">
+      <option value="totalConsumption">Total Consumption</option>
+      <option value="solarEnergy">Solar Breakdown</option>
+    </select>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Stable color mapping so regions always render with consistent colors
+      const regionColors = {
+        'China': '#ef4444',
+        'USA': '#3b82f6',
+        'Other': '#f59e0b',
+        'Uncaptured Potential': '#a3a3a3',
+        'Total Captured': '#facc15'
+      };
+      const colorFor = (name, fallback) => regionColors[name] || fallback || '#9ca3af';
+      const datasets = {
+        totalConsumption: {
+          title: 'Global Primary Energy Consumption',
+          description: 'Based on 2022 data from the Statistical Review of World Energy.',
+          data: [
+            { name: 'USA', value: 27167, color: '#3b82f6' },
+            { name: 'China', value: 44430, color: '#ef4444' },
+
+            { name: 'Other', value: 96181, color: '#f59e0b' }
+          ]
+        },
+        solarEnergy: {
+          title: 'Solar Energy: Captured vs. Uncaptured',
+          description: '',
+          data: {
+            parent: { name: 'Uncaptured Potential', value: 1498716, color: '#a3a3a3' },
+            children: [
+              { name: 'China', value: 417.5, color: '#ef4444' },
+              { name: 'USA', value: 216.7, color: '#3b82f6' },
+              { name: 'Other', value: 649.8, color: '#f59e0b' }
+            ],
+            childParentColor: '#facc15'
+          }
+        }
+      };
+
+      // Feature flag: disable the optional comparison ring outside the solar outer ring
+      const ENABLE_COMPARISON_RING = false;
+
+      const width = 600;
+      const height = 450; // Increased height for the third ring
+      const radius = Math.min(width, height) / 2.6; // Adjusted radius for more space
+
+      const svgContainer = d3.select("#chart")
+        .append("svg")
+        .attr("viewBox", `0 0 ${width} ${height}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+
+      const tooltip = d3.select(".tooltip");
+      const selector = d3.select("#dataset-selector");
+      const detailsContainer = d3.select("#details-container");
+
+      function updateChart(datasetKey) {
+        const currentData = datasets[datasetKey];
+
+        svgContainer.selectAll("*").remove();
+        detailsContainer.html("");
+        d3.select("#legend").selectAll("*").remove();
+
+        d3.select("#chart-title").text(currentData.title);
+        d3.select("#chart-description").text(currentData.description);
+
+        const pieGroup = svgContainer.append("g")
+          .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+        const centerGroup = svgContainer.append("g")
+          .attr("class", "center-text-group")
+          .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+        if (datasetKey === 'solarEnergy') {
+          drawTwoLayerChart(currentData.data, pieGroup, centerGroup);
+        } else {
+          drawSingleLayerChart(currentData.data, pieGroup, centerGroup);
+        }
+      }
+
+      function handleClick(d, pieGroup, totalValue) {
+        const midAngle = (d.startAngle + d.endAngle) / 2;
+        // Correct rotation to 6 o'clock (Math.PI) from the slice's midpoint
+        const rotation = (Math.PI - midAngle) * (180 / Math.PI);
+        pieGroup.transition().duration(1000).attr("transform", `translate(${width / 2}, ${height / 2}) rotate(${rotation})`);
+
+        const percentage = (d.data.value / totalValue * 100);
+        const percentageString = percentage < 0.01 ? '< 0.01%' : `${percentage.toFixed(2)}%`;
+
+        detailsContainer.html(`
+                    <div class="details-value">${d.data.value.toLocaleString()} TWh (${percentageString})</div>
+                    <div class="details-label">${d.data.name}</div>
+                `);
+      };
+
+      function drawSingleLayerChart(data, pieGroup, centerGroup) {
+        const totalValue = data.reduce((sum, d) => sum + d.value, 0);
+        const ringThickness = 12; // 12px thickness
+        const innerRadius = radius * 0.95;
+        const outerRadius = innerRadius + ringThickness;
+
+        const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
+        const pie = d3.pie().value(d => d.value).sort(null);
+        const pieData = pie(data);
+
+        centerGroup.append("text").attr("x", 0).attr("class", "total-value").attr("dy", "-0.1em").text(`${totalValue.toLocaleString()} TWh`);
+        centerGroup.append("text").attr("x", 0).attr("class", "total-label").attr("dy", "1.1em").text("Total");
+
+        const arcs = pieGroup.selectAll(".arc").data(pieData).enter().append("g").attr("class", "arc").style("cursor", "pointer");
+        arcs.append("path").attr("d", arc).attr("fill", d => colorFor(d.data.name, d.data.color)).on("click", (event, d) => handleClick(d, pieGroup, totalValue));
+
+        setupTooltipAndLegend(arcs, data, pieData, pieGroup, totalValue, () => { });
+      }
+
+      function drawTwoLayerChart(data, pieGroup, centerGroup) {
+        const childrenTotal = data.children.reduce((sum, d) => sum + d.value, 0);
+        const totalValue = data.parent.value + childrenTotal;
+        const innerData = [{ ...data.parent }, { name: "Total Captured", value: childrenTotal, color: data.childParentColor }];
+
+        const ringThickness = 12; // 12px thickness
+        const ringGap = 1; // 1px gap
+        const innerRadius = radius * 0.95; // Larger inner circle
+        const outerRadiusInner = innerRadius + ringThickness;
+        const innerRadiusOuter = outerRadiusInner + ringGap;
+        const outerRadius = innerRadiusOuter + ringThickness;
+
+        const arcInner = d3.arc().innerRadius(innerRadius).outerRadius(outerRadiusInner);
+
+        const pie = d3.pie().value(d => d.value).sort(null);
+        const pieDataInner = pie(innerData);
+        const pieDataOuter = pie(data.children);
+
+        const capturedArc = pieDataInner.find(d => d.data.name === 'Total Captured');
+        const angleScale = d3.scaleLinear().domain([0, 2 * Math.PI]).range([capturedArc.startAngle, capturedArc.endAngle]);
+
+        centerGroup.append("text").attr("x", 0).attr("class", "total-value").attr("dy", "-0.1em").text(`${totalValue.toLocaleString()} TWh`);
+        centerGroup.append("text").attr("x", 0).attr("class", "total-label").attr("dy", "1.1em").text("Total Potential (est.)");
+
+        // Ensure the clicked outer sliver is visibly highlighted in blue
+        const highlightOuterSlice = (sliceName) => {
+          pieGroup.selectAll('.arc-outer path')
+            .attr('fill', p => colorFor(p.data.name, p.data.color));
+          pieGroup.selectAll('.arc-outer path')
+            .filter(p => p && p.data && p.data.name === sliceName)
+            .attr('fill', colorFor(sliceName));
+        };
+
+        const solarClickHandler = (event, d) => {
+          const targetPixelWidth = 1; // Target width for tiny slices
+          const avgRadius = (innerRadiusOuter + outerRadius) / 2;
+          const targetAngle = targetPixelWidth / avgRadius;
+
+          // Re-calculate the exact visual angles that were used for drawing the path
+          const visualStartAngle = angleScale(d.startAngle);
+          let visualEndAngle = angleScale(d.endAngle);
+          const span = visualEndAngle - visualStartAngle;
+
+          // If slice is very small, use the target angle for rotation calculation
+          if (span > 0 && span < targetAngle * 5) {
+            visualEndAngle = visualStartAngle + targetAngle;
+          }
+          const finalVisualEndAngle = Math.min(visualEndAngle, capturedArc.endAngle);
+
+          // Rotate based on the visual center of the drawn arc
+          const visualMidAngle = (visualStartAngle + finalVisualEndAngle) / 2;
+          const rotation = (Math.PI - visualMidAngle) * (180 / Math.PI); // Correct rotation to 6 o'clock
+          pieGroup.transition().duration(1000).attr("transform", `translate(${width / 2}, ${height / 2}) rotate(${rotation})`);
+
+          const percentage = (d.data.value / totalValue * 100);
+          const percentageString = percentage < 0.01 ? '< 0.01%' : `${percentage.toFixed(2)}%`;
+          detailsContainer.html(`
+                        <div class="details-value">${d.data.value.toLocaleString()} TWh (${percentageString})</div>
+                        <div class="details-label">${d.data.name}</div>
+                    `);
+
+          // Hard-code the active outer sliver to blue so selection is unmistakable
+          highlightOuterSlice(d.data.name);
+
+          pieGroup.selectAll(".arc-comparison").remove();
+          const region = d.data.name.split(' ')[0];
+          const totalConsumptionData = datasets.totalConsumption.data.find(item => item.name === region);
+
+          if (ENABLE_COMPARISON_RING && totalConsumptionData) {
+            const capturedValue = d.data.value;
+            const totalConsumptionValue = totalConsumptionData.value;
+            const comparisonData = [
+              { name: d.data.name, value: capturedValue, color: d.data.color },
+              { name: `Other ${region} Consumption`, value: totalConsumptionValue - capturedValue, color: '#e5e7eb' }
+            ];
+            const comparisonInnerRadius = outerRadius + ringGap;
+            const comparisonOuterRadius = comparisonInnerRadius + ringThickness;
+            const arcComparison = d3.arc().innerRadius(comparisonInnerRadius).outerRadius(comparisonOuterRadius);
+            const pieComparison = d3.pie().value(p => p.value).sort(null)(comparisonData);
+            pieGroup.selectAll(".arc-comparison").data(pieComparison).enter()
+              .append("g").attr("class", "arc arc-comparison")
+              .append("path").attr("d", arcComparison).attr("fill", p => p.data.color);
+          }
+        };
+
+        const arcsInner = pieGroup.selectAll(".arc-inner").data(pieDataInner).enter().append("g").attr("class", "arc arc-inner").style("cursor", "pointer");
+        arcsInner.append("path").attr("d", arcInner).attr("fill", d => colorFor(d.data.name, d.data.color)).on("click", (event, d) => {
+          handleClick(d, pieGroup, totalValue);
+          pieGroup.selectAll(".arc-comparison").remove();
+        });
+
+        const arcsOuter = pieGroup.selectAll(".arc-outer").data(pieDataOuter).enter().append("g").attr("class", "arc arc-outer").style("cursor", "pointer");
+
+        // --- Final Minimum Width and Layering Logic ---
+        const targetPixelWidth = 1;
+        const avgRadius = (innerRadiusOuter + outerRadius) / 2;
+        const targetAngle = targetPixelWidth / avgRadius;
+
+        arcsOuter.append("path")
+          .attr("d", d => {
+            const start = angleScale(d.startAngle);
+            let end = angleScale(d.endAngle);
+            const span = end - start;
+
+            // If the slice is very small, draw it as exactly 1px wide.
+            // The threshold (targetAngle * 5) prevents this from applying to larger slices.
+            if (span > 0 && span < targetAngle * 5) {
+              end = start + targetAngle;
+            }
+
+            // Ensure the slice does not extend beyond its parent container
+            const finalEnd = Math.min(end, capturedArc.endAngle);
+
+            // Do not draw if the start angle is already past the end
+            if (start >= finalEnd) return null;
+
+            return d3.arc()
+              .innerRadius(innerRadiusOuter).outerRadius(outerRadius)
+              .startAngle(start).endAngle(finalEnd)();
+          })
+          .attr("fill", d => colorFor(d.data.name, d.data.color))
+          .on("click", solarClickHandler);
+
+        const allLegendData = [data.parent, ...data.children];
+        const allPieData = [...pieDataInner, ...pieDataOuter];
+        setupTooltipAndLegend(pieGroup.selectAll(".arc"), allLegendData, allPieData, pieGroup, totalValue, (evt, pd) => {
+          solarClickHandler(evt, pd);
+          // Also re-assert blue highlight when interacting through the legend
+          if (pd && pd.data) {
+            pieGroup.selectAll('.arc-outer path')
+              .attr('fill', p => colorFor(p.data.name, p.data.color));
+            pieGroup.selectAll('.arc-outer path')
+              .filter(p => p && p.data && p.data.name === pd.data.name)
+              .attr('fill', colorFor(pd.data.name));
+          }
+        });
+      }
+
+      function setupTooltipAndLegend(arcs, legendData, pieData, pieGroup, totalValue, clickHandler) {
+        arcs.on("mouseover", function (event, d) {
+          tooltip.style("opacity", 1);
+          const percentage = (d.data.value / totalValue * 100);
+          const percentageString = percentage < 0.01 ? '< 0.01%' : `${percentage.toFixed(2)}%`;
+          tooltip.html(`${d.data.name}<br>${d.data.value.toLocaleString()} TWh (${percentageString})`)
+            .style("left", (event.pageX + 15) + "px")
+            .style("top", (event.pageY - 28) + "px");
+        }).on("mouseout", () => tooltip.style("opacity", 0));
+
+        const legend = d3.select("#legend");
+        legendData.forEach(d => {
+          const percentage = (d.value / totalValue * 100);
+          const percentageString = percentage < 0.01 ? '< 0.01%' : `${percentage.toFixed(2)}%`;
+          const legendItem = legend.append("div").attr("class", "legend-item");
+          legendItem.append("div").attr("class", "legend-color").style("background-color", colorFor(d.name, d.color));
+          legendItem.append("span").html(`<span class="font-semibold">${d.name}:</span> ${d.value.toLocaleString()} TWh <span class="text-gray-500">(${percentageString})</span>`);
+          legendItem.on("click", () => {
+            const correspondingArc = pieData.find(pd => pd.data.name === d.name);
+            if (correspondingArc) {
+              if (datasets.solarEnergy.data.children.some(child => child.name === d.name)) {
+                clickHandler(null, correspondingArc);
+              } else {
+                handleClick(correspondingArc, pieGroup, totalValue);
+                pieGroup.selectAll(".arc-comparison").remove();
+              }
+            }
+          });
+        });
+      }
+
+      selector.on("change", function () { updateChart(this.value); });
+      updateChart(selector.property('value'));
+    });
+  </script>
+</body>
+
+</html>
