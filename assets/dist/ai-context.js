@@ -422,7 +422,7 @@ function UserOntologySection({ activeTab, setActiveTab }) {
             React.createElement("div", null,
                 React.createElement("p", { className: "text-xs font-semibold uppercase tracking-wide text-slate-500" }, "Orientation"),
                 React.createElement("h2", { id: "user-ontologies-heading", className: "text-xl md:text-2xl font-semibold tracking-tight" }, "How does the Golden Grid support users?"),
-                React.createElement("p", { className: "text-sm text-slate-600 mt-2 max-w-3xl" }, "Pick a role-centric view to see how the Golden Grid layers assemble data, policies, and workflows into question-ready ontologies. Each tab highlights user questions, connective tissue, and the signals that make the support loop work before you drop into the CLI tools below.")),
+                React.createElement("p", { className: "text-sm text-slate-600 mt-2 max-w-3xl" }, "Pick a role-centric view to see how the Golden Grid layers assemble data, policies, and workflows into question-ready ontologies. Each tab highlights user questions, connective tissue, and the signals that make the support loop work today via CLI tooling\u2014while pointing toward future AI chat or web interfaces that can sit atop the same ontology.")),
             React.createElement("div", { className: "flex flex-wrap gap-2" }, USER_ONTOLOGY_TABS.map((tab) => {
                 const active = tab.id === current.id;
                 const base = "px-4 py-2 rounded-full border text-sm font-semibold transition select-none";
