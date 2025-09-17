@@ -30,8 +30,8 @@ const THEME_KEYS = ["context", "tools", "ontology", "memory", "permission", "neu
 const USER_ONTOLOGY_TABS = [
     {
         id: "homeowner",
-        label: "Home Modeling",
-        title: "Homeowner Insight Loop",
+        label: "Home Owner",
+        title: "Home Owner Insight Loop",
         description: "Pair Raw → Clean → Transform intervals with tariff lenses so homeowners can ask grounded questions about comfort, bills, and DER performance without leaving the governed workflow.",
         questionExamples: [
             "How did my site load change during last week's 4–9pm peak after inverter losses were applied?",
@@ -60,8 +60,8 @@ const USER_ONTOLOGY_TABS = [
     },
     {
         id: "policy",
-        label: "Policy & Regulators",
-        title: "Regulatory Evidence Loop",
+        label: "Regulator",
+        title: "Regulator Evidence Loop",
         description: "Align tariff updates, docket language, and ontology fields to help analysts review filings, de-identify sensitive data, and publish explainable impact memos.",
         questionExamples: [
             "Which accounts on PG&E EV-A saw bill swings greater than 15% after the July 2025 docket revision?",
@@ -89,8 +89,8 @@ const USER_ONTOLOGY_TABS = [
     },
     {
         id: "grid",
-        label: "Grid Simulation",
-        title: "Synthetic Twin Planning Loop",
+        label: "Grid Operator",
+        title: "Grid Operator Planning Loop",
         description: "Stage battery, solar, and load scenarios so operators can rehearse constraints, overlay emerging DER policies, and generate dispatch-ready playbooks.",
         questionExamples: [
             "Which feeders breach hosting capacity when I stagger the new DER policy across 500 synthetic homes?",
