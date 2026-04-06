@@ -1,18 +1,83 @@
 ---
 layout: page
 title: Frank Chen
-subtitle: Explorer, Software Architect, Behavior Designer
+subtitle: Building with AI for boring industries
 bigimg:
   - 'img/background-lines-light.png'
 use-site-title: true
 ---
 
+<style>
+.bio-section {
+  position: relative;
+}
+.bio-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+.bio-btn {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-family: 'Avenir', 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+  color: #808080;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  line-height: 1.4;
+}
+.bio-btn:hover {
+  color: #0085a1;
+  border-color: #0085a1;
+}
+.bio-btn.copied {
+  color: #2ecc71;
+  border-color: #2ecc71;
+}
+.bio-long {
+  display: none;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+.bio-long.is-visible {
+  display: block;
+}
+</style>
+
 <h2>bio</h2>
-Frank Chen is a maker. He develops products and leads software engineering teams with a background in behavior design, engineering leadership, systems reliability engineering, and resiliency research. At Slack, Frank focuses on making engineers' lives simpler, more pleasant, and more productive, in the Developer Productivity group. At Palantir, Frank has worked with customers in healthcare, finance, government, energy and consumer packaged goods to solve their hardest problems by transforming how they use data. At Amazon, Frank led a front-end team and infrastructure team to launch AWS WorkDocs, the first secure multi-platform service of its kind for enterprise customers. At Sandia National Labs, Frank researched resiliency and complexity analysis tooling with the Grid Resiliency group. He received a M.S. in Computer Science focused in Human-Computer Interaction from Stanford. Frank's thesis studied how the design / psychology of exergaming interventions might produce efficacious health outcomes. With the Stanford Prevention Research Center, Frank developed health interventions rooted in behavioral theory to create new behaviors through mobile phones. He prototyped early builds of Tiny Habits with BJ Fogg and worked in the Persuasive Technology Lab. He received a B.S. in Computer Science from UCLA. Frank researched networked systems and image processing with the Center for embedded Networked Systems. With the Rand Corporation, he built research systems to support group decision-making.
-<p class="text-muted">217 words</p>
+
+<div class="bio-section">
+  <div id="bio-short">
+    <p>Frank Chen is co-founder and CTO of Balto Energy, a climate tech startup using AI to transform home energy. Before Balto, he led developer productivity at Slack, built data platforms at Palantir for healthcare, energy, and government customers, and launched AWS WorkDocs at Amazon.</p>
+    <p>He's been keeping his brain in markdown + git for almost 20 years—journals, integrations, everything in plaintext. He built a personal AI agent called Frankly that lived inside it. Then he did the same thing for his company. He writes about what happened.</p>
+    <p>Frank holds an M.S. in Computer Science (HCI) from Stanford, where he worked in BJ Fogg's Persuasive Technology Lab and prototyped early builds of Tiny Habits. B.S. in Computer Science from UCLA.</p>
+  </div>
+
+  <div class="bio-actions">
+    <button class="bio-btn" onclick="copyBio('short')" id="copy-short-btn">Copy bio</button>
+    <button class="bio-btn" onclick="toggleLongBio()" id="toggle-bio-btn">Full bio &darr;</button>
+  </div>
+
+  <div class="bio-long" id="bio-long">
+    <p>Frank Chen is co-founder and CTO of Balto Energy, a climate tech startup using AI to transform home energy. He develops products and leads engineering teams with a background in behavior design, engineering leadership, systems reliability, and resiliency research.</p>
+    <p>Before Balto, Frank led developer productivity at Slack, where he focused on making engineers' lives simpler, more pleasant, and more productive. At Palantir, he worked with customers in healthcare, finance, government, energy, and consumer packaged goods to solve their hardest problems by transforming how they use data. At Amazon, he led a front-end and infrastructure team to launch AWS WorkDocs, the first secure multi-platform enterprise document service of its kind. At Sandia National Labs, he researched resiliency and complexity analysis tooling with the Grid Resiliency group.</p>
+    <p>He's been keeping his brain in markdown + git for almost 20 years—journals, data integrations, everything in plaintext. He built a personal AI agent called Frankly that connected Slack, Linear, Obsidian, and his personal vault with hybrid search. Then he brought the same architecture to his company, where an AI agent now reads the entire knowledge base and onboards new team members from the living state of the company's thinking. He writes about what happens when you give AI access to all of it.</p>
+    <p>Frank received an M.S. in Computer Science focused in Human-Computer Interaction from Stanford. His thesis studied how the design and psychology of exergaming interventions might produce efficacious health outcomes. With the Stanford Prevention Research Center, he developed health interventions rooted in behavioral theory to create new behaviors through mobile phones. He prototyped early builds of Tiny Habits with BJ Fogg and worked in the Persuasive Technology Lab. He received a B.S. in Computer Science from UCLA, where he researched networked systems and image processing with the Center for Embedded Networked Systems. With the Rand Corporation, he built research systems to support group decision-making.</p>
+
+    <div class="bio-actions">
+      <button class="bio-btn" onclick="copyBio('long')" id="copy-long-btn">Copy full bio</button>
+      <button class="bio-btn" onclick="toggleLongBio()">Hide &uarr;</button>
+    </div>
+  </div>
+</div>
 
 <h2>modus operandi</h2>
-I am a maker. I help people make better decisions by designing technologies that connect people to what they want to do. I seek to learn about and to connect people with technologies that positively influence our mind, body, and relationships. I recently moved back to the bay. I'm an avid traveler and can be found hiking, wood working, and running.
+<p>Building systems with AI for a new home energy experience. I write about what actually ships vs. what demos well, how culture scales in startups, and why I put my brain in a git repo 20 years ago—then did the same thing for our company and gave an AI agent the keys.</p>
 
 <p class="spacer"></p>
 <hr>
@@ -34,3 +99,39 @@ I am a maker. I help people make better decisions by designing technologies that
 
 <a href="/writing"><h3>more…</h3></a>
 
+<script>
+function getTextContent(el) {
+  return el.innerText.trim();
+}
+
+function copyBio(type) {
+  var source = document.getElementById('bio-' + type);
+  var btnId = type === 'short' ? 'copy-short-btn' : 'copy-long-btn';
+  var btn = document.getElementById(btnId);
+  var text = getTextContent(source);
+
+  navigator.clipboard.writeText(text).then(function() {
+    var original = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+function toggleLongBio() {
+  var longBio = document.getElementById('bio-long');
+  var toggleBtn = document.getElementById('toggle-bio-btn');
+  var isVisible = longBio.classList.contains('is-visible');
+
+  if (isVisible) {
+    longBio.classList.remove('is-visible');
+    toggleBtn.innerHTML = 'Full bio &darr;';
+  } else {
+    longBio.classList.add('is-visible');
+    toggleBtn.innerHTML = 'Short bio &uarr;';
+  }
+}
+</script>
