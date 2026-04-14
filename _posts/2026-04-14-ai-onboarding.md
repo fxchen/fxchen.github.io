@@ -36,11 +36,11 @@ knowledge base doesn't get smarter because someone new
 joined.
 
 ```
-  traditional:   Company ──────► New hire
-                 (one way, decays)
+traditional:   Company ──────► New hire
+               (one way, decays)
 
-  this:          Company ◄─────► New hire
-                 (live graph, compounds)
+this:          Company ◄─────► New hire
+               (live graph, compounds)
 ```
 
 ---
@@ -54,16 +54,14 @@ New hire gets the current state of the company's thinking.
 Not an artifact from Q1.
 
 ```
-  ╔══════════════════════════════════════════╗
-  ║                                          ║
-  ║  Onboarding guide:     Knowledge base:   ║
-  ║                                          ║
-  ║  Written once          Updated daily     ║
-  ║  Stale in weeks        Always current    ║
-  ║  Same for everyone     Adapts to you     ║
-  ║  Read it and forget    Reads you back    ║
-  ║                                          ║
-  ╚══════════════════════════════════════════╝
+╔══════════════════════════════════════════╗
+║  Onboarding guide:     Knowledge base:   ║
+║                                          ║
+║  Written once          Updated daily     ║
+║  Stale in weeks        Always current    ║
+║  Same for everyone     Adapts to you     ║
+║  Read it and forget    Reads you back    ║
+╚══════════════════════════════════════════╝
 ```
 
 Garry Tan [wrote about this recently][garry-fat-skills].
@@ -90,21 +88,19 @@ Last month Maria joined our operations team. She cloned
 the repo, typed `claude` in the terminal, and got this:
 
 ```
-  ┌──────────────────────────────────────────────┐
-  │                                              │
-  │  $ claude                                    │
-  │                                              │
-  │  > Hey, you're Maria, right?                 │
-  │  > Welcome to Balto.                         │
-  │  >                                           │
-  │  > I see you're joining on the operations    │
-  │  > side. Let me walk you through how we      │
-  │  > work and get your workspace set up.       │
-  │  >                                           │
-  │  > First question: have you set up           │
-  │  > 1Password yet?                            │
-  │                                              │
-  └──────────────────────────────────────────────┘
+┌──────────────────────────────────────────────┐
+│  $ claude                                    │
+│                                              │
+│  > Hey, you're Maria, right?                 │
+│  > Welcome to Balto.                         │
+│  >                                           │
+│  > I see you're joining on the operations    │
+│  > side. Let me walk you through how we      │
+│  > work and get your workspace set up.       │
+│  >                                           │
+│  > First question: have you set up           │
+│  > 1Password yet?                            │
+└──────────────────────────────────────────────┘
 ```
 
 Nobody told the AI her name or her role. It pulled her git
@@ -151,12 +147,12 @@ The ramp-up follows OODA, same loop we use for all
 knowledge work. Compressed into a single day.
 
 ```
-  morning          midday           afternoon        end of day
-  ──────────────   ──────────────   ──────────────   ──────────────
-  setup script     knowledge graph  vault health     ship first
-  core files       person-notes     pick a gap       contribution
-  CULTURE.md       wikilinks in
-  README           Obsidian
+morning          midday           afternoon        end of day
+──────────────   ──────────────   ──────────────   ──────────────
+setup script     knowledge graph  vault health     ship first
+core files       person-notes     pick a gap       contribution
+CULTURE.md       wikilinks in
+README           Obsidian
 ```
 
 The AI walks you through what matters for your role.
