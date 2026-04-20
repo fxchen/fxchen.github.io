@@ -17,7 +17,7 @@ permalink: company-vault
 OK so this is maybe a weird one but I've been thinking about
 it a lot and wanted to share.
 
-We're a small energy startup. < 10 people. And we have this
+We're a small energy startup. And we have this
 problem that I think every startup has but nobody talks about:
 
 Where does institutional knowledge actually live?
@@ -211,7 +211,7 @@ only information-routing mechanism available. AI changes that.
 Block is building what he calls a "company world model"—an
 AI that maintains a continuously updated picture of what's
 happening across the org, replacing what managers used to
-carry in their heads. Our vault is a 10-person version of
+carry in their heads. Our vault is a small-team version of
 that same thesis.
 
 Nobody coordinated this. We've all been intuiting our way
