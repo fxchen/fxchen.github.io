@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The Enterprise Brain Is a Router Problem
+title: We Built the Enterprise Brain. It Was the Easy Part.
 subtitle: "Fat skills, one per work function."
 permalink: enterprise-brain-router
 ---
