@@ -12,6 +12,8 @@ This is what most operations CEOs do at 7 a.m.: read a dashboard somebody on the
 
 The one I work with does something different. He runs the integration himself. Daily.
 
+Why he's up. Business uncertainty is the highest it's been in his twenty years running operations companies. Tariffs shift midweek. Permit rules update without warning. Equipment costs move faster than the bid pipeline can absorb. And the data that would tell him what to do is fragmented across Salesforce, ops spreadsheets, jurisdiction PDFs, his sales lead's head. The analytics team's quarterly cycle isn't keeping up. He can either be at the keyboard at 7 a.m. or he can be wrong about pricing for six weeks.
+
 ---
 
 *Disclosure: we're Balto Energy, an early-stage vertical AI company in the Palantir Startup Fellowship, building on Foundry.*
