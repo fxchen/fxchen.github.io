@@ -6,6 +6,8 @@ permalink: vertical-ai-rewrite
 share-img: "https://frankc.net/img-posts/vertical-ai-rewrite.png"
 ---
 
+![Handoffs on the left as a linear stamped chain; loops on the right as a circular write-back cycle](/img-posts/vertical-ai-rewrite.png)
+
 The peaceful era is over.
 
 Last weekend, our operations company's CEO built a thirteen-week cash forecast. Supplier statements, work orders, reservation orders, PM overrides, account-by-account Monte Carlo. No analytics team. No quarter-long project. The speed isn't the story. The story is what stopped being necessary.
