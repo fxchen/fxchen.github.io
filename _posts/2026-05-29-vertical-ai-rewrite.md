@@ -3,6 +3,7 @@ layout: post
 title: "The Handoff Was the Bug. Vertical AI Is the Rewrite."
 subtitle: "Quality used to come from approvals. Now it comes from correction."
 permalink: vertical-ai-rewrite
+share-img: "https://frankc.net/img-posts/vertical-ai-rewrite.png"
 ---
 
 The peaceful era is over.
