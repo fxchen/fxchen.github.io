@@ -44,7 +44,7 @@ That was possible before. It was just expensive enough that almost no one did it
 
 [capture]: /capture-before-reasoning
 
-If the AI move is better dashboards, faster summaries, or copilots on top of the same narrow data, you're still optimizing the controlled process. You're improving throughput against a constraint that no longer binds.
+If you reach for AI to make the keyhole more efficient—better dashboards, faster summaries, copilots on top of the same narrow data—you're still optimizing the controlled process. You're improving throughput against a constraint that no longer binds.
 
 The corrective-loop move is to redesign the operating system so the company itself becomes the source of truth. Pull operational reality out of the narrow systems. Represent it as a structured business graph: entities, evidence, constraints, prior decisions, current state, and write-back paths in a form humans and agents can both act on. Then operators and agents can run loops against that graph, keep what works, and write the patterns back into the operating system. Next week starts from a sharper version of the company than this week did.
 
@@ -76,7 +76,7 @@ What both loops share: the operator isn't doing one step in a chain. They own th
 
 We're building that harness around the operating company: vault for memory, Foundry for executable ontology, Slack and Linear for coordination, agents for the repeatable typing. Every real workflow teaches the harness where the graph is missing, where the permissions are wrong, where a human judgment call should remain human, and where a tiny automation can safely take over.
 
-One reason Liu Cixin’s *Three-Body* trilogy is one of my favorite sci-fi series is that the chaos comes from coupling, not mood: each sun keeps pulling the other two off their neat path, and Stable Eras break into Chaotic Eras.[^three-body-series] Same shape here. The memory graph, execution graph, and coordination graph each look legible alone. The weirdness starts when they perturb each other.[^three-body-physics]
+One reason Liu Cixin’s *Three-Body* trilogy is one of my favorite sci-fi series is that the chaos comes from coupling, not mood: each sun keeps pulling the other two off their neat path, and Stable Eras break into Chaotic Eras.[^three-body-series] Same shape here, with much lower stakes. The memory graph, execution graph, and coordination graph each look legible alone. The weirdness starts when they perturb each other.[^three-body-physics]
 
 [^three-body-series]: Netflix’s science explainer for *3 Body Problem* describes the San-Ti planet as moving between Stable and Chaotic Eras because it sits in a three-sun system. Liu Cixin’s trilogy is doing the same thing this post is trying to do in miniature: using a hard science concept as a way to talk about civilization-scale instability. https://www.netflix.com/tudum/articles/3-body-problem-science-explained-burning-questions
 
@@ -96,11 +96,11 @@ The implementation sequence I'd trust is narrower than the slogan.
 
 **One: pick one narrow value stream where a miss hurts and rebuild the whole loop.** Not a demo. Not an innovation-theater pilot. A real client workflow with real consequences. Painful enough that everyone feels the drag, bounded enough that you can actually ship. The mistake is trying to AI-ify the whole company at once. The thing you're learning is what a real loop feels like when graph, agents, and operator judgment compose. You can only learn that on one stream at a time.
 
-**Two: write the graph before buying more agents.** Most AI-first competitors will fake this for a while. They'll wrap agents around messy context, get impressive demos, raise money. The durable advantage is the structured representation of the business: what the core entities are, what evidence supports what claim, what prior work is relevant, what constraints bind which decisions. Without a graph, every loop restarts from zero.
+**Two: write the graph before buying more agents.** Most AI-first competitors will fake this for a while. They'll wrap agents around messy context, get impressive demos, raise money. The durable advantage is the structured representation of the business: what the core entities are, what evidence supports what claim, what prior work is relevant, what constraints bind which decisions. Agents without a graph are clever interns with amnesia. Agents with a graph become operators inside a compounding system.
 
 A blunt test: pick a surprising outcome from last week. Time how long it takes someone who was not in the room to answer, "have we seen anything like this before, and what did we do?" If it takes more than ten minutes, or only one person can answer, the business is not queryable yet. It just feels queryable to the people holding the missing context in their heads.
 
-**Three: climb from augmentation to minimal automation to bounded agency.** Start with augmentation: make the operator faster at seeing, querying, drafting, checking. Then automate the smallest reversible pieces: status updates, deterministic checks, routing, reminders, data hygiene. Only then grant bounded agency: the loop can act, but inside rules the operator wrote and with a clear write-back path. Some roles collapse into operator-builders. Other humans move closer to judgment and taste. The accumulated expertise of the company becomes infrastructure instead of headcount.
+**Three: climb from augmentation to minimal automation to bounded agency.** Start with augmentation: make the operator faster at seeing, querying, drafting, checking. Then automate the smallest reversible pieces: status updates, deterministic checks, routing, reminders, data hygiene. Only then grant bounded agency: the loop can act, but inside rules the operator wrote and with a clear write-back path. Some roles collapse into operator-builders. Other humans move closer to judgment, taste, customer understanding, exception handling. The accumulated expertise of the company becomes infrastructure instead of headcount.
 
 ---
 
@@ -108,7 +108,7 @@ The honest "I don't know" on this is about which specialist expertise translates
 
 Some judgment feels structural: the kind of taste a senior PM has about which customers will churn, the read on whether a furious client wants apology or action, the triage move an ops lead makes in a hallway. I don't know if any of that survives the translation to graph + agents. I suspect some does and some doesn't, and the line isn't obvious from where I'm standing.
 
-The simplest tell I've found: expertise that's purely sequential (measure, score, route, approve) or pattern-matched (similar customer, similar move) tends to clean into infrastructure. Expertise that requires judgment in the face of surprises survives longer. Structural judgment has survived every loop we've run.
+The simplest tell I've found: expertise that's purely sequential (measure, score, route, approve) or pattern-matched (similar customer, similar move) tends to clean into infrastructure. Expertise that requires judgment in the face of surprises survives longer. We've seen structural judgment survive. We haven't seen it disappear entirely yet, even in loops that execute hundreds of times a week.
 
 One more caveat: graphs decay. Earlier this month two paths in our financial model returned contradictory numbers for the same scenario. The same agent queried two interfaces and got two answers. The graph hadn't gotten worse. The correction loop was load-bearing. A parity contract and a CI check closed the drift path. The cost was a morning we lost finding it. The cost of not finding it would have been a contradictory answer in front of the wrong audience. Graphs compound when correction is cheaper than capture. Without that condition, the graph is a slower keyhole.
 
