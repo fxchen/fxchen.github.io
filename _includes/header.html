@@ -49,7 +49,11 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="{{ include.type }}-heading">
+          {% if page.bigimg %}
+          <div class="fallback-title">{% if page.title %}{{ page.title }}{% else %}<br/>{% endif %}</div>
+          {% else %}
           <h1>{% if page.title %}{{ page.title }}{% else %}<br/>{% endif %}</h1>
+          {% endif %}
 		  {% if page.subtitle %}
 		    {% if include.type == "page" %}
             <hr class="small">
