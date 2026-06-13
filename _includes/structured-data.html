@@ -1,0 +1,93 @@
+{% if page.url == "/" %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "{{ site.url }}/#person",
+    "name": "Frank Chen",
+    "url": "{{ site.url }}/",
+    "image": "{{ site.url }}{{ site.avatar }}",
+    "jobTitle": "Co-founder & CTO",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Balto Energy"
+    },
+    "description": "Frank Chen is co-founder and CTO of Balto Energy, a climate tech startup using AI to transform home energy. Before Balto, he led developer infrastructure special projects at Slack, built data platforms at Palantir, and launched AWS WorkDocs at Amazon.",
+    "alumniOf": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "Stanford University"
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "University of California, Los Angeles"
+      }
+    ],
+    "email": "mailto:hello@frankc.net",
+    "sameAs": [
+      "https://github.com/fxchen",
+      "https://www.linkedin.com/in/fxchen",
+      "https://www.instagram.com/fxchen"
+    ]
+  }
+  </script>
+{% endif %}
+{% if page.id %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ site.url }}{{ page.url }}"
+    },
+    "headline": {{ page.title | jsonify }},
+    "description": {% if page.subtitle %}{{ page.subtitle | jsonify }}{% else %}{{ page.content | strip_html | normalize_whitespace | truncate: 160 | jsonify }}{% endif %},
+    {% if page.share-img %}
+    "image": {{ page.share-img | jsonify }},
+    {% elsif page.image %}
+    "image": {{ page.image | absolute_url | jsonify }},
+    {% endif %}
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{% if page.modified-date %}{{ page.modified-date | date_to_xmlschema }}{% else %}{{ page.date | date_to_xmlschema }}{% endif %}",
+    "author": {
+      "@type": "Person",
+      "@id": "{{ site.url }}/#person",
+      "name": "Frank Chen",
+      "url": "{{ site.url }}/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "@id": "{{ site.url }}/#person",
+      "name": "Frank Chen",
+      "url": "{{ site.url }}/"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ site.url }}/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Writing",
+        "item": "{{ site.url }}/writing/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ page.title | jsonify }},
+        "item": "{{ site.url }}{{ page.url }}"
+      }
+    ]
+  }
+  </script>
+{% endif %}

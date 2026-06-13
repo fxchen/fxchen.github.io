@@ -7,11 +7,11 @@ subtitle: A very incomplete list of projects, references, etc
 
 # Media
 
-A very incomplete list of projects, references, etc. Roughly ordered chronologically.
+Talks, podcasts, book chapters, and open-source projects by Frank Chen, co-founder and CTO of Balto Energy. A very incomplete list of projects, references, etc. Roughly ordered chronologically.
 
 ## 2023
 
-AI Powered Development Workflows: Sharing initial experiments with generative models and their challenges in developer workflows [[Developer Experience Summit](http://localhost:4000/writing/)]. I delved into the integration of generative artificial intelligence (AI) models into the developer workflow, exploring initial experiments with AI-powered code review in open source repositories at Slack.
+AI Powered Development Workflows: Sharing initial experiments with generative models and their challenges in developer workflows [[Developer Experience Summit](/ai-dev)]. I delved into the integration of generative artificial intelligence (AI) models into the developer workflow, exploring initial experiments with AI-powered code review in open source repositories at Slack.
 
 
 AI Has Entered the Chat: Humans, AI, and the Art of Collaboration [[craftconf talk](https://craft-conf.com/2023/talk/frank-chens-talk)] [[talk references](https://frankc.net/ai-entered-chat)]. I explored the potential of integrating large language models and generative artificial intelligence (AI) agents into our work processes.

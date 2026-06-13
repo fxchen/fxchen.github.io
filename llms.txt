@@ -1,0 +1,28 @@
+# Frank Chen — frankc.net
+
+> Frank Chen is co-founder and CTO of Balto Energy, a climate tech startup using AI to transform home energy. Before Balto, he led developer infrastructure special projects at Slack, built data platforms at Palantir for healthcare, energy, and finance customers, and launched AWS WorkDocs at Amazon. He holds an M.S. in Computer Science (HCI) from Stanford, where he worked in BJ Fogg's Persuasive Technology Lab, and a B.S. in Computer Science from UCLA.
+
+He writes about deploying real AI in the messy physical world: agents, knowledge graphs, and workflows that survive permits, people, bills, and operations with consequences — what actually ships vs. what demos well.
+
+## Start here
+
+- [About Frank Chen](https://frankc.net/): bio (short and full), background, and what he works on
+- [Writing](https://frankc.net/writing/): all essays, newest first
+- [Media](https://frankc.net/media): talks, podcasts, book chapters, and open-source projects
+
+## Selected essays
+
+- [What It Feels Like to Rebuild a Company Around a Graph](https://frankc.net/rebuilding-our-company): going forward-deployed in Palantir Foundry and rebuilding a company around an ontology
+- [The Handoff Was the Bug. Vertical AI Is the Rewrite.](https://frankc.net/vertical-ai-rewrite): quality used to come from approvals; now it comes from correction
+- [The Operations CEO Doesn't Wait for the Dashboard](https://frankc.net/forward-deployed-engineer-executive): what happens when the forward-deployed engineer is the CEO himself
+- [The Moat Is What You Capture](https://frankc.net/capture-before-reasoning): reasoning gets cheaper; capture compounds
+- [We Built the Enterprise Brain. It Was the Easy Part.](https://frankc.net/enterprise-brain-router): fat skills, one per work function
+- [Our AI Onboards New Hires Better Than We Do](https://frankc.net/ai-onboarding): using Claude Code to personalize onboarding from a living knowledge base
+- [We Put Our Entire Company's Brain in a Git Repo](https://frankc.net/company-vault): ARKS, AI agents, and company knowledge in plain markdown
+- [AI Has Entered the Chat](https://frankc.net/ai-entered-chat): humans, AI, and the art of collaboration (CraftConf 2023)
+- [Design your Personal Operating System — Habits](https://frankc.net/personal-operating-system): habits as the operating system you live your life through
+
+## Meta
+
+- [Sitemap](https://frankc.net/sitemap.xml)
+- [RSS feed](https://frankc.net/feed.xml)
