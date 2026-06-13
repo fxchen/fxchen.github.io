@@ -109,7 +109,9 @@ url-pretty: "frankc.net"  # eg. "deanattali.com/beautiful-jekyll"
 #gtag: ""
 
 # Fill in your Google Analytics ID to track your website using GA
-google_analytics: "UA-36961797-1"
+# (Universal Analytics shut down July 2023; set gtag above with a GA4
+# G-XXXXXXX measurement ID to re-enable analytics)
+#google_analytics: ""
 
 # Google Tag Manager ID
 #gtm: ""
