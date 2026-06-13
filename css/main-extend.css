@@ -35,6 +35,19 @@ body, a {
   text-shadow: 1px 1px 8px rgb(240,240,240);
 }
 
+/* Small-screen fallback header on pages with a big image: styled like the
+   h1 it replaces, but a div so the page keeps a single semantic H1 */
+.intro-header .page-heading .fallback-title {
+  margin-top: 0;
+  font-size: 50px;
+  font-weight: 400;
+}
+.intro-header .post-heading .fallback-title {
+  margin-top: 0;
+  font-size: 35px;
+  font-weight: 400;
+}
+
 /* ----- Search Bar -------*/
 .nav-search-link .nav-search-icon {
   display: none;
