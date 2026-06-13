@@ -180,6 +180,8 @@ link-tags: true
 # Exclude these files from production site
 exclude:
   - CHANGELOG.md
+  - CHANGELOG_FXCHEN.md
+  - CLAUDE.md
   - CNAME
   - Dockerfile
   - Gemfile
@@ -263,6 +265,7 @@ prose:
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-redirect-from
 
 
 # - jekyll-gist

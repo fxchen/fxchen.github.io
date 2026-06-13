@@ -2,7 +2,7 @@
 layout: post
 title: How to Design for Habit
 subtitle: The Secret to Making Great Products
-permalink: behavioral-antipatterns-product-design
+permalink: how-to-design-for-habits
 image: https://raw.githubusercontent.com/fxchen/frankc/master/2014%20July/spiral.jpg
 modified-date: Sep 16, 2018
 ---
