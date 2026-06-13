@@ -7,7 +7,7 @@ subtitle: A very incomplete list of projects, references, etc
 
 # Media
 
-A very incomplete list of projects, references, etc. Roughly ordered chronologically.
+Talks, podcasts, book chapters, and open-source projects by Frank Chen, co-founder and CTO of Balto Energy. A very incomplete list of projects, references, etc. Roughly ordered chronologically.
 
 ## 2023
 
