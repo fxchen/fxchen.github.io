@@ -10,9 +10,9 @@ There's a field in a public solar dataset that flags whether a system is a lease
 
 It does. All the time.
 
-I read that zero. A Palantir forward-deployed engineer read it. The AI agent we had running inside Foundry read it, scored it, and ranked on it. Three different kinds of intelligence looked at the same confident number, and all three of us were wrong, because every other field in the row was internally consistent and nothing hinted the number was a lie. Call it a clean lie: false by construction, clean on its face, wrong exactly where it counts.
+Here's the part that should worry you: none of us even had to look at it. The zero sat in source permit data, passed untouched through the architecture a Palantir forward-deployed engineer guided us in building, and the AI agent inside our Foundry read it, scored it, and ranked on it — and it never tripped a thing, because every other field in the row was internally consistent and nothing hinted the number was a lie. A clean lie doesn't get caught. It gets used. False by construction, clean on its face, wrong exactly where it counts.
 
-The person who knew was Shelby. She files the permits. She'd been told, years ago, to leave that box blank, because the form's follow-up questions describe a kind of lease we don't sell. Leaving it empty was the honest answer at filing time. The zero isn't a fact about the business. It's the residue of a verbal instruction, sitting in one person's head, where no founder, no FDE, and no agent could reach it.
+The person who knew was Shelby. She files the permits. She'd been told, years ago, to leave that box blank, because the form's follow-up questions describe a kind of lease we don't sell. Leaving it empty was the honest answer at filing time. The zero isn't a fact about the business. It's the residue of a verbal instruction, sitting in one person's head as tacit knowledge, where no founder, no FDE, and no agent could reach it.
 
 Six weeks into Palantir's Startup Fellowship, that gap is the whole post. Nobody at Palantir wrote a line of our ontology, and the reason that's the highest compliment I can pay the program is the same reason the zero stayed a lie until Shelby explained it.
 
@@ -52,7 +52,7 @@ The obvious objection is that this is temporary. Catalog the lies, write the ove
 
 It also goes stale the moment the world moves, which is constantly. A permitting authority swaps its software vendor and the scraper goes quiet with no error, so a drop in observability looks identical to a drop in business — and only Shelby, now filing through the new portal, knows which one it is. A utility changes a form field. A national installer fragments into new legal entities. The vendor regenerates its contractor IDs on an edit. There is no stable function here to learn. The override table is re-authored continuously, because the thing it corrects keeps changing shape underneath it.
 
-So the agent can apply today's distrust list. It cannot author tomorrow's. That's not a gap that closes with a better model. It's the difference between running a correction and knowing, this month, in this jurisdiction, what just quietly broke. An agent inherits the schema and the SOPs when it lands in a new region. It does not inherit the operator who knows which clean numbers are lying, and it can't derive her, because what she knows isn't in the data by construction.
+So the agent can apply today's distrust list. It cannot author tomorrow's. That's not a gap that closes with a better model. It's the difference between running a correction and knowing, this month, in this jurisdiction, what just quietly broke. An agent inherits the schema and the SOPs when it lands in a new region. It does not inherit the operator who knows which clean numbers are lying, and it can't derive her, because what she knows isn't in the data by construction. That's the shape of operator tacit knowledge: she knows more than she can tell, and the part she can't tell is the part the model most needs.
 
 ## Why "guided, not done-for" is the design
 
