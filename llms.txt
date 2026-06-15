@@ -12,6 +12,7 @@ He writes about deploying real AI in the messy physical world: agents, knowledge
 
 ## Selected essays
 
+- [Forward Deploy to Solve the Untrainable](https://frankc.net/forward-deploy-to-solve-untrainable): why the operator who knows the clean number is a lie can't be outsourced — FD(x) across the org chart
 - [What It Feels Like to Rebuild a Company Around a Graph](https://frankc.net/rebuilding-our-company): going forward-deployed in Palantir Foundry and rebuilding a company around an ontology
 - [The Handoff Was the Bug. Vertical AI Is the Rewrite.](https://frankc.net/vertical-ai-rewrite): quality used to come from approvals; now it comes from correction
 - [The Operations CEO Doesn't Wait for the Dashboard](https://frankc.net/forward-deployed-engineer-executive): what happens when the forward-deployed engineer is the CEO himself
