@@ -3,6 +3,7 @@ layout: post
 title: We Put Our Entire Company's Brain in a Git Repo
 subtitle: "ARKS, AI agents, and what happens when your company's knowledge lives in plain markdown"
 permalink: company-vault
+share-img: "https://frankc.net/img-posts/company-vault.png"
 ---
 
 ```
