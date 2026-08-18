@@ -188,6 +188,13 @@ exclude:
   - TODO.md
   - Vagrantfile
   - serve.py
+  # Any .md dropped beside an image becomes a published page, because
+  # github-pages pulls in jekyll-optional-front-matter transitively — it renders
+  # markdown that has no front matter at all. That is how a planning note ended
+  # up live at /img-posts/.../notes-hero-2-surfaces-verdigris-portrait/, in the
+  # sitemap, leaking local filesystem paths. The image-generation workflow keeps
+  # writing those files, so this is a glob rather than a filename.
+  - img-posts/**/*.md
   # Local gem path. Without this Jekyll walks vendor/bundle and dies on
   # jekyll's own site_template posts, which carry an ERB date placeholder
   # instead of a real one. GitHub Pages never sees this directory.
