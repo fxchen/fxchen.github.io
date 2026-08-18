@@ -4,6 +4,7 @@ title: "What It Feels Like to Rebuild a Company Around a Graph"
 subtitle: "Our CEO went forward-deployed into the ontology. The wonder and the friction, honestly."
 permalink: rebuilding-our-company
 share-img: "https://frankc.net/img-posts/rebuilding-our-company.png"
+categories: ['selected']
 ---
 
 > *"Why are French restaurants so good? Because the waiter is part of the kitchen: he knows the food, the technique, the method, not just the path from the pass to the table."*

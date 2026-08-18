@@ -4,6 +4,7 @@ title: "FD(x): Forward Deploy to Solve the Untrainable"
 subtitle: "The cleanest number in our dataset was a lie, and only the operator who owns the loop knew why."
 permalink: forward-deploy-to-solve-untrainable
 share-img: "https://frankc.net/img-posts/forward-deploy-to-solve-untrainable.png"
+categories: ['selected']
 ---
 
 There's a field in a public solar dataset that flags whether a system is a lease instead of a purchase. For our operations company it reads a clean, machine-precise zero. The data says, flatly, that the company has never once done a lease.

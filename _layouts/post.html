@@ -53,14 +53,26 @@ layout: base
       {% endif %}
 
       <ul class="pager blog-pager">
+        {% comment %}
+          The neighbour's title is the only topical signal this pager carries, so it
+          is visible anchor text rather than a title= attribute. The old markup put it
+          in a Bootstrap tooltip whose JS is never initialised, leaving "Previous Post"
+          as the sole crawlable text on the site's only systematic post-to-post link.
+        {% endcomment %}
         {% if page.previous.url %}
         <li class="previous">
-          <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
+          <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" rel="prev">
+            <span class="pager-dir">&larr; Previous</span>
+            <span class="pager-title">{{ page.previous.title }}</span>
+          </a>
         </li>
         {% endif %}
         {% if page.next.url %}
         <li class="next">
-          <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
+          <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" rel="next">
+            <span class="pager-dir">Next &rarr;</span>
+            <span class="pager-title">{{ page.next.title }}</span>
+          </a>
         </li>
         {% endif %}
       </ul>

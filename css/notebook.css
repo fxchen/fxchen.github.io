@@ -967,6 +967,42 @@ h2.linked-section .fa { display: none; }
   border: none;
 }
 
+/* Post pager carries the neighbour's real title: a mono direction label above the
+   title set in body type. Two halves share the row, so each is capped at 48% and
+   the direction labels stay pinned to the outer edges. */
+/* The first and last post have only one neighbour. bootstrap's .pager sets
+   text-align:center, so a lone item drifts to the middle; the auto margins pin
+   each half to its own edge whether or not the other one exists. */
+.pager.blog-pager li { max-width: 48%; }
+.pager.blog-pager li.previous { margin-right: auto; text-align: left; }
+.pager.blog-pager li.next { margin-left: auto; text-align: right; }
+.pager.blog-pager li a { display: block; }
+.pager-dir {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--field-gray);          /* 5.37:1 on porcelain */
+  margin-bottom: var(--space-1);
+}
+.pager-title {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.35;
+  color: var(--charcoal);            /* 12.89:1 on porcelain */
+}
+.pager.blog-pager li a:hover .pager-title,
+.pager.blog-pager li a:focus-visible .pager-title { color: var(--acid-green-dark); }
+
+@media (max-width: 600px) {
+  .pager.blog-pager { flex-direction: column; gap: var(--space-4); }
+  .pager.blog-pager li, .pager.blog-pager li.next { max-width: 100%; text-align: left; }
+}
+
 /* ---------- §4.16 Footnotes ---------- */
 
 .footnotes {
