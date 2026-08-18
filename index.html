@@ -2,6 +2,10 @@
 layout: page
 title: Frank Chen
 subtitle: Deploying real AI in our messy physical world.
+# The subtitle is the hero line and reads as a thesis, not as an identifier. This is
+# the SERP/social snippet: it names the entity and the credentials first, which is
+# what a search or answer engine needs to tell this Frank Chen from the others.
+meta-description: "Frank Chen is co-founder and CTO of Balto Energy, previously Slack, Palantir, and Amazon. He writes about deploying real AI in the messy physical world."
 use-site-title: true
 headshot: bio
 hero-accent: none
@@ -59,8 +63,15 @@ hero-accent: none
 
 <h3>selected writing</h3>
 <ul class="simple-list">
+  {% comment %}
+    A new post can be both the newest and one of the best, so skip anything
+    "recent writing" just listed rather than printing it twice on one page.
+  {% endcomment %}
+  {% assign recent_urls = site.posts | slice: 0, 2 | map: 'url' %}
   {% for post in site.categories['selected'] %}
+    {% unless recent_urls contains post.url %}
     <li><a href="{{ post.url }}">{{ post.title }}</a><i>{{post.subtitle}}</i></li>
+    {% endunless %}
   {% endfor %}
 </ul>
 

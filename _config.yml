@@ -29,7 +29,11 @@ navbar-links:
 
 # Image to show in the navigation bar - image must be a square (width = height)
 # Remove this parameter if you don't want an image in the navbar
-avatar: "/img/avatar-icon.jpeg"
+# Feeds og:image, twitter:image and the JSON-LD Person.image — the last of which
+# is an entity signal, so it should be the current portrait, and JPEG because
+# social scrapers are unreliable on WebP. The visible bio headshot is a separate
+# WebP in _includes/headshot.html.
+avatar: "/img/frank-chen-2022.jpg"
 
 # If you want to have an image logo in the top-left corner instead of the title text,
 # then specify the following parameter
@@ -188,6 +192,13 @@ exclude:
   - TODO.md
   - Vagrantfile
   - serve.py
+  # Any .md dropped beside an image becomes a published page, because
+  # github-pages pulls in jekyll-optional-front-matter transitively — it renders
+  # markdown that has no front matter at all. That is how a planning note ended
+  # up live at /img-posts/.../notes-hero-2-surfaces-verdigris-portrait/, in the
+  # sitemap, leaking local filesystem paths. The image-generation workflow keeps
+  # writing those files, so this is a glob rather than a filename.
+  - img-posts/**/*.md
   # Local gem path. Without this Jekyll walks vendor/bundle and dies on
   # jekyll's own site_template posts, which carry an ERB date placeholder
   # instead of a real one. GitHub Pages never sees this directory.

@@ -4,6 +4,7 @@ title: "What It Feels Like to Rebuild a Company Around a Graph"
 subtitle: "Our CEO went forward-deployed into the ontology. The wonder and the friction, honestly."
 permalink: rebuilding-our-company
 share-img: "https://frankc.net/img-posts/rebuilding-our-company.png"
+categories: ['selected']
 ---
 
 > *"Why are French restaurants so good? Because the waiter is part of the kitchen: he knows the food, the technique, the method, not just the path from the pass to the table."*
@@ -12,13 +13,13 @@ share-img: "https://frankc.net/img-posts/rebuilding-our-company.png"
 
 Six weeks ago we went forward-deployed[^fde] in Foundry through Palantir's Startup Fellowship. What it actually feels like, most days, is being reorganized by your own tools. We're building a company brain that runs across several graphs at once, anchored by the ontology in Foundry.[^graphs] An ontology is just a structured model of how the business actually fits together — the concepts and how they relate — in one shared layer humans and agents can both read. Standing that up means unlearning where our truth used to live and relearning how to ask the business questions through the graph. Some of it is wonder. Most of it is just learning. This post is about how we're rebuilding the company, not what we launched.
 
-![Woodcut engraving: operator-builders climb and construct a stepped company structure wired together by acid-green graph edges.](/img-posts/rebuilding-our-company-cover.png)
+![Woodcut engraving: operator-builders climb and construct a stepped company structure wired together by acid-green graph edges.](/img-posts/rebuilding-our-company-cover.webp){: width="1536" height="1024" loading="lazy" decoding="async"}
 
 It clicked for me mid-demo. We were walking through a Salesforce view and I stopped the room: each of these platforms is just a graph—not a chart with axes, but a web of things and the relationships between them. Slack is people, channels, and messages. Linear is tasks linked to projects linked to owners. GitHub is the unique one: it holds both the code and the agents that execute against it, and those runs link back to the Linear tasks they close and the Slack threads they report into. The Foundry ontology is a graph too, all the way down to the vault. And none of them sits alone — a Slack thread points at a Linear task that points at a GitHub pull request, until the dozen disconnected tools resolve into one connected thing. Once you see it you can't unsee it.
 
 The clearest place to watch it happen is our CEO. James Quazi didn't delegate this one. He did the engineering himself, the operator-builder of our business-model ontology, standing up the tools and the harness all of us think through, today and going forward. That meant building and interrogating a model of the business inside the graph, then exposing relevant slices through an investor portal so they can explore our ontology the same way we do, with the same tools we use,[^tools] and trace any answer back to its source rather than trusting a slide. The portal is the visible edge, and it matters. But it isn't the story. The story is what it took him to get the graph right, what he learned about our own business in the fight, and the moment the whole thing came alive once the context was finally true. That's the wonder. Not a tool we bought, a brain we're building, getting sharper every loop.
 
-![Woodcut cutaway: workers tend many different surfaces on top of a stone block whose interior is one dense green node-and-edge graph.](/img-posts/rebuilding-our-company-surfaces.png)
+![Woodcut cutaway: workers tend many different surfaces on top of a stone block whose interior is one dense green node-and-edge graph.](/img-posts/rebuilding-our-company-surfaces.webp){: width="1536" height="1024" loading="lazy" decoding="async"}
 
 That's the thing I'd lose if I switched off Foundry tomorrow. Keep it in mind for every complaint below. None of these were bad enough to make us reconsider the bet. They were bad enough to cost us days.
 
@@ -32,7 +33,7 @@ Now the friction that really was friction. For each: what it was, and where hone
 
 **A description in the ontology is load-bearing, and it cut both ways.** This is the one that cost us days. We were rebuilding a model of the business under different assumptions, querying the graph and rewiring it on the fly through a couple of fast functions, and the answers kept coming out subtly wrong. The functions were right. We'd already fixed those. What was wrong was a single load-bearing assumption buried in an object's description. Our first quick pass had written it badly, and Analyst reasons over those descriptions, so the bad one haunted every downstream answer like an old model hallucination. Nothing errored. It was just quietly, exhaustingly wrong. When we finally fixed the description, everything came out beautifully, same functions. The fix was almost embarrassingly small — one sentence in a description rewritten from a guess into what was actually true — and that single edit flipped every downstream answer from subtly wrong to clean. The ontology is what let us navigate back out. Forming the context in the graph was the key, not the code.
 
-![Woodcut engraving: builders set the keystone of a great arch while a small graph and one corrected node anchor it from below, in coral.](/img-posts/rebuilding-our-company-keystone.png)
+![Woodcut engraving: builders set the keystone of a great arch while a small graph and one corrected node anchor it from below, in coral.](/img-posts/rebuilding-our-company-keystone.webp){: width="1536" height="1024" loading="lazy" decoding="async"}
 
 The general habit we took from it: merge fast. An ontology with a dozen open proposals isn't one graph, it's a dozen maybes, and the agents slow down guessing between them. Cycle time lives or dies on how fast you converge.
 

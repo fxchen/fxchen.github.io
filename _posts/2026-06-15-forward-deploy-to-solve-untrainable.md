@@ -4,6 +4,7 @@ title: "FD(x): Forward Deploy to Solve the Untrainable"
 subtitle: "The cleanest number in our dataset was a lie, and only the operator who owns the loop knew why."
 permalink: forward-deploy-to-solve-untrainable
 share-img: "https://frankc.net/img-posts/forward-deploy-to-solve-untrainable.png"
+categories: ['selected']
 ---
 
 There's a field in a public solar dataset that flags whether a system is a lease instead of a purchase. For our operations company it reads a clean, machine-precise zero. The data says, flatly, that the company has never once done a lease.
@@ -18,11 +19,11 @@ Six weeks into Palantir's Startup Fellowship, that gap is the whole post. Nobody
 
 *Disclosure: I'm CTO at Balto Energy, a vertical AI for home energy services company, starting with California solar. The Fellowship, the operations company, and the data below are ours.*
 
-![Woodcut engraving: a ledger row of identical machine-perfect zeros, the central one struck through with a single acid-green correction mark — the clean number that is a lie.](/img-posts/forward-deploy-to-solve-untrainable-clean-number.png)
+![Woodcut engraving: a ledger row of identical machine-perfect zeros, the central one struck through with a single acid-green correction mark — the clean number that is a lie.](/img-posts/forward-deploy-to-solve-untrainable-clean-number.webp){: width="1536" height="1024" loading="lazy" decoding="async"}
 
 ## Who actually built it
 
-![Woodcut cutaway: founders and operators build inside a great permitting-and-data engine while a guide stands outside it, hands off, pointing a verdigris line at a fault in the mechanism.](/img-posts/forward-deploy-to-solve-untrainable-builders-guides.png)
+![Woodcut cutaway: founders and operators build inside a great permitting-and-data engine while a guide stands outside it, hands off, pointing a verdigris line at a fault in the mechanism.](/img-posts/forward-deploy-to-solve-untrainable-builders-guides.webp){: width="1536" height="1024" loading="lazy" decoding="async"}
 
 The legible version of the story is "startup uses Foundry." The real one is that the building was done by two groups who, on paper, had no business doing it: founders and operators.
 
@@ -46,7 +47,7 @@ That's the moat, and notice how I'm showing it. Not by asserting that operators 
 
 ## Why you can't just teach the agent the list
 
-![Woodcut: a Jacquard training-loom devours a deck of identical punched cards but cannot draw in the single green thread an operator holds just off the deck — the knowledge that isn't in the data by construction.](/img-posts/forward-deploy-to-solve-untrainable-untrainable.png)
+![Woodcut: a Jacquard training-loom devours a deck of identical punched cards but cannot draw in the single green thread an operator holds just off the deck — the knowledge that isn't in the data by construction.](/img-posts/forward-deploy-to-solve-untrainable-untrainable.webp){: width="1536" height="1024" loading="lazy" decoding="async"}
 
 The obvious objection is that this is temporary. Catalog the lies, write the overrides into code, let the agent learn the distrust list, and the operator ages out of the loop. We did write the overrides into code. The pipeline is taught to disbelieve the third-party-owned field for exactly the installers Jill knows are misfiling, and to substitute an estimate instead. The distrust list is real and it runs in production.
 
@@ -62,7 +63,7 @@ That's why guidance beats delegation, and it's not a soft point. Guidance writes
 
 ## The pattern has a name: FD(x)
 
-![Woodcut: two colossal parenthesis press-jaws clamp one fused machine of work-tools threaded by a single ochre drive-belt — FD(x), the whole company evaluated as one function over the org chart.](/img-posts/forward-deploy-to-solve-untrainable-fdx.png)
+![Woodcut: two colossal parenthesis press-jaws clamp one fused machine of work-tools threaded by a single ochre drive-belt — FD(x), the whole company evaluated as one function over the org chart.](/img-posts/forward-deploy-to-solve-untrainable-fdx.webp){: width="1536" height="1024" loading="lazy" decoding="async"}
 
 What actually happened over six weeks is that we forward-deployed the whole company into one vertical AI business. Not a founder parachuting in. The whole company relocated into the work. Our engineers rebuilt the systems. Our operators rebuilt and kept correcting the truth. Forward-deploy as a function, evaluated over the org chart, everyone landing inside the same operating company instead of shipping at it from outside.
 

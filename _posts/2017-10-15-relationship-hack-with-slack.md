@@ -5,7 +5,6 @@ subtitle: A Six Month Experiment
 permalink: relationship-hack-with-slack
 image: /img-posts/slack-0-icon.png
 modified-date: Sep 16, 2018
-categories: ['selected']
 ---
 
 Haley and I have been using Slack as a primary way to communicate in the past 6 months, and its been an authenticity and delight creating relationship hack.
@@ -139,14 +138,14 @@ If anyone out there uses enterprise messaging for their relationship communicati
 
 [link-brand]: https://giphy.com/gifs/mind-blown-kVA5mbyY6Z6AU
 [link-todobot]: http://todobot.io/
-[image-slack-0-icon]: /img-posts/slack-0-icon.png  
+[image-slack-0-icon]: /img-posts/slack-0-icon.webp  
 <!-- https://icons8.com/icon/set/slack/all -->
-[image-slack-1-message]: /img-posts/slack-1-message.png
-[image-slack-2-message]: /img-posts/slack-2-message.png
-[image-slack-3-message]: /img-posts/slack-3-message.png
-[image-slack-4-signup]: /img-posts/slack-4-signup.png
-[image-slack-5-claude]: /img-posts/slack-5-claude.png
-[image-slack-6-meditation]: /img-posts/slack-6-meditation.jpeg
-[image-slack-7-search]: /img-posts/slack-7-search.jpeg
-[image-slack-8-catana]: /img-posts/slack-8-catana.jpeg
-[image-slack-9-brand]: /img-posts/slack-9-brand.gif
+[image-slack-1-message]: /img-posts/slack-1-message.webp
+[image-slack-2-message]: /img-posts/slack-2-message.webp
+[image-slack-3-message]: /img-posts/slack-3-message.webp
+[image-slack-4-signup]: /img-posts/slack-4-signup.webp
+[image-slack-5-claude]: /img-posts/slack-5-claude.webp
+[image-slack-6-meditation]: /img-posts/slack-6-meditation.webp
+[image-slack-7-search]: /img-posts/slack-7-search.webp
+[image-slack-8-catana]: /img-posts/slack-8-catana.webp
+[image-slack-9-brand]: /img-posts/slack-9-brand.webp

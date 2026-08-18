@@ -1,9 +1,15 @@
 {% assign headshot_placement = include.placement | default: "bio" %}
 <figure class="headshot headshot--{{ headshot_placement }}">
+  {% comment %}
+    WebP here, JPEG for site.avatar. This one is a visible content image and
+    never an OpenGraph surface, so it can take the smaller format; the avatar
+    feeds og:image, twitter:image and the JSON-LD Person.image, where social
+    scrapers are unreliable on WebP.
+  {% endcomment %}
   <img class="headshot-image"
-       src="{{ '/img/avatar-icon.jpeg' | relative_url }}"
-       alt="Frank Chen"
-       width="180" height="180"
+       src="{{ '/img/frank-chen-2022.webp' | relative_url }}"
+       alt="Frank Chen, co-founder and CTO of Balto Energy"
+       width="600" height="600"
        {% if headshot_placement == "hero" %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
        decoding="async">
   <figcaption class="headshot-caption">FRANK CHEN</figcaption>

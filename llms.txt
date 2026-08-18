@@ -12,6 +12,8 @@ He writes about deploying real AI in the messy physical world: agents, knowledge
 
 ## Selected essays
 
+- [The Company as a Codebase](https://frankc.net/company-as-codebase): the two-artifact rule — every workflow ships the result and a versioned improvement to the system that produced it
+- [Blue-Collar AI Is an Observability Problem](https://frankc.net/observable-blue-collar-ai): generation is cheap, ground truth is the work — why the field has to write back
 - [Forward Deploy to Solve the Untrainable](https://frankc.net/forward-deploy-to-solve-untrainable): why the operator who knows the clean number is a lie can't be outsourced — FD(x) across the org chart
 - [What It Feels Like to Rebuild a Company Around a Graph](https://frankc.net/rebuilding-our-company): going forward-deployed in Palantir Foundry and rebuilding a company around an ontology
 - [The Handoff Was the Bug. Vertical AI Is the Rewrite.](https://frankc.net/vertical-ai-rewrite): quality used to come from approvals; now it comes from correction

@@ -4,7 +4,8 @@ title: "The Company as a Codebase"
 subtitle: "Every workflow ships two artifacts: the result, and a versioned improvement to the system that produced it."
 permalink: company-as-codebase
 share-img: "https://frankc.net/img-posts/company-as-codebase.png"
-bigimg: /img-posts/company-as-codebase-banner.jpg
+bigimg: /img-posts/company-as-codebase-banner.webp
+categories: ['selected']
 ---
 
 A rule with no enforcement is a wish.
@@ -26,7 +27,7 @@ We had already [rebuilt our company around a git-backed brain][rebuild]. The new
 
 We close each Foundry session with a writeback: what changed, what the prompt got wrong, which functions need tags before an agent can find them.[^writeback] The writeback isn't a note in a doc nobody reads. It's a pull request against the company brain. Reviewed, merged, and deployed back into the ontology descriptions the agents reason over, the prompt builder that shapes the next session, and a skill anyone can run. The unit of work isn't the session. It's the diff the session leaves behind.
 
-![A diff against a file labelled "company brain": a removed line reading "the why lived in one person's head", and an added line reading "written down once, where the next job inherits it".](/img-posts/company-as-codebase-writeback-diff.png)
+![A diff against a file labelled "company brain": a removed line reading "the why lived in one person's head", and an added line reading "written down once, where the next job inherits it".](/img-posts/company-as-codebase-writeback-diff.webp){: width="1200" height="630" loading="lazy" decoding="async"}
 
 The boundary matters. The repo gets the rule, never the record. It holds reusable context: doctrine, ontology descriptions, skills, and review rules. Raw customer PII and system-of-record financial data stay behind Foundry permissions. The pull request changes how the company works with the data; it does not copy the data into git.
 
@@ -40,7 +41,7 @@ So by the time agents were writing into the brain at volume, the checks already 
 
 ## The loop without a keyboard
 
-![Frank Chen at a lectern on the Palantir DevCon stage, wearing a headset microphone, in front of a screen showing a company context graph linking contractors and homes through a shared ontology.](/img-posts/company-as-codebase-portrait.jpg)
+![Frank Chen at a lectern on the Palantir DevCon stage, wearing a headset microphone, in front of a screen showing a company context graph linking contractors and homes through a shared ontology.](/img-posts/company-as-codebase-portrait.webp){: width="1200" height="1799" loading="lazy" decoding="async"}
 
 *Palantir DevCon, July 2026. Photo: Charlie Neely.*
 
@@ -58,13 +59,13 @@ The second artifact is the loop. Every calibration run feeds its metrics into an
 
 Two loops, one shape. Both end the same way: an output, and a system that's sharper for the next pass.
 
-![A woodcut-style figure of an infinity loop, carved in heavy black linework, with arrows running continuously around both halves.](/img-posts/company-as-codebase-two-loops.png)
+![A woodcut-style figure of an infinity loop, carved in heavy black linework, with arrows running continuously around both halves.](/img-posts/company-as-codebase-two-loops.webp){: width="1200" height="630" loading="lazy" decoding="async"}
 
 ## What DevCon changed
 
 At Palantir DevCon in July, I gave this argument on the main stage. Palantir [just posted the talk on YouTube][devcon-video]. The workshops clarified two implementation questions: where a correction should live, and how far an agent should be allowed to range.
 
-![Frank Chen speaking beside a lectern on a black-curtain stage at Palantir DevCon, with green stage accents and no projected slide in frame.](/img-posts/company-as-codebase-devcon-stage.jpg)
+![Frank Chen speaking beside a lectern on a black-curtain stage at Palantir DevCon, with green stage accents and no projected slide in frame.](/img-posts/company-as-codebase-devcon-stage.webp){: width="1200" height="630" loading="lazy" decoding="async"}
 
 *Palantir DevCon, July 2026. Photo: Charlie Neely.*
 
@@ -76,7 +77,7 @@ Inside a sandbox, let the agent iterate. Before production, keep human judgment 
 
 ## What can still break
 
-![Three status rows under the heading "a gate that can fail": BLOCKS MERGE for sensitive PII, a missing verdict, or an unverified review model; SELF-PUBLISHES for ordinary content once the checks pass; HUMAN APPROVAL for changes to the gate itself.](/img-posts/company-as-codebase-gate.png)
+![Three status rows under the heading "a gate that can fail": BLOCKS MERGE for sensitive PII, a missing verdict, or an unverified review model; SELF-PUBLISHES for ordinary content once the checks pass; HUMAN APPROVAL for changes to the gate itself.](/img-posts/company-as-codebase-gate.webp){: width="1200" height="630" loading="lazy" decoding="async"}
 
 The first failure mode is boredom. CI works in software because a red build is loud and public. Our gates are software in some places — the modal that won't let a job advance, the review agent that fails a pull request on sensitive PII — and culture in others, like the session writeback a tired person could skip on a Friday. The software gates will hold. The human ones are what I watch, because most knowledge systems die the same death: not disproven, just quietly unattended. A couple months of novelty is not evidence against boredom.
 

@@ -199,14 +199,14 @@ A friend once said, Your professional development will never surpass your person
 [link-book-buddhism-true]: https://www.amazon.com/Why-Buddhism-True-Philosophy-Enlightenment/dp/1439195463/
 [link-book-zen]: https://www.amazon.com/Zen-Mind-Beginners-Informal-Meditation/dp/1590308492
 
-[image-meditation-goenka]: /img-posts/meditation-0-goenka.jpg
-[image-fb-question]: /img-posts/meditation-1-fb-question.png
-[image-meditation-2-tam]: /img-posts/meditation-2-tam.png
-[image-meditation-3-maki]: /img-posts/meditation-3-maki.png
-[image-meditation-4-david]: /img-posts/meditation-4-david.png
-[image-meditation-5-john]: /img-posts/meditation-5-john.png
-[image-meditation-6-rebecca]: /img-posts/meditation-6-rebecca.png
-[image-meditation-7-reflection]: /img-posts/meditation-7-reflection.png
+[image-meditation-goenka]: /img-posts/meditation-0-goenka.webp
+[image-fb-question]: /img-posts/meditation-1-fb-question.webp
+[image-meditation-2-tam]: /img-posts/meditation-2-tam.webp
+[image-meditation-3-maki]: /img-posts/meditation-3-maki.webp
+[image-meditation-4-david]: /img-posts/meditation-4-david.webp
+[image-meditation-5-john]: /img-posts/meditation-5-john.webp
+[image-meditation-6-rebecca]: /img-posts/meditation-6-rebecca.webp
+[image-meditation-7-reflection]: /img-posts/meditation-7-reflection.webp
 
 <!-- 
 Republished to Medium… on 2018/10/05:

@@ -4,6 +4,7 @@ title: We Built the Enterprise Brain. It Was the Easy Part.
 subtitle: "Fat skills, one per work function."
 permalink: enterprise-brain-router
 share-img: "https://frankc.net/img-posts/enterprise-brain-router.png"
+categories: ['selected']
 ---
 
 Alex Lieberman thinks [someone is about to build a world-class
