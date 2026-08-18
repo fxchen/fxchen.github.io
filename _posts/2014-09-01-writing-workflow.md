@@ -85,4 +85,3 @@ I have read each of these books recently and have enjoyed them immensely.
 
 <hr />
 
-<img style="width:0;height:0;" src="https://ga-beacon.appspot.com/UA-36961797-1/sheets/2014-aug-writing-workflow" alt="" />

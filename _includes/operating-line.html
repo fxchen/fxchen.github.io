@@ -1,0 +1,31 @@
+{% assign operating_line_variant = include.variant | default: "1" %}
+<!-- A static, hand-plotted operating line. Each variant changes the wave's
+     amplitude, phase, inflection count, and waypoint pattern.
+
+     Pass `flush=true` when the wave directly follows the page hero — it
+     subtracts .intro-header's margin-bottom so the hero-to-wave gap matches
+     every later section-to-wave gap. See §4.5 in css/notebook.css. -->
+<svg class="operating-line operating-line--{{ operating_line_variant }}{% if include.flush %} operating-line--flush{% endif %}"
+     data-operating-line-variant="{{ operating_line_variant }}"
+     viewBox="0 0 400 48" preserveAspectRatio="none"
+     aria-hidden="true" focusable="false">
+  {% case operating_line_variant %}
+  {% when "2" %}
+    <path d="M0 13 C28 8 47 31 78 34 C111 37 133 5 169 10 C203 15 215 36 248 31 C282 26 318 7 352 14 C375 19 389 30 400 25"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    <circle cx="248" cy="31" r="2.75" fill="currentColor"/>
+  {% when "3" %}
+    <path d="M0 32 C54 38 76 30 95 15 C112 2 138 7 158 25 C181 45 210 39 227 21 C246 1 268 8 281 21 C295 36 320 43 340 25 C360 7 378 5 400 12"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+  {% when "4" %}
+    <path d="M0 21 C17 7 37 6 52 18 C68 31 78 39 99 34 C124 28 127 8 151 7 C174 6 184 28 207 30 C231 32 238 9 261 12 C283 15 287 40 313 39 C337 38 344 17 363 14 C379 12 389 18 400 28"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    <circle cx="99" cy="34" r="2.75" fill="currentColor"/>
+    <circle cx="313" cy="39" r="2.75" fill="currentColor"/>
+  {% else %}
+    <path d="M0 27 C41 4 79 7 116 25 C153 43 184 36 218 17 C252 -2 291 5 321 25 C348 43 374 34 400 17"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    <circle cx="116" cy="25" r="2.75" fill="currentColor"/>
+    <circle cx="321" cy="25" r="2.75" fill="currentColor"/>
+  {% endcase %}
+</svg>

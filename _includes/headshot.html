@@ -1,0 +1,10 @@
+{% assign headshot_placement = include.placement | default: "bio" %}
+<figure class="headshot headshot--{{ headshot_placement }}">
+  <img class="headshot-image"
+       src="{{ '/img/avatar-icon.jpeg' | relative_url }}"
+       alt="Frank Chen"
+       width="180" height="180"
+       {% if headshot_placement == "hero" %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
+       decoding="async">
+  <figcaption class="headshot-caption">FRANK CHEN</figcaption>
+</figure>

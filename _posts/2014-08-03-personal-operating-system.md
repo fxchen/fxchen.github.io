@@ -91,4 +91,3 @@ Create automatic systems to maximize habits. Trying to run? Find a group and joi
 
 <hr />
 
-<img src="https://ga-beacon.appspot.com/UA-36961797-1/sheets/2014-may-habits" alt="" width="0" height="0" />

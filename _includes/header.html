@@ -1,4 +1,19 @@
-<!-- TODO this file has become a mess, refactor it -->
+<!-- Was: "TODO this file has become a mess, refactor it". Restyled in place
+     rather than rewritten from scratch — the bigimg/fallback-title structure
+     and JS hooks (main.js initImgs) are untouched; eyebrow is a new optional
+     hook, and the green Post H1 rule is pure CSS; page heroes use the
+     front-matter-selectable accent markup below. -->
+
+{% assign hero_accent = "none" %}
+{% if page.hero-accent == "underline" %}
+  {% assign hero_accent = "underline" %}
+{% endif %}
+{%- comment -%}Treatment A restore: uncomment the Liquid block below and set 'hero-accent: origin' in index.html front matter.{%- endcomment -%}
+{% comment %}
+{% if page.hero-accent == "origin" %}
+  {% assign hero_accent = "origin" %}
+{% endif %}
+{% endcomment %}
 
 {% if page.bigimg or page.title %}
 
@@ -24,12 +39,32 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="{{ include.type }}-heading">
+		<div class="{{ include.type }}-heading{% if include.type == 'page' %} page-heading--accent-{{ hero_accent }}{% endif %}{% if page.headshot == 'hero' %} {{ include.type }}-heading--with-headshot{% endif %}">
+          {% if page.headshot == "hero" %}<div class="hero-copy">{% endif %}
+          {% if include.type == "post" %}{% include eyebrow.html %}{% endif %}
           <h1>{% if page.title %}{{ page.title }}{% else %}<br/>{% endif %}</h1>
 		  {% if page.subtitle %}
 		    {% if include.type == "page" %}
-            <hr class="small">
+            {% case hero_accent %}
+            {%- comment -%}Treatment A restore: uncomment the Liquid block below and set 'hero-accent: origin' in index.html front matter.{%- endcomment -%}
+            {% comment %}
+            {% when "origin" %}
+            <svg class="hero-accent hero-accent--origin" viewBox="0 0 184 24" aria-hidden="true" focusable="false">
+              <path d="M2 5.5 C34 5.2 60 5.1 87 6 C116 7 139 10.5 157 17 C166 20.3 175 21 182 18.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+              <circle cx="75" cy="5.5" r="2.75" fill="currentColor"/>
+            </svg>
             <span class="{{ include.type }}-subheading">{{ page.subtitle }}</span>
+		    {% endcomment %}
+		    {% when "underline" %}
+            <span class="hero-annotated-subtitle">
+              <span class="{{ include.type }}-subheading">{{ page.subtitle }}</span>
+              <svg class="hero-accent hero-accent--underline" viewBox="0 0 400 10" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d="M2 5.7 C47 3.1 83 6.5 126 4.8 C169 3.1 207 6.2 249 4.7 C292 3.2 338 5.9 398 3.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+              </svg>
+            </span>
+		    {% else %}
+            <span class="{{ include.type }}-subheading">{{ page.subtitle }}</span>
+		    {% endcase %}
 			{% else %}
 			<h2 class="{{ include.type }}-subheading">{{ page.subtitle }}</h2>
 			{% endif %}
@@ -37,6 +72,7 @@
 		  {% if include.type == "post" %}
 		  <span class="post-meta">Posted on {{ page.date | date: "%B %-d, %Y" }}.</span>
 		  {% endif %}
+          {% if page.headshot == "hero" %}</div>{% include headshot.html placement="hero" %}{% endif %}
         </div>
       </div>
     </div>
@@ -48,20 +84,41 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="{{ include.type }}-heading">
+        <div class="{{ include.type }}-heading{% if include.type == 'page' %} page-heading--accent-{{ hero_accent }}{% endif %}{% if page.headshot == 'hero' %} {{ include.type }}-heading--with-headshot{% endif %}">
+          {% if page.headshot == "hero" %}<div class="hero-copy">{% endif %}
           {% if page.bigimg %}
           <div class="fallback-title">{% if page.title %}{{ page.title }}{% else %}<br/>{% endif %}</div>
           {% else %}
+          {% if include.type == "post" %}{% include eyebrow.html %}{% endif %}
           <h1>{% if page.title %}{{ page.title }}{% else %}<br/>{% endif %}</h1>
           {% endif %}
 		  {% if page.subtitle %}
 		    {% if include.type == "page" %}
-            <hr class="small">
+            {% case hero_accent %}
+            {%- comment -%}Treatment A restore: uncomment the Liquid block below and set 'hero-accent: origin' in index.html front matter.{%- endcomment -%}
+            {% comment %}
+            {% when "origin" %}
+            <svg class="hero-accent hero-accent--origin" viewBox="0 0 184 24" aria-hidden="true" focusable="false">
+              <path d="M2 5.5 C34 5.2 60 5.1 87 6 C116 7 139 10.5 157 17 C166 20.3 175 21 182 18.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+              <circle cx="75" cy="5.5" r="2.75" fill="currentColor"/>
+            </svg>
             <span class="{{ include.type }}-subheading">{{ page.subtitle }}</span>
+		    {% endcomment %}
+		    {% when "underline" %}
+            <span class="hero-annotated-subtitle">
+              <span class="{{ include.type }}-subheading">{{ page.subtitle }}</span>
+              <svg class="hero-accent hero-accent--underline" viewBox="0 0 400 10" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d="M2 5.7 C47 3.1 83 6.5 126 4.8 C169 3.1 207 6.2 249 4.7 C292 3.2 338 5.9 398 3.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+              </svg>
+            </span>
+		    {% else %}
+            <span class="{{ include.type }}-subheading">{{ page.subtitle }}</span>
+		    {% endcase %}
 			{% else %}
 			<h2 class="{{ include.type }}-subheading">{{ page.subtitle }}</h2>
 			{% endif %}
 		  {% endif %}
+          {% if page.headshot == "hero" %}</div>{% include headshot.html placement="hero" %}{% endif %}
         </div>
       </div>
     </div>

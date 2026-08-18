@@ -27,11 +27,6 @@ navbar-links:
   Media: "media"
   Writing: "writing"
 
-
-# --- Google custom search config --- #
-# search page name search -> /seach.md
-nav-search: "search"
-
 # Image to show in the navigation bar - image must be a square (width = height)
 # Remove this parameter if you don't want an image in the navbar
 avatar: "/img/avatar-icon.jpeg"
@@ -72,10 +67,10 @@ author:
 # If you want to add a new link that isn't here, you'll need to also edit the file _data/SocialNetworks.yml
 social-network-links:
 
-  email: "hello@frankc.net"
   github: fxchen
   instagram: fxchen
   linkedin: fxchen
+#  email: "hello@frankc.net"
 #  rss: true
 #  facebook: fxchen
 #  twitter: frankc
@@ -153,7 +148,7 @@ timezone: "America/New_York"
 markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
-paginate: 10
+paginate: 12
 paginate_path: "writing/:num/"
 
 kramdown:
@@ -192,6 +187,11 @@ exclude:
   - README.md
   - TODO.md
   - Vagrantfile
+  - serve.py
+  # Local gem path. Without this Jekyll walks vendor/bundle and dies on
+  # jekyll's own site_template posts, which carry an ERB date placeholder
+  # instead of a real one. GitHub Pages never sees this directory.
+  - vendor
 
 # prose.io config
 prose:
