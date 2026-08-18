@@ -12,16 +12,16 @@ This article accompanies the talk and shares a preview of references for the Sla
 
 <h2><strong>🎉🍿 Here from Craft Conference? <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=I%27m%20listening%20to%20@frankc%20talk%20about%20Slack%27s%20internal%20tooling%20circuit%20breakers.%20🔥%20They%20went%20from%20many%20to%20zero%20cascading%20incidents%20in%20CI/CD%21%0AMore%3A%20https%3A//bit.ly/slack-circuit-breakers%0A@craftconf" data-size="large">Tweet</a> and say hi!</strong></h2>
 
-[circuit-breaker-diagram]: /img-posts/circuit-breakers-diagram.png
-[circuit-breaker-meme]: /img-posts/circuit-breakers-meme-friends-do-not-send.png
+[circuit-breaker-diagram]: /img-posts/circuit-breakers-diagram.webp
+[circuit-breaker-meme]: /img-posts/circuit-breakers-meme-friends-do-not-send.webp
 
-[![Circuit Breakers Diagram][circuit-breaker-diagram]](/img-posts/circuit-breakers-diagram.png)
+[![Circuit Breakers Diagram][circuit-breaker-diagram]](/img-posts/circuit-breakers-diagram.webp)
 
 **💡 Abstract**
 
 After months of similar cascading incidents, Frank Chen shares how Slack engineers increased developer productivity by implementing circuit breakers throughout internal tooling. Engineers across Developer Productivity teams at Slack applied friction or shed to requests in Checkpoint, a Continuous Integration (CI) / Continuous Delivery (CD) orchestration service. This methodology increased service availability, overall throughput and decreased bad developer experiences with circuit breakers on Checkpoint’s scheduler. These circuit breakers on the interface between systems in CI were levers to minimize cascading failures and provided high leverage for programmatic metric queries for multiple services instead of individual client or service based approaches.
 
-[![Friends meme: should we send requests as fast as possible?][circuit-breaker-meme]](/img-posts/circuit-breakers-meme-friends-do-not-send.png)
+[![Friends meme: should we send requests as fast as possible?][circuit-breaker-meme]](/img-posts/circuit-breakers-meme-friends-do-not-send.webp)
 
 **🔗 References**
 

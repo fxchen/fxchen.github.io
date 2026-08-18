@@ -11,8 +11,8 @@ This article accompanies the talk at CraftConf 2023 ([link](https://craft-conf.c
 
 ---
 
-[ai-entered-chat-intro]: /img-posts/ai-entered-chat-intro.png
-[ai-entered-chat-stream]: /img-posts/ai-entered-chat-stream.png
+[ai-entered-chat-intro]: /img-posts/ai-entered-chat-intro.webp
+[ai-entered-chat-stream]: /img-posts/ai-entered-chat-stream.webp
 
 **💡 Abstract**
 
@@ -24,9 +24,9 @@ My motivation for this talk stems from my desire to help people make better deci
 
 Please note that this talk is separate from my software development and leadership roles at Slack.
 
-[![How should we introduce this topic?][ai-entered-chat-intro]](/img-posts/ai-entered-chat-intro.png)
+[![How should we introduce this topic?][ai-entered-chat-intro]](/img-posts/ai-entered-chat-intro.webp)
 
-[![Stream of consciousness][ai-entered-chat-stream]](/img-posts/ai-entered-chat-stream.png)
+[![Stream of consciousness][ai-entered-chat-stream]](/img-posts/ai-entered-chat-stream.webp)
 
 **🔗 References**
 
