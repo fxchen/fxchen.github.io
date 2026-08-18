@@ -1,0 +1,11 @@
+{%- comment -%}
+  Renders the mono eyebrow for a post or page. Pass `post=post` when calling
+  from a loop (writing/index.html); defaults to `page` for header.html.
+  Label: FIELD NOTE for the 14 pre-2024 archive posts, ESSAY for the 2026
+  era — a small, honest way to visibly age the archive without unlisting or
+  hiding anything.
+{%- endcomment -%}
+{%- assign target = include.post | default: page -%}
+{%- assign cutoff = "2024-01-01" | date: "%s" | plus: 0 -%}
+{%- assign tdate = target.date | date: "%s" | plus: 0 -%}
+<p class="eyebrow">{% if tdate < cutoff %}FIELD NOTE{% else %}ESSAY{% endif %}</p>

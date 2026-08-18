@@ -13,13 +13,13 @@ Notice how many the apps on your phone don’t get used.
 
 <img src="https://github.com/fxchen/frankc/raw/master/2014%20November/aint-nobody.gif" alt="Ain't Nobody Got Time for That" />
 
-This is why I absolutely <strong>love it</strong> when I can delete phone apps. Minimizing the amount of apps I have on the iOS home screen is like <a href="http://frankc.wordpress.com/2014/08/03/playlist-your-morning-routine-beat-complexity-like-a-boss/">minimizing decisions</a> in the morning. The less I see (even a minuscule extra icon or notification) the faster my attention can go back to using my phone.
+This is why I absolutely <strong>love it</strong> when I can delete phone apps. Minimizing the amount of apps I have on the iOS home screen is like <a href="/playlist-morning-routine">minimizing decisions</a> in the morning. The less I see (even a minuscule extra icon or notification) the faster my attention can go back to using my phone.
 
 When I go on an app deleting spree, it comes in one of two forms:
 
 1) Every time I have an ios update and don’t have enough space on my phone
 
-2) I have some pressing need for a product and am deciding which one is best. This happens about once every few months. I’ll realize I have wanted to fulfill some need and install many similar apps to find the very best one. Recently, I downloaded 10 different calendar and todo list apps. I enabled notifications for all of them. Each app was on the secondary screen of my phone. In one week, I went back and deleted all the apps that don’t work for my use case. I test apps similarly to how I test <a href="frankc.wordpress.com/2014/10/26/the-ultimate-beginners-guide-to-web-development-lessons-from-the-web-lead-of-an-amazon-web-service/">learning courses</a>: I’ll take many potential solutions and time-box a test for each one until I find the one that works for me.
+2) I have some pressing need for a product and am deciding which one is best. This happens about once every few months. I’ll realize I have wanted to fulfill some need and install many similar apps to find the very best one. Recently, I downloaded 10 different calendar and todo list apps. I enabled notifications for all of them. Each app was on the secondary screen of my phone. In one week, I went back and deleted all the apps that don’t work for my use case. I test apps similarly to how I test <a href="/beginners-guide-web-dev">learning courses</a>: I’ll take many potential solutions and time-box a test for each one until I find the one that works for me.
 
 <a href="https://github.com/fxchen/frankc/raw/master/2014%20November/homescreen.png"><img src="https://github.com/fxchen/frankc/raw/master/2014%20November/homescreen.png" alt="My Current Home Screen" height="400px" /></a>
 
@@ -41,7 +41,7 @@ Companies today have options to share and reeive files: Box, Dropbox, Amazon Zoc
 
 <a href="https://github.com/fxchen/frankc/raw/master/2014%20November/dropbox.png"><img src="https://github.com/fxchen/frankc/raw/master/2014%20November/dropbox.png" alt="Faxes with Sharepoint" height="300px" /></a>
 
-Dropbox is a popular consumer solution to sync files between computers. The interface fits what I already see throughout my computer. It looks just like a folder. Only it syncs between each of my computers. I can put the Dropbox folder anywhere on my computer, and I can put whatever I want in it. This application presents a simple interface to the complex problem of sharing my own files between all of my computers. They helped people do what they were <a href="http://frankc.wordpress.com/2014/08/09/how-to-design-for-habit-the-secret-to-making-great-products/">already doing as part of their workflow</a>
+Dropbox is a popular consumer solution to sync files between computers. The interface fits what I already see throughout my computer. It looks just like a folder. Only it syncs between each of my computers. I can put the Dropbox folder anywhere on my computer, and I can put whatever I want in it. This application presents a simple interface to the complex problem of sharing my own files between all of my computers. They helped people do what they were <a href="/how-to-design-for-habits">already doing as part of their workflow</a>
 <h2 id="the-damn-easy-principle">The Damn Easy Principle</h2>
 Recently I started to listen to podcasts regularly. And it was because listening and using podcasts became really easy after I moved away from Apple’s default Podcast app.
 
@@ -97,4 +97,3 @@ Many apps get deleted. How can you make sure yours doesn’t get deleted?
 </li>
 </ul>
 
-<img src="https://ga-beacon.appspot.com/UA-36961797-1/sheets/2014-nov-application-churn" alt="" width="0" height="0" />

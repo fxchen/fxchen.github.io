@@ -197,3 +197,8 @@ display: -webkit-box;
 .amazon-link .image {
     margin:0; float:right;
 }
+}
+/* Closed the @media (min-width: 768px) block opened at line 60 — it was
+   missing its closing brace, which trapped everything above (search bar
+   desktop rules through the amazon-link styles) inside a desktop-only
+   query and silently dropped them below 768px. */

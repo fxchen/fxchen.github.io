@@ -106,4 +106,3 @@ Playlists represent individual actions to be performed. My morning routine has b
 
 <hr />
 
-<img src="https://ga-beacon.appspot.com/UA-36961797-1/sheets/2014-july-morning-routines" alt="" width="0" height="0" />

@@ -17,6 +17,13 @@
 
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }} {{ site.title-separator }} {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
 
+  <!-- Self-hosted variable fonts: Bodoni Moda (display), Lora (body),
+       JetBrains Mono (chrome/code). Preloaded since they're render-blocking
+       for the running head and H1, which paint first. -->
+  <link rel="preload" as="font" type="font/woff2" href="{{ '/fonts/bodoni-moda-var.woff2' | prepend: site.baseurl }}" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="{{ '/fonts/lora-var.woff2' | prepend: site.baseurl }}" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="{{ '/fonts/jetbrains-mono-var.woff2' | prepend: site.baseurl }}" crossorigin>
+
   {% include gtag.html %}
   {% include gtm_head.html %}
   {% include google_analytics.html %}
