@@ -29,7 +29,11 @@ navbar-links:
 
 # Image to show in the navigation bar - image must be a square (width = height)
 # Remove this parameter if you don't want an image in the navbar
-avatar: "/img/avatar-icon.jpeg"
+# Feeds og:image, twitter:image and the JSON-LD Person.image — the last of which
+# is an entity signal, so it should be the current portrait, and JPEG because
+# social scrapers are unreliable on WebP. The visible bio headshot is a separate
+# WebP in _includes/headshot.html.
+avatar: "/img/frank-chen-2022.jpg"
 
 # If you want to have an image logo in the top-left corner instead of the title text,
 # then specify the following parameter
