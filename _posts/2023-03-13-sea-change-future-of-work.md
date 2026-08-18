@@ -10,7 +10,7 @@ Many of today's headlines are dominated by Artificial Intelligence (AI) and Chat
 
 I'll share some of my own experiments and where I believe this technology is going.
 
-![../img-posts/future-of-work-robotic-sea-change.png](../img-posts/future-of-work-robotic-sea-change.png)
+![A Hokusai-style great wave in blue and white ink, with a small round-headed robot surfing down its face.](/img-posts/future-of-work-robotic-sea-change.webp){: width="1728" height="1024" loading="lazy" decoding="async"}
 <p class="text-muted">Generated via dalle</p>
 
 ### Sea change
@@ -40,7 +40,7 @@ One field to look at is the progression of chess over the last few decades and i
 
 In the past, chess was a purely human game, with players relying on their own strategy and tactics to win. However, with the advent of computer chess engines, the game has evolved into what is known as "centaur chess." In centaur chess, human players team up with computer engines to analyze outcomes, resulting in a new and unconventional way of playing the game.
 
-![../img-posts/future-of-work-deep-blue.jpg](../img-posts/future-of-work-deep-blue.jpg)
+![Garry Kasparov at the board during the 1997 Deep Blue match, head in hand, shown on television monitors in front of a packed auditorium.](/img-posts/future-of-work-deep-blue.webp){: width="1500" height="918" loading="lazy" decoding="async"}
 <p class="text-muted">Photo from Deep Blue and Garry Kasparov tournament (1997)</p>
 
 In 1997, IBM's supercomputer Deep Blue famously beat world chess champion Garry Kasparov in six games. Starting in 1998, Kasparov founded ["Advanced" chess tournaments](https://historyofinformation.com/detail.php?entryid=4724) centered on human-computer teams playing chess against each other (also called freestyle chess).
@@ -51,7 +51,7 @@ I find this space fascinating to study how human experts and human amateurs coll
 
 The full play-by-play can be found in the link. In individual measurements, the amateur group seemed to be the underdog in Chess Elo (players on average had 1000 fewer Elo points) and AI (both hardware and software were inferior). Yet, the amateur group prevailed - potentially due to their efficacy on using AI.
 
-![../img-posts/future-of-work-centaur-office-worker.png](../img-posts/future-of-work-centaur-office-worker.png)
+![A chrome centaur hunched over a keyboard at an office desk in front of computer monitors — half horse, half knowledge worker.](/img-posts/future-of-work-centaur-office-worker.webp){: width="1024" height="1024" loading="lazy" decoding="async"}
 <p class="text-muted">Generated via dalle</p>
 
 Magnus Carlsen, the current world chess champion, has spoken about how he uses AI in his own chess practice, saying that it "opens up new avenues for analyzing games and potential outcomes." This is just one example of how AI can be used to augment human abilities rather than replacing them.

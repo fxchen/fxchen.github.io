@@ -9,14 +9,14 @@ This article accompanies the talk at the Developer Experience Summit (August 202
 
 **🤖 Github Action Code Review**: [**Install link**](https://github.com/marketplace/actions/code-review-github-action). Currently supports models from OpenAI, Anthropic, plug-and-play with your own LLM!
 
-**💬 Example Code Review**: [![Example review][kaldb-review]](/img-posts/ai-code-review-kaldb-review.png)
+**💬 Example Code Review**: [![Example review][kaldb-review]](/img-posts/ai-code-review-kaldb-review.webp)
 
 **🎞️ Slides** (soon)
 
-[kaldb-review]: /img-posts/ai-code-review-kaldb-review.png
-[kent-beck]: /img-posts/ai-code-review-kent-beck.png
-[review-oracle]: /img-posts/ai-code-review-oracle.png
-[oracle-yet]: /img-posts/ai-code-review-oracle-yet.png
+[kaldb-review]: /img-posts/ai-code-review-kaldb-review.webp
+[kent-beck]: /img-posts/ai-code-review-kent-beck.webp
+[review-oracle]: /img-posts/ai-code-review-oracle.webp
+[oracle-yet]: /img-posts/ai-code-review-oracle-yet.webp
 
 **💡 Abstract**
 
@@ -26,7 +26,7 @@ I will provide a detailed examination of these experiments—discussing the bene
 
 My motivation for this talk is rooted in my commitment to advancing technologies that empower developers to make better decisions. I believe AI powered developer tools present tremendous leverage for engineers across a variety of developer workflows.
 
-[![Tweet: Kent Beck][kent-beck]](/img-posts/ai-code-review-kent-beck.png)
+[![Tweet: Kent Beck][kent-beck]](/img-posts/ai-code-review-kent-beck.webp)
 
 **🔗 References**
 
@@ -59,6 +59,6 @@ Here is a list of links mentioned in the document with their corresponding title
 - [https://github.com/brexhq/prompt-engineering](https://github.com/brexhq/prompt-engineering) - A Github repository for a Python library that provides a set of tools for fine-tuning large language models.
 - [https://twitter.com/ricburton/status/1657425842304057345?s=12](https://twitter.com/ricburton/status/1657425842304057345?s=12) - A tweet by Richard Burton about models leaking data and the potential risks of fine-tuning.
 
-[![Would you like code][review-oracle]](/img-posts/ai-entered-chat-intro.png)
+[![Would you like code][review-oracle]](/img-posts/ai-entered-chat-intro.webp)
 
-[![It doesn't work yet!][oracle-yet]](/img-posts/ai-code-review-oracle-yet.png)
+[![It doesn't work yet!][oracle-yet]](/img-posts/ai-code-review-oracle-yet.webp)

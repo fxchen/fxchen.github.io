@@ -6,7 +6,7 @@ permalink: vertical-ai-rewrite
 share-img: "https://frankc.net/img-posts/vertical-ai-rewrite.png"
 ---
 
-![Handoffs on the left as a linear stamped chain; loops on the right as a circular write-back cycle](/img-posts/vertical-ai-rewrite.png)
+![Handoffs on the left as a linear stamped chain; loops on the right as a circular write-back cycle](/img-posts/vertical-ai-rewrite.webp){: width="1200" height="630" loading="lazy" decoding="async"}
 
 The peaceful era is over.
 
