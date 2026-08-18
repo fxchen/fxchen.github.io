@@ -4,6 +4,7 @@ title: "The Operations CEO Doesn't Wait for the Dashboard"
 subtitle: "What happens when the forward-deployed engineer is the CEO himself."
 permalink: forward-deployed-engineer-executive
 share-img: "https://frankc.net/img-posts/forward-deployed-engineer-executive.png"
+categories: ['selected']
 ---
 
 

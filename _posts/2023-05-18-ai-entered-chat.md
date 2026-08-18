@@ -3,6 +3,7 @@ layout: post
 title: AI Has Entered the Chat
 subtitle: Humans, AI and the Art of Collaboration
 permalink: ai-entered-chat
+categories: ['selected']
 ---
 
 This article accompanies the talk at CraftConf 2023 ([link](https://craft-conf.com/2023/talk/frank-chens-talk)).

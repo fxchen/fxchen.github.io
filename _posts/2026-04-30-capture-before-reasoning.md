@@ -4,6 +4,7 @@ title: The Moat Is What You Capture
 subtitle: "Reasoning gets cheaper. Capture compounds."
 permalink: capture-before-reasoning
 share-img: "https://frankc.net/img-posts/capture-before-reasoning.png"
+categories: ['selected']
 ---
 
 

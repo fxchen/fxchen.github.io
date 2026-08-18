@@ -5,6 +5,7 @@ subtitle: "Every workflow ships two artifacts: the result, and a versioned impro
 permalink: company-as-codebase
 share-img: "https://frankc.net/img-posts/company-as-codebase.png"
 bigimg: /img-posts/company-as-codebase-banner.webp
+categories: ['selected']
 ---
 
 A rule with no enforcement is a wish.

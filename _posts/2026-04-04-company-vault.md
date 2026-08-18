@@ -4,31 +4,32 @@ title: We Put Our Entire Company's Brain in a Git Repo
 subtitle: "ARKS, AI agents, and what happens when your company's knowledge lives in plain markdown"
 permalink: company-vault
 share-img: "https://frankc.net/img-posts/company-vault.png"
+categories: ['selected']
 ---
 
 ```
 +----------------------------------------------------------+
 |  We put our entire company's brain in a git repo         |
 |                                                          |
-|  I'm not sure it's the right move but I think            |
-|  something interesting is happening                      |
+|  Markdown files. Version controlled. Structured so       |
+|  people and agents read from the same source.            |
 +----------------------------------------------------------+
 ```
 
-OK so this is maybe a weird one but I've been thinking about
-it a lot and wanted to share.
+Where does your company's brain actually live?
 
-We're a small energy startup. And we have this
-problem that I think every startup has but nobody talks about:
-
-Where does institutional knowledge actually live?
-
-Really—where does the *why* behind a decision go?
-A Slack thread? A Google Doc that 2 people have open and
-nobody else has permission to? Someone's head—until they
-leave?
+Not the tickets. Not the roadmap. The real stuff—where does
+the *why* behind a decision go? A Slack thread? A Google Doc
+that 2 people have open and nobody else has permission to?
+Someone's head—until they leave?
 
 It just... evaporates.
+
+We're a small energy startup, and our honest answer was
+"scattered across six tools and a few people's heads." So we
+moved it. Every durable thing the company knows now lives in
+one git repo of plain markdown, structured so that people and
+AI agents read from the same source.
 
 ```
 ┌──────────────────────────────────────────────┐

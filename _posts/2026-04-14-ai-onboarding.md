@@ -4,6 +4,7 @@ title: Our AI Onboards New Hires Better Than We Do
 subtitle: "How we use Claude Code to personalize onboarding from a living knowledge base"
 permalink: ai-onboarding
 share-img: "https://frankc.net/img-posts/ai-onboarding.png"
+categories: ['selected']
 ---
 
 Last week I wrote about keeping our company's brain in a
