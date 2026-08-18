@@ -34,7 +34,7 @@ In the remainder of this guide, you’ll learn how you can grow from a beginnine
 I want to emphasize action:
 <ul>
   <li>If you have an interest in web development, you should <strong>block two hours</strong> for <a href="#the-basics">The Basics</a> section and return to reading this guide at that time. For beginners, it’s important to have the right expectations. At the end of these hours, you should have a basic understanding of web development and a web presence.</li>
-  <li>Else, if you’re looking to learn web development as a hobby or as a career, you may want to print this document (<a href="https://github.com/fxchen/frankc/raw/master/2014%20October/learning-frontend-software.pdf">pdf</a>) and bookmark it for easy reference. The most important part of <strong>learning a craft</strong> is building a consistent habit, for more on structuring <a href="http://frankc.wordpress.com/2014/08/03/design-your-personal-operating-system-habits/">habits</a>, see [<a href="#frontend-notes">2</a>]. At the end of this reading, you will have a baseline for qualified resources on how to start. This prevents the choice analysis paralysis (when too many choices makes the choice difficult).</li>
+  <li>Else, if you’re looking to learn web development as a hobby or as a career, you may want to print this document (<a href="https://github.com/fxchen/frankc/raw/master/2014%20October/learning-frontend-software.pdf">pdf</a>) and bookmark it for easy reference. The most important part of <strong>learning a craft</strong> is building a consistent habit, for more on structuring <a href="/personal-operating-system">habits</a>, see [<a href="#frontend-notes">2</a>]. At the end of this reading, you will have a baseline for qualified resources on how to start. This prevents the choice analysis paralysis (when too many choices makes the choice difficult).</li>
 </ul>
 The following sections are ordered by increasing difficulty.
 <h2 id="the-basics">The Basics</h2>
@@ -114,7 +114,7 @@ Read these guides for a basic understanding of the console. You’ll return to t
 
 <em>Knowing how to use the debugger is like having Quicksilver’s superpower from X-Men. You can stop Javascript execution, change variables, manipulate HTML, and much more. Image credit <a href="http://www.inentertainment.co.uk/">EW</a></em>
 <h4 id="structure-your-learning">Structure your learning</h4>
-A critical juncture in learning is a habit to jump start your learning process. For example, I like to learn in the mornings. I describe my morning routine <a href="http://frankc.wordpress.com/2014/08/03/playlist-your-morning-routine-beat-complexity-like-a-boss/">here</a>. When I am learning a new craft, I will block at least 30 minutes every morning to learn and practice this craft prior to leaving for work. For more on building a habit see: <a href="#frontend-notes">[2]</a>
+A critical juncture in learning is a habit to jump start your learning process. For example, I like to learn in the mornings. I describe my morning routine <a href="/playlist-morning-routine">here</a>. When I am learning a new craft, I will block at least 30 minutes every morning to learn and practice this craft prior to leaving for work. For more on building a habit see: <a href="#frontend-notes">[2]</a>
 
 Courses:
 <ul>
@@ -205,7 +205,7 @@ The easiest pitfall of development is not testing. At the highest levels, testin
 
 <img src="https://github.com/fxchen/frankc/raw/master/2014%20October/selfie.jpg" alt="" height="500px" />
 
-<strong>I’m smiling because I hope you’ll send me feedback!</strong> Send me an email at <a href="mailto:hello@frankc.net">hello@frankc.net</a> on what worked or didn’t work for you!
+<strong>I’m smiling because I hope you’ll send me feedback!</strong> Let me know what worked or didn’t work for you!
 
 Special thanks to <a href="http://abhishekmantha.com/">Abhishek Mantha</a> for critical insights on how he learned development, <a href="http://www.linkedin.com/pub/jeffrey-song/4/651/760">Jeffrey Song</a> for a beginner’s narrative on using this guide for learning web development, and <a href="http://amaanp.com">Amaan Penang</a>, <a href="http://www.linkedin.com/in/ngerebara">Nate Ngerebara</a> for feedback on early drafts of this guide.
 
@@ -227,5 +227,3 @@ Development at a company or startup requires a different set of skills. I studie
 </ul>
 [3] <strong>On picking the right Javascript framework</strong> I focus on AngularJS in this guide. To prevent frontend framework choice paralysis, AngularJS is the only Javascript framework presented. AngularJS has been hugely popular and useful for many developers who use it. If you’re interested in what else is out there, I would suggest <strong><a href="http://todomvc.com">TodoMVC</a></strong> TodoMVC implements the same To-do application using many popular Javascript frontend frameworks. This allows for a comparison and bootstraps the ability for people to prototype in different flavors of frontend frameworks.
 
-
-<img src="https://ga-beacon.appspot.com/UA-36961797-1/sheets/2014-oct-learning-frontend-software" alt="" width="0" height="0" />

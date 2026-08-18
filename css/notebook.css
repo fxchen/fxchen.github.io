@@ -1,0 +1,1218 @@
+/* ==========================================================================
+   frankc.net — design system
+
+   Loaded LAST (see _layouts/base.html common-css), after main.css and
+   main-extend.css.
+
+   main.css is BROKEN, NOT INERT — do not read "loaded last" as "wins".
+   Its `/* DO NOT MODIFY */` sits above the `---`, so Jekyll never processes the
+   front matter. That kills exactly two things: the 20 Liquid-bearing
+   declarations, and its first `body` rule — the parser reads the literal `---`
+   as a bogus rule's prelude and consumes tokens through `body`'s whole block.
+   (It used to kill a third: an `@import` of pygment_highlights.css sat inside
+   that same swallowed prelude, so the file never loaded once. Both the import
+   and the file are gone now; those rules live in §4.7.)
+   EVERYTHING AFTER THAT FIRST BLOCK PARSES AND COMPETES NORMALLY, and it wins
+   often. So:
+     - match or exceed main.css's specificity for any property you set here;
+       loading later saves nothing (see §4.7's invisible-text bug, and §4.18,
+       where `footer .footer-links {font-size:18px}` was quietly winning);
+     - remember inheritance loses to ANY direct rule on the element —
+       main-extend.css's `body, a {font-family: Avenir}` beats a font-family
+       set on any ancestor, however specific. State type on the link itself.
+
+   main-extend.css's unclosed @media brace has been fixed separately; this file
+   does not rely on anything past that fix.
+
+   Token values against porcelain (#F6F2EA), computed WCAG 2.x:
+     #41511A  7.78:1  AAA normal text  — the ONLY green for text/interactive
+     #7DA718  2.54:1  fails 3:1 floor  — graphics/heavy-rule only, never text
+   ========================================================================== */
+
+/* ---------- §3.2 Typography — font faces ---------- */
+/* Subsetting done by Google Fonts' css2 API (unicode-range: latin), not a
+   local subsetting tool — fonttools/pyftsubset were unavailable in this
+   environment. Combined weight: ~153KB for 4 files (Bodoni Moda 45.2KB,
+   Lora 36.9KB + 39.8KB italic, JetBrains Mono 30.7KB). */
+
+@font-face {
+  font-family: 'Bodoni Moda';
+  src: url('/fonts/bodoni-moda-var.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora-var.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora-italic-var.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrains-mono-var.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- §3 Design tokens ---------- */
+
+:root {
+  /* Surfaces — sampled from the 8 renders (cooler than the visual-system-stub) */
+  --porcelain:        #F6F2EA;
+  --paper:             #EFEAE3;
+  --paper-kraft:       #E1D2B6;
+  --ash:               #C5C0B8;
+  --graphite:          #1B1B1A;  /* surface only — never a text color */
+
+  /* Ink */
+  --ink:               #080909;
+  --charcoal:          #2A2A27;
+  --field-gray:        #66635B;
+
+  /* Green */
+  --acid-green:        #7DA718;  /* graphics only — NEVER text or interactive */
+  --acid-green-wash:   #E9EFDD;  /* light chip / hover fill, non-text */
+  --acid-green-dark:   #41511A;  /* THE interactive green — 7.78:1 AAA on porcelain */
+
+  /* Reserved, warning/error only — not used as a default accent anywhere here */
+  --coral:             #FF5A3D;
+  --goldenrod:         #B8860B;  /* 2.92:1 on porcelain, fails 3:1 — border-only, never text, same discipline as coral */
+
+  /* Rules */
+  --rule-hairline:     rgba(8, 9, 9, 0.12);
+  --rule-strong:       rgba(8, 9, 9, 0.28);
+
+  /* Two-token focus ring: dark ink-green on light surfaces, porcelain on graphite */
+  --focus-ring-light:  var(--acid-green-dark);
+  --focus-ring-dark:   var(--porcelain);
+
+  /* Type families */
+  --font-display: 'Bodoni Moda', Georgia, 'Times New Roman', serif;
+  --font-body:    'Lora', Georgia, 'Times New Roman', serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Consolas, monospace;
+
+  /* Fluid type scale (16px root, clamp) */
+  --text-hero:        clamp(2.75rem, 1.9rem + 3.6vw, 5.5rem);     /* 44px – 88px */
+  --text-h2:          clamp(2rem, 1.5rem + 2.2vw, 3.75rem);       /* 32px – 60px */
+  --text-h3:          clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);   /* 22px – 28px */
+  --text-dek:         clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);    /* 17px – 20px */
+  --text-body:        1.125rem;                                    /* 18px */
+  --text-caption:     0.8125rem;                                   /* 13px */
+  --text-eyebrow:     0.75rem;                                     /* 12px */
+  --text-runninghead: 0.6875rem;                                   /* 11px */
+
+  /* Spacing (4px base) */
+  --space-1: 4px;   --space-4: 16px;  --space-7: 48px;
+  --space-2: 8px;   --space-5: 24px;  --space-8: 64px;
+  --space-3: 12px;  --space-6: 32px;  --space-9: 96px;
+
+  --running-head-h: 56px;
+
+  /* Jagged torn-edge clip-path, defined once. Footnote box only: at index or
+     tag scale this stops reading as a texture and becomes a motif. */
+  --torn-edge-clip: polygon(
+    0 10px, 4% 2px, 8% 9px, 12% 1px, 16% 8px, 20% 0, 24% 9px, 28% 2px,
+    32% 8px, 36% 1px, 40% 9px, 44% 0, 48% 8px, 52% 2px, 56% 9px, 60% 0,
+    64% 8px, 68% 1px, 72% 9px, 76% 0, 80% 8px, 84% 1px, 88% 9px, 92% 0,
+    96% 8px, 100% 1px, 100% 100%, 0 100%
+  );
+}
+
+/* ---------- §2 Foundations — reset and base type ---------- */
+
+/* Bootstrap 3's scaffolding sets `html { font-size: 10px }`. Nothing here had
+   overridden it, so every rem in the type scale was resolving to 62.5% of its
+   documented value — body shipped at 11.25px, captions at 8.125px, running-head
+   links at 6.875px, all of it smaller than production's own 14px body.
+   `100%` rather than `16px` on purpose: it restores the documented scale exactly
+   AND honors a reader who has changed their browser's default font size, which
+   Bootstrap's hard 10px silently overrode. */
+html { font-size: 100%; }
+html { box-sizing: border-box; -webkit-text-size-adjust: 100%; }
+*, *::before, *::after { box-sizing: inherit; }
+
+/* Safety net: a position:fixed running head with nowrap flex children
+   can grow past 100vw and drag the whole document into horizontal
+   scroll on narrow viewports even with min-width:0 on its own flex
+   items (Chrome still measured this happening at 375px in testing).
+   Nested scroll containers (.running-head-nav's own overflow-x:auto)
+   keep working fine under this — only the page-level runaway is capped. */
+html, body { overflow-x: hidden; max-width: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--charcoal);
+  background-color: var(--porcelain);
+  /* Near-invisible feTurbulence paper grain, opacity baked into the SVG
+     itself (avoids a second layered element / stacking-context risk). */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+::selection { background: var(--acid-green-wash); color: var(--ink); }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.08;
+  margin: 0 0 var(--space-4);
+}
+.h4, h4 { font-size: 1.375rem !important; font-weight: 500; }
+.h5, h5 { font-size: 1.125rem !important; font-weight: 500; }
+
+p { line-height: 1.6; margin: 0 0 var(--space-5); max-width: 68ch; }
+.blog-post p, .blog-post li { max-width: 68ch; }
+
+a {
+  color: var(--acid-green-dark);
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: color 150ms ease, text-decoration-color 150ms ease, border-color 150ms ease;
+}
+a:hover, a:focus { color: var(--acid-green-dark); text-decoration-color: currentColor; }
+
+/* ---------- §2.3 Interaction states — focus ---------- */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+.running-head-link:focus-visible,
+.wordmark:focus-visible,
+.notebook-pager-link:focus-visible,
+.index-card-title a:focus-visible,
+.pager li a:focus-visible {
+  outline: 2px solid var(--focus-ring-light);
+  outline-offset: 2px;
+  transition: none;
+}
+/* Graphite / dark surfaces need the light-on-dark token — #41511A on
+   #1B1B1A is 1.98:1, invisible, which is the exact bug this build fixes.
+   The running head is porcelain (light), NOT graphite, so it correctly
+   uses the default --focus-ring-light rule above — it must NOT be listed
+   here, or its links would get a porcelain-on-porcelain invisible ring,
+   reintroducing the same bug on a different surface. */
+pre :focus-visible,
+pre a:focus-visible {
+  outline-color: var(--focus-ring-dark);
+}
+
+/* ---------- §2.2 Layout — running-head offset ---------- */
+
+.intro-header { margin: var(--space-9) 0 var(--space-5); position: relative; }
+.intro-header.big-img { margin-top: var(--running-head-h); margin-bottom: var(--space-6); }
+@media (min-width: 768px) {
+  .intro-header { margin-top: 152px; }
+  .intro-header.big-img { margin-top: var(--running-head-h); }
+}
+
+/* ---------- §4.1 Running head ---------- */
+
+.running-head {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  width: 100%;
+  max-width: 100vw;
+  z-index: 1030;
+  height: var(--running-head-h);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--rule-strong);
+  padding: 0 var(--space-3);
+  background: var(--porcelain);
+  overflow: hidden;
+}
+.running-head-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 0;
+  gap: var(--space-2);
+}
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+.wordmark:hover { color: var(--acid-green-dark); }
+
+.running-head-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  min-width: 0;
+}
+.running-head-nav::-webkit-scrollbar { display: none; }
+.running-head-link {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 2px 1px;
+}
+.running-head-link:hover, .running-head-link:focus-visible { color: var(--acid-green-dark); }
+
+@media (max-width: 400px) {
+  .wordmark { font-size: 1rem; }
+  .running-head-nav { gap: 10px; }
+  .running-head-link { font-size: 0.5625rem; }
+}
+@media (min-width: 560px) {
+  .running-head-link { font-size: var(--text-runninghead); }
+}
+@media (min-width: 768px) {
+  .running-head { padding: 0 var(--space-7); }
+  .running-head-nav { gap: var(--space-5); }
+}
+
+/* ---------- §4.4 Eyebrow ---------- */
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--acid-green-dark);
+  margin: 0 0 var(--space-3);
+}
+
+/* ---------- §4.3 Post hero — accent rule ---------- */
+
+.post-heading h1::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  background: var(--acid-green);
+  margin-top: var(--space-4);
+}
+@media (min-width: 768px) {
+  .post-heading h1::after { width: 72px; }
+}
+.intro-header.big-img .page-heading hr,
+.intro-header.big-img .post-heading hr { display: none; } /* replaced by the ::after rule */
+
+/* ---------- §4.2 Page hero ----------
+   main.css targets these same properties via .intro-header .page-heading h1
+   / .intro-header .post-heading h1 / …-subheading at specificity (0,2,1) /
+   (0,3,0). A bare `.page-heading h1` is (0,1,1) and loses that fight on
+   specificity regardless of load order (the same class of bug as the code
+   blocks above), so every selector here is written to match or exceed
+   main.css's, letting this file's later position in the cascade actually
+   decide ties. */
+
+.page-heading h1, .post-heading h1, .fallback-title {
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.intro-header .page-heading h1 { font-size: var(--text-hero); line-height: 1.02; }
+.intro-header .post-heading h1 { font-size: var(--text-h2); line-height: 1.04; }
+.fallback-title { font-size: var(--text-h2); line-height: 1.06; }
+
+.intro-header .page-heading, .intro-header .post-heading { text-align: left; }
+.intro-header .page-heading .page-subheading,
+.intro-header .post-heading .post-subheading {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--charcoal);
+  font-size: var(--text-dek);
+  line-height: 1.4;
+  display: block;
+  margin: var(--space-4) 0 0;
+  max-width: 60ch;
+}
+
+/* ---------- §4.2 Page hero — accents ---------- */
+
+.intro-header .page-heading--accent-none h1,
+.intro-header .page-heading--accent-underline h1,
+.intro-header .page-heading--accent-none .fallback-title,
+.intro-header .page-heading--accent-underline .fallback-title {
+  margin-bottom: 0;
+}
+
+.hero-accent {
+  color: var(--acid-green); /* graphics only */
+  overflow: visible;
+}
+
+/* Treatment A restore: uncomment the CSS block below and set 'hero-accent: origin' in index.html front matter. */
+/*
+.intro-header .page-heading--accent-origin h1,
+.intro-header .page-heading--accent-origin .fallback-title {
+  margin-bottom: 0;
+}
+.hero-accent--origin {
+  display: block;
+  width: 184px;
+  max-width: 55vw;
+  height: 24px;
+  margin: 8px 0 0;
+}
+.intro-header .page-heading.page-heading--accent-origin .page-subheading {
+  margin-top: var(--space-1);
+}
+*/
+
+.intro-header .page-heading.page-heading--accent-none .page-subheading {
+  margin-top: 6px;
+  line-height: 1.32;
+}
+.hero-annotated-subtitle {
+  display: inline-flex;
+  flex-direction: column;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 6px;
+}
+.intro-header .page-heading.page-heading--accent-underline .page-subheading {
+  margin: 0;
+}
+.hero-accent--underline {
+  display: block;
+  width: 100%;
+  height: 10px;
+  margin-top: 1px;
+  flex: 0 0 auto;
+}
+.intro-header.big-img .page-heading,
+.intro-header.big-img .post-heading {
+  color: var(--ink);
+  text-shadow: 0 1px 16px rgba(246, 242, 234, 0.92), 0 0 40px rgba(246, 242, 234, 0.7);
+  padding: 64px 0;
+}
+@media (min-width: 768px) {
+  .intro-header.big-img .page-heading,
+  .intro-header.big-img .post-heading { padding: 96px 0; }
+}
+.intro-header.big-img .post-heading .post-meta { color: var(--field-gray); }
+
+/* Image-backed headers use a porcelain wash to keep the heading legible. */
+.intro-header.big-img { position: relative; }
+.intro-header.big-img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--porcelain);
+  opacity: 0.72;
+  pointer-events: none;
+}
+.intro-header.big-img .container { position: relative; z-index: 2; }
+
+.post-meta, .post-heading .post-meta, .post-preview .post-meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--field-gray);
+  font-style: normal;
+  display: block;
+  margin: var(--space-3) 0 0;
+}
+
+/* ---------- §4.5 Operating line ---------- */
+
+.operating-line {
+  display: block;
+  width: 100%;
+  height: 32px;
+  color: var(--acid-green); /* graphics-only use of the base green, not text */
+  margin: var(--space-7) 0;
+}
+@media (min-width: 768px) { .operating-line { height: 40px; margin: var(--space-8) 0; } }
+
+/* Modifier: --flush. Use on a wave that directly follows .intro-header.
+   The hero's own margin-bottom (--space-5) already closes the hero before
+   this element's margin-top opens further space, so the two stack to 88px —
+   24px proud of the 64px every later section-to-wave transition gets from
+   margin-top alone. This subtracts the hero's margin back out.
+
+   Opt-in via `{% include operating-line.html variant="1" flush=true %}`
+   rather than matched by DOM position. An earlier version scoped this with
+   `.container[role="main"] .operating-line:first-child`, which measured
+   correctly but silently reverted to 88px the moment anything was inserted
+   above the wave — the spacing of the system's most visible seam should not
+   depend on sibling order. */
+.operating-line--flush { margin-top: calc(var(--space-7) - var(--space-5)); }
+@media (min-width: 768px) {
+  .operating-line--flush { margin-top: calc(var(--space-8) - var(--space-5)); }
+}
+
+/* ---------- §4.6 Headshot ---------- */
+
+.headshot {
+  width: 150px;
+  max-width: calc(100% - 4px);
+  margin: 0;
+  color: var(--field-gray);
+  transform: rotate(-1.2deg);
+  transform-origin: center;
+}
+.headshot-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1.5px solid var(--ink);
+  border-radius: 0 !important;
+  box-shadow: 4px 4px 0 rgba(8, 9, 9, 0.10);
+}
+.headshot-caption {
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-runninghead);
+  line-height: 1.3;
+  letter-spacing: 0.1em;
+  color: var(--field-gray);
+  text-align: center;
+}
+.headshot--bio {
+  float: right;
+  margin: 0 0 var(--space-5) var(--space-6);
+}
+.headshot--hero {
+  width: 180px;
+  margin-top: var(--space-6);
+}
+.hero-copy { min-width: 0; }
+
+@media (min-width: 768px) {
+  .intro-header .page-heading.page-heading--with-headshot {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 180px;
+    align-items: start;
+    gap: var(--space-7);
+  }
+  .headshot--hero {
+    justify-self: end;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .headshot--bio {
+    float: none;
+    margin: 0 0 var(--space-6);
+  }
+}
+
+/* ---------- §4.8 Rules ---------- */
+
+hr { border: 0; border-top: 1px solid var(--rule-hairline); margin: var(--space-6) 0; }
+hr.small { display: none; } /* replaced by the H1 accent rule */
+
+/* ---------- §4.9 Blockquote ---------- */
+
+blockquote {
+  border-left: 3px solid var(--acid-green);
+  padding: 2px 0 2px 20px;
+  margin: var(--space-6) 0;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.1em;
+  color: var(--charcoal);
+}
+blockquote p { margin: 0 0 var(--space-3); max-width: none; }
+blockquote p:first-child { margin-top: 0; }
+blockquote p:last-child { margin-bottom: 0; }
+blockquote cite, blockquote footer {
+  display: block;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: var(--text-caption);
+  color: var(--field-gray);
+  margin-top: var(--space-2);
+}
+
+/* ---------- §4.10 Table ---------- */
+
+table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-6) 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+}
+table tr { border-top: none; background: transparent; }
+table tr:nth-child(2n) { background: transparent; }
+table tr th {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-size: var(--text-caption);
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: var(--field-gray);
+  text-align: left;
+  border: none;
+  border-bottom: 1px solid var(--rule-strong);
+  padding: 10px 20px 10px 0;
+}
+table tr td {
+  border: none;
+  border-bottom: 1px solid var(--rule-hairline);
+  text-align: left;
+  padding: 10px 20px 10px 0;
+  font-variant-numeric: tabular-nums;
+}
+table tr th:last-child, table tr td:last-child { padding-right: 0; }
+
+/* ---------- §4.7 Terminal card ---------- */
+
+.highlighter-rouge, div.highlight, figure.highlight {
+  background: transparent;
+  margin: 0 0 var(--space-6);
+}
+/* main.css's competing rule is `pre.highlight, .highlight > pre, td.code
+   pre { background-color:#FAFAFA; background-image:linear-gradient(...);
+   border-left:7px solid #444 }` at specificity (0,1,1). A bare `pre` here
+   is (0,0,1) and LOSES that fight even though this file loads later —
+   specificity beats source order. Match every one of main.css's selectors
+   at equal-or-greater specificity so this file's later position actually
+   wins the tie. (This was shipping porcelain-on-porcelain text — an
+   invisible-text bug, not just a wrong-look one.) */
+pre,
+pre.highlight,
+.highlight > pre,
+td.code pre {
+  background: var(--graphite);
+  color: var(--porcelain);
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  padding: 20px 24px;
+  border-radius: 4px;
+  border-left: none;
+  background-image: none;
+  overflow-x: auto;
+  margin: 0 0 var(--space-6);
+  white-space: pre;
+  tab-size: 2;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+  -webkit-font-feature-settings: "liga" 0, "calt" 0;
+}
+.highlighter-rouge pre, div.highlight pre { margin: 0; }
+pre code {
+  background: transparent;
+  color: inherit;
+  border: none;
+  padding: 0;
+  white-space: pre;
+  font-size: inherit;
+}
+code table, code table td, code table th, code table tbody, code table tr,
+td.gutter pre {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+:not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--paper);
+  color: var(--charcoal);
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid var(--rule-hairline);
+}
+
+/* §4.7 Terminal card — Rouge syntax tokens.
+   Moved here from css/pygment_highlights.css, which was DELETED. That file was
+   reachable only through an `@import` near the top of main.css, and that import
+   sat inside the rule the CSS parser swallows (see the header of this file), so
+   it never loaded once, in dev or production. It also carried its own divergent
+   copy of the palette in var() fallbacks — #79A50F where the token is #7DA718,
+   #F2EEE8 where it is #F6F2EA. One palette, one file. The dead import has since
+   been removed from main.css; computed styles were identical before and after,
+   which is what made that edit safe despite Forbidden Move #1.
+
+   Tuned for the DARK card, which inverts the usual advice: --acid-green-dark
+   (#41511A) is the interactive green everywhere else on this site, but on
+   graphite it computes to 1.98:1 and disappears. The base --acid-green is
+   6.08:1 there, so the dark surface is the one place it may carry text.
+
+   Restrained on purpose — three colors, not a rainbow: green for strings and
+   comments, porcelain for keywords and identifiers, ash for numbers. Only
+   language-tagged fences ever reach these rules; unlabeled ASCII-art fences
+   produce no Rouge spans and stay plain mono. */
+.highlight .c, .highlight .cm, .highlight .c1, .highlight .cs, .highlight .cp,
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .sc,
+.highlight .sd, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx,
+.highlight .sr, .highlight .ss { color: var(--acid-green); }
+
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kp, .highlight .kr,
+.highlight .kt, .highlight .o, .highlight .ow { color: var(--porcelain); font-weight: 600; }
+
+.highlight .na, .highlight .nb, .highlight .nc, .highlight .no, .highlight .ni,
+.highlight .ne, .highlight .nf, .highlight .nn, .highlight .nt, .highlight .nv,
+.highlight .bp, .highlight .vc, .highlight .vg, .highlight .vi { color: var(--porcelain); }
+
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo,
+.highlight .il { color: var(--ash); }
+
+.highlight .w { color: rgba(246, 242, 234, 0.30); }
+.highlight .err { color: var(--coral); background: transparent; }
+.highlight .gd, .highlight .gd .x, .highlight .gi, .highlight .gi .x { background: transparent; }
+.highlight .lineno {
+  color: rgba(246, 242, 234, 0.35);
+  padding: 0 10px;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.highlight .lineno::selection { background-color: transparent; }
+
+/* ---------- §4.11 Tag chips ---------- */
+
+.blog-tags {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--field-gray);
+  letter-spacing: 0.02em;
+  margin: var(--space-5) 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+.blog-tags a {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--ash);
+  border-radius: 999px;
+  padding: 3px 12px;
+  background: var(--porcelain);
+  color: var(--charcoal);
+  text-decoration: none;
+  font-size: var(--text-caption);
+  transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
+}
+.blog-tags a::before { content: "#"; margin-right: 2px; color: var(--field-gray); }
+.blog-tags a:hover, .blog-tags a:focus-visible {
+  border-color: var(--acid-green-dark);
+  color: var(--acid-green-dark);
+  background: var(--acid-green-wash);
+}
+
+/* tags.html chip buttons */
+.tag-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--charcoal);
+  background: var(--porcelain);
+  border: 1px solid var(--ash);
+  border-radius: 999px;
+  padding: 6px 14px;
+  margin: 0 8px 8px 0;
+  text-decoration: none;
+}
+.tag-btn::before { content: "#"; color: var(--acid-green-dark); }
+.tag-btn:hover, .tag-btn:focus-visible {
+  border-color: var(--acid-green-dark);
+  background: var(--acid-green-wash);
+  color: var(--acid-green-dark);
+}
+h2.linked-section {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-top: var(--space-8);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--rule-hairline);
+}
+h2.linked-section .fa { display: none; }
+#full-tags-list .post-list { margin: var(--space-3) 0 var(--space-6); }
+.tag-entry {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: 10px 0;
+  border-top: 1px solid var(--rule-hairline);
+  font-family: var(--font-body);
+}
+.tag-entry a { color: var(--ink); text-decoration: none; }
+.tag-entry a:hover { color: var(--acid-green-dark); }
+.tag-entry .entry-date {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--field-gray);
+  white-space: nowrap;
+}
+
+/* ---------- §4.12 Post index cards ---------- */
+
+.index-lede {
+  font-family: var(--font-body);
+  font-size: var(--text-dek);
+  color: var(--charcoal);
+  max-width: 62ch;
+  margin: 0 0 var(--space-7);
+}
+
+.index-grid-featured {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+@media (min-width: 700px) {
+  .index-grid-featured { grid-template-columns: 1fr 1fr; }
+}
+
+.index-grid-quiet {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+@media (min-width: 560px) {
+  .index-grid-quiet { grid-template-columns: 1fr 1fr; }
+}
+/* Two columns is the ceiling, not three. The content column is
+   col-lg-8 (750px), so a third column leaves each card 239px wide — 191px
+   inside the padding. That was survivable when the root font-size bug had
+   caption text rendering at 8.125px; at its real 13px the meta row needs
+   ~215px and broke mid-value ("April 14," / "2026"). Two columns give 367px
+   cards and 319px of content, which fits the meta on one line and stops the
+   h3 titles from stacking four lines deep. Widening past col-lg-8 would buy
+   a third column back, but that is a layout change, not a grid change. */
+
+.index-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--paper);
+  border: 1px solid var(--rule-hairline);
+  border-radius: 6px;
+  padding: var(--space-5);
+  box-shadow: 0 2px 8px rgba(8, 9, 9, 0.06), 0 1px 2px rgba(8, 9, 9, 0.05);
+}
+.index-card--featured { padding: var(--space-6); }
+
+/* ---------- §4.13 Artifact sprite ---------- */
+/* Presentation for the hand-authored inline SVG symbols defined once in
+   _includes/notebook-artifacts.html and referenced by <use> from index
+   cards. The symbols carry no color of their own — they inherit
+   currentColor from .index-card-art, and only the two accent classes
+   opt into green. Lives here rather than inside §4.12 because the sprite
+   is its own component: any surface that <use>s a symbol needs these
+   rules, not just the post index. */
+.index-card-art {
+  width: 40px; height: 40px;
+  color: var(--field-gray);
+  opacity: 0.85;
+}
+.index-card--featured .index-card-art { width: 52px; height: 52px; }
+.index-card-art svg { width: 100%; height: 100%; display: block; }
+.index-card-art .artifact-accent { fill: var(--acid-green-dark); }
+.index-card-art .artifact-accent-stroke { stroke: var(--acid-green-dark); }
+
+/* ---------- §4.12 Post index cards (cont.) ---------- */
+
+.index-card-title {
+  font-size: var(--text-h3);
+  line-height: 1.15;
+  margin: 0;
+}
+.index-card--featured .index-card-title { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem); }
+.index-card-title a { color: var(--ink); text-decoration: none; }
+.index-card-title a:hover, .index-card-title a:focus-visible { color: var(--acid-green-dark); }
+
+.index-card-dek {
+  font-family: var(--font-body);
+  color: var(--charcoal);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: none;
+}
+/* nowrap on the children is the actual guard here. Flex items shrink below
+   their content width by default, so without it the date gets squeezed and
+   wraps *inside itself* — "April 14," on one line and "2026" on the next,
+   which reads as broken rather than as a wrap. flex-wrap lets the row break
+   between whole values instead, if a narrow card ever forces it. */
+.index-card-meta > span,
+.index-card-meta > a { white-space: nowrap; flex: 0 0 auto; }
+
+.index-card-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 2px;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--field-gray);
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+.index-card-arrow {
+  margin-left: auto;
+  color: var(--acid-green-dark);
+  text-decoration: none;
+  font-family: var(--font-mono);
+}
+.index-card-arrow:hover, .index-card-arrow:focus-visible { text-decoration: underline; }
+
+/* ---------- §4.14 Simple list ---------- */
+
+.simple-list { list-style: none; margin: 0 0 var(--space-6); padding: 0; }
+.simple-list li {
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--rule-hairline);
+  font-family: var(--font-body);
+}
+.simple-list li:first-child { border-top: none; }
+.simple-list a { color: var(--ink); text-decoration: none; font-weight: 500; }
+.simple-list a:hover, .simple-list a:focus-visible { color: var(--acid-green-dark); }
+.simple-list i {
+  display: block;
+  font-family: var(--font-body);
+  font-style: italic;
+  color: var(--field-gray);
+  font-size: 0.95rem;
+  margin-top: 2px;
+}
+
+/* ---------- §4.15 Pagination ---------- */
+
+.notebook-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin: var(--space-8) 0 var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule-hairline);
+  font-family: var(--font-mono);
+}
+.notebook-pager-link {
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  text-decoration: none;
+}
+.notebook-pager-link:hover, .notebook-pager-link:focus-visible { color: var(--acid-green-dark); }
+.notebook-pager-link.is-disabled { color: var(--ash); pointer-events: none; }
+.notebook-pager-count {
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+  color: var(--acid-green-dark);
+  white-space: nowrap;
+}
+
+.pager.blog-pager, .pager.main-pager {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: var(--space-8) 0 var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule-hairline);
+  font-family: var(--font-mono);
+}
+.pager.blog-pager li, .pager.main-pager li { display: inline-block; float: none; }
+.pager.blog-pager li a, .pager.main-pager li a {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+.pager.blog-pager li a:hover, .pager.blog-pager li a:focus,
+.pager.main-pager li a:hover, .pager.main-pager li a:focus {
+  color: var(--acid-green-dark);
+  background: transparent;
+  border: none;
+}
+
+/* ---------- §4.16 Footnotes ---------- */
+
+.footnotes {
+  position: relative;
+  margin: var(--space-8) 0 var(--space-6);
+  padding: 32px 28px 22px;
+  background: var(--paper);
+  border: 1px solid var(--rule-hairline);
+  clip-path: var(--torn-edge-clip);
+  box-shadow: 0 2px 8px rgba(8, 9, 9, 0.08), 0 1px 2px rgba(8, 9, 9, 0.06);
+}
+.footnotes::before {
+  content: "FOOTNOTES";
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  letter-spacing: 0.08em;
+  color: var(--acid-green-dark);
+}
+.footnotes::after {
+  content: "";
+  position: absolute;
+  top: -9px; left: 36px;
+  width: 58px; height: 22px;
+  background: rgba(239, 234, 227, 0.9);
+  border: 1px solid rgba(8, 9, 9, 0.08);
+  box-shadow: 0 1px 3px rgba(8, 9, 9, 0.12);
+  transform: rotate(-3deg);
+}
+.footnotes ol {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--charcoal);
+  line-height: 1.6;
+  margin: var(--space-3) 0 0;
+  padding-left: 20px;
+}
+.footnotes li { margin-bottom: var(--space-2); padding-left: 4px; }
+.footnotes li::marker { color: var(--acid-green-dark); }
+.footnotes p { margin: 0; max-width: none; }
+.footnotes a.reversefootnote { color: var(--acid-green-dark); text-decoration: none; margin-left: 6px; }
+sup a.footnote {
+  font-family: var(--font-mono);
+  font-size: 0.7em;
+  color: var(--acid-green-dark);
+  text-decoration: none;
+}
+
+/* ---------- §4.17 Notification boxes ----------
+   Documented in this repo's CLAUDE.md as an available kramdown class, not
+   currently used in any post, but a real component worth carrying forward.
+   main.css's version is (0,1,0)-equivalent per class; matched/exceeded here.
+   --coral and --goldenrod are reserved for error/warning — this is their one
+   sanctioned use. Both fail the 3:1 floor on porcelain (2.77:1 and 2.91:1), so
+   they stay border accents only, never text, same discipline as the base
+   green: the box's own label and copy carry the meaning. */
+.box-note, .box-warning, .box-error {
+  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-3);
+  margin: var(--space-5) 0;
+  border: 1px solid var(--rule-hairline);
+  border-left-width: 4px;
+  border-radius: 0 4px 4px 0;
+  font-family: var(--font-body);
+}
+.box-note, .box-warning, .box-error { background: var(--paper); }
+.box-note { border-left-color: var(--acid-green-dark); }
+.box-warning { border-left-color: var(--goldenrod); background: var(--paper-kraft); }
+.box-error { border-left-color: var(--coral); }
+
+/* ---------- §4.18 Footer ---------- */
+
+.beautiful-jekyll-footer {
+  padding: var(--space-8) 0 var(--space-6);
+  margin-top: var(--space-9);
+  border-top: 1px solid var(--rule-hairline);
+}
+/* main.css is NOT dead — see §6.1. Only its Liquid-bearing declarations and its
+   first `body` rule are lost; every plain declaration after that parses and
+   competes normally. Two of them were beating this block outright:
+     main.css  `footer .footer-links { font-size: 18px }`  (0,2,1) @≥768px
+     main-extend.css  `body, a { font-family: Avenir, … }` (0,0,1) on the <a>
+   The second is the subtler one: font-family here is inherited by the links,
+   and inheritance loses to ANY direct rule on the element itself, regardless of
+   specificity. The mono treatment has to be stated on the anchor, not the list. */
+footer .footer-links,
+.footer-links {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 var(--space-4);
+  padding: 0;
+}
+.footer-links li { padding: 0 4px; }
+.footer-links li a {
+  /* font-family restated here on purpose — inherited values lose to
+     main-extend.css's `body, a` rule no matter how specific the ancestor is. */
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--charcoal);
+  text-decoration: none;
+}
+.footer-links li a:hover, .footer-links li a:focus-visible { color: var(--acid-green-dark); }
+.footer-links li:not(:last-child)::after { content: "·"; margin-left: 16px; color: var(--ash); }
+
+/* Social marks. Inline SVG from the sprite in _includes/notebook-artifacts.html,
+   not an icon font — Font Awesome was dropped sitewide (forbidden move #7) and
+   these are hand-authored to sit in the same CAD/patent register as the artifact
+   marks. currentColor means they inherit the link's hover state for free. */
+.footer-icon {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.copyright, p.copyright.text-muted {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--field-gray) !important;
+  letter-spacing: 0.02em;
+}
+.copyright a { color: var(--field-gray); }
+
+/* ---------- §4.20 Content image ---------- */
+/* The headshot's scanned-print treatment (§4.6), generalized to every image in
+   post and page bodies: square corners, hard ink hairline, zero-blur offset
+   shadow. Same argument as the headshot — an image on this site is an artifact
+   sitting on paper, not a pane bleeding into the layout.
+
+   Three deliberate differences from §4.6, all because these images are large
+   and arbitrary where the headshot is small and known:
+     - the tilt is ~half the headshot's and ALTERNATES, so a run of images reads
+       as hand-placed rather than as one systematically crooked template. Set
+       --content-image-tilt to 0deg to make every image sit dead straight;
+       that is the whole off-switch.
+     - a porcelain backing, so transparent PNGs (most of the woodcut art) sit on
+       paper instead of letting the body grain show through the artwork.
+     - centered with real vertical air, since these interrupt reading. */
+:root { --content-image-tilt: 0.5deg; }
+
+.blog-post img,
+.container[role="main"] .post-preview img {
+  display: block;
+  margin: var(--space-7) auto;
+  max-width: 100%;
+  height: auto;
+  background: var(--porcelain);
+  border: 1.5px solid var(--ink);
+  border-radius: 0;
+  box-shadow: 4px 4px 0 rgba(8, 9, 9, 0.10);
+  transform: rotate(calc(-1 * var(--content-image-tilt)));
+}
+/* Alternate the lean. Images are each wrapped in their own <p> by kramdown, so
+   nth-of-type on the image itself is always 1 — the paragraph index is what
+   varies, and using it gives a stable, non-uniform rhythm. */
+.blog-post p:nth-of-type(even) img {
+  transform: rotate(var(--content-image-tilt));
+}
+
+/* Exclusions.
+     .headshot-image — already carries §4.6; would double the border and fight
+                    the -1.2deg with this rule's tilt.
+     svg          — wave dividers, artifact marks, footer icons. Never framed.
+     zero-size    — a GUARD, with no live target as of 2026-08-18. Six
+                    ga-beacon.appspot.com tracking pixels used to sit in the
+                    2014 posts and this rule framed them into visible 2-3px
+                    boxes; they have since been deleted outright (the service
+                    503s and its Universal Analytics property died in 2023).
+                    Kept because zero-size images recur — spacers, beacons,
+                    pixels — and the failure is silent and ugly. Note it must
+                    catch BOTH spellings: five of those six used width/height
+                    attributes, the sixth used inline style, and an
+                    attribute-only selector shipped a visible box on
+                    /writing-workflow. */
+.blog-post img[width="0"],
+.blog-post img[height="0"],
+.blog-post img[style*="width:0"],
+.blog-post img[style*="width: 0"],
+.blog-post .headshot-image,
+.blog-post svg {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  transform: none;
+  margin: 0;
+}
+.headshot .headshot-image { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-post img, .blog-post p:nth-of-type(even) img { transform: none; }
+}
+
+/* ---------- §4.19 Bio actions ---------- */
+
+.bio-section { position: relative; }
+.bio-actions {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  margin: var(--space-2) 0 var(--space-1);
+}
+.bio-btn {
+  background: none;
+  border: 1px solid var(--ash);
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  line-height: 1.4;
+  color: var(--field-gray);
+  cursor: pointer;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+.bio-btn:hover,
+.bio-btn.copied { color: var(--acid-green-dark); border-color: var(--acid-green-dark); }
+.bio-long {
+  display: none;
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--rule-hairline);
+}
+.bio-long.is-visible { display: block; }
+
+/* ---------- §6 Governance — legacy chrome suppression ---------- */
+
+.nav-search-icon { display: none !important; }
+
+/* ---------- §2.4 Motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.001ms !important; animation-duration: 0.001ms !important; }
+}
+
+/* ---------- §6 Governance — print ---------- */
+
+@media print {
+  .running-head { display: none; }
+  .operating-line { color: #000 !important; background: #000 !important; }
+  pre { background: #fff !important; color: #000 !important; border: 1px solid #000; }
+}
+
+/* ---------- §2.2 Layout — overflow guardrails ---------- */
+
+img, iframe, svg { max-width: 100%; }
+.container, .container-fluid { max-width: 100%; }

@@ -18,7 +18,7 @@ show-avatar: true
         {% if page.layout != 'feed' %}
             {% if page.title != 'Sitemap' or page.title != nil%}
                 {% if page.title != nil %}
-                    {% if page.url contains 'tag/' or page.title contains '404' or page.url contains 'blog/page' %}
+                    {% if page.url == '/search' or page.url contains 'tag/' or page.title contains '404' or page.url contains 'blog/page' %}
                     {% else %}
 <li><a href="{{ url }}{{ page.url | remove: 'index.html' }}">{{ page.title }}</a> </li>
                     {% endif %}
