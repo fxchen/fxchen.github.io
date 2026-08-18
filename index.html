@@ -2,56 +2,21 @@
 layout: page
 title: Frank Chen
 subtitle: Deploying real AI in our messy physical world.
-bigimg:
-  - 'img/background-lines-light.png'
 use-site-title: true
+headshot: bio
+hero-accent: none
 ---
 
-<style>
-.bio-section {
-  position: relative;
-}
-.bio-actions {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  margin-top: 8px;
-  margin-bottom: 4px;
-}
-.bio-btn {
-  background: none;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 4px 10px;
-  font-family: 'Avenir', 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 13px;
-  color: #808080;
-  cursor: pointer;
-  transition: color 0.2s, border-color 0.2s;
-  line-height: 1.4;
-}
-.bio-btn:hover {
-  color: #0085a1;
-  border-color: #0085a1;
-}
-.bio-btn.copied {
-  color: #2ecc71;
-  border-color: #2ecc71;
-}
-.bio-long {
-  display: none;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid #eee;
-}
-.bio-long.is-visible {
-  display: block;
-}
-</style>
+{% include operating-line.html variant="1" flush=true %}
 
 <h2>bio</h2>
 
 <div class="bio-section">
+  {% assign headshot_placement = page.headshot | default: "bio" %}
+  {% if headshot_placement == "bio" %}
+    {% include headshot.html placement="bio" %}
+  {% endif %}
+
   <div id="bio-short">
     <p>Frank Chen is co-founder and CTO of Balto Energy, a climate tech startup using AI to transform home energy. Before Balto, he led special projects in developer infrastructure at Slack, built data platforms at Palantir for healthcare, energy, and finance customers, and launched AWS WorkDocs at Amazon.</p>
     <p>He's been keeping his brain in markdown + git for almost 20 years—journals, integrations, everything in plaintext. He built a personal AI agent called Frankly that lived inside it. Then he did the same thing for his company. He writes about what happened.</p>
@@ -76,28 +41,30 @@ use-site-title: true
   </div>
 </div>
 
+{% include operating-line.html variant="2" %}
+
 <h2>modus operandi</h2>
 <p>Most AI demos end where the real work starts. I build systems for what comes after: agents, graphs, teams, and workflows that have to survive permits, people, bills, and operations with consequences. I write about what actually ships vs. what demos well, how culture scales in startups, and why I put my brain in a git repo 20 years ago—then did the same thing for our company and gave an AI agent the keys.</p>
 
-<p class="spacer"></p>
-<hr>
-<p class="spacer"></p>
+{% include operating-line.html variant="3" %}
 
 <h3>recent writing</h3>
-<ul>
+<ul class="simple-list">
   {% for post in site.posts limit:2 %}
-    <li><a href="{{ post.url }}">{{ post.title }}</a>  <i>{{post.subtitle}}</i></li>
+    <li><a href="{{ post.url }}">{{ post.title }}</a><i>{{post.subtitle}}</i></li>
   {% endfor %}
 </ul>
+
+{% include operating-line.html variant="4" %}
 
 <h3>selected writing</h3>
-<ul>
+<ul class="simple-list">
   {% for post in site.categories['selected'] %}
-    <li><a href="{{ post.url }}">{{ post.title }}</a> <i>{{post.subtitle}}</i></li>
+    <li><a href="{{ post.url }}">{{ post.title }}</a><i>{{post.subtitle}}</i></li>
   {% endfor %}
 </ul>
 
-<a href="/writing"><h3>more…</h3></a>
+<p><a href="/writing">more essays &rarr;</a></p>
 
 <script>
 function getTextContent(el) {
