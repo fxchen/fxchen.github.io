@@ -482,6 +482,11 @@ pre a:focus-visible {
 .headshot-image {
   display: block;
   width: 100%;
+  /* height:auto is load-bearing. The img's height attribute lands as a
+     presentational hint, and aspect-ratio only computes a height when height
+     is auto — so without this the box is 150px wide by whatever the attribute
+     says. The old 180x180 attributes hid it by being nearly square. */
+  height: auto;
   aspect-ratio: 1;
   object-fit: cover;
   border: 1.5px solid var(--ink);
