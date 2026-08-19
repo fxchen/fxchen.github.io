@@ -186,14 +186,39 @@ h1, h2, h3, h4, h5, h6 {
 p { line-height: 1.6; margin: 0 0 var(--space-5); }
 .blog-post p, .blog-post li { max-width: 68ch; }
 
+/* An underline at rest is forced here, not a preference.
+   #41511A against body charcoal #2A2A27 is 1.66:1. WCAG 1.4.1 lets colour be
+   the sole link cue only at >=3:1 against the surrounding text, and this palette
+   cannot reach it: a green light enough to clear 3:1 against charcoal fails the
+   4.5:1 text gate on porcelain (--acid-green is already 2.54:1 there). There is
+   no third green that satisfies both, so the cue has to be non-colour.
+   Rest is deliberately quiet — 40% of currentColor, hairline — so a 25-link
+   reference list does not read as a wall. Hover promotes to full colour, 2px,
+   and adds the wash so the target is unmistakable once you are on it. */
 a {
   color: var(--acid-green-dark);
   text-decoration-line: underline;
-  text-decoration-color: transparent;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  transition: color 150ms ease, text-decoration-color 150ms ease, border-color 150ms ease;
+  transition: color 150ms ease, text-decoration-color 150ms ease,
+              text-decoration-thickness 150ms ease, background-color 150ms ease,
+              border-color 150ms ease;
 }
-a:hover, a:focus { color: var(--acid-green-dark); text-decoration-color: currentColor; }
+a:hover, a:focus {
+  color: var(--acid-green-dark);
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+}
+/* The wash is prose-only. On nav, footer, cards and the pager the link already
+   has a container to hover against, and a second highlight there reads as noise. */
+.blog-post a:hover, .blog-post a:focus { background-color: var(--acid-green-wash); }
+
+/* Chrome/Safari support color-mix; the fallback keeps a visible underline rather
+   than silently dropping to `transparent`, which is the state being fixed. */
+@supports not (color: color-mix(in srgb, currentColor 40%, transparent)) {
+  a { text-decoration-color: currentColor; }
+}
 
 /* ---------- §2.3 Interaction states — focus ---------- */
 
