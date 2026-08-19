@@ -176,17 +176,49 @@ h1, h2, h3, h4, h5, h6 {
 .h4, h4 { font-size: 1.375rem !important; font-weight: 500; }
 .h5, h5 { font-size: 1.125rem !important; font-weight: 500; }
 
-p { line-height: 1.6; margin: 0 0 var(--space-5); max-width: 68ch; }
+/* The 68ch measure is scoped to prose on the next line, deliberately. It used to
+   be set here on every `p` as well, which is both redundant and a trap: a capped
+   block box keeps `margin-left: 0`, so `text-align: center` centres the text
+   inside the stranded box rather than inside its container. That is exactly what
+   put the footer copyright 120px left of centre at wide viewports — the cap
+   binds at 530px inside an 800px column, and only at wide viewports, which is
+   why it read as a full-screen-only bug. Cap prose where prose lives. */
+p { line-height: 1.6; margin: 0 0 var(--space-5); }
 .blog-post p, .blog-post li { max-width: 68ch; }
 
+/* An underline at rest is forced here, not a preference.
+   #41511A against body charcoal #2A2A27 is 1.66:1. WCAG 1.4.1 lets colour be
+   the sole link cue only at >=3:1 against the surrounding text, and this palette
+   cannot reach it: a green light enough to clear 3:1 against charcoal fails the
+   4.5:1 text gate on porcelain (--acid-green is already 2.54:1 there). There is
+   no third green that satisfies both, so the cue has to be non-colour.
+   Rest is deliberately quiet — 40% of currentColor, hairline — so a 25-link
+   reference list does not read as a wall. Hover promotes to full colour, 2px,
+   and adds the wash so the target is unmistakable once you are on it. */
 a {
   color: var(--acid-green-dark);
   text-decoration-line: underline;
-  text-decoration-color: transparent;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  transition: color 150ms ease, text-decoration-color 150ms ease, border-color 150ms ease;
+  transition: color 150ms ease, text-decoration-color 150ms ease,
+              text-decoration-thickness 150ms ease, background-color 150ms ease,
+              border-color 150ms ease;
 }
-a:hover, a:focus { color: var(--acid-green-dark); text-decoration-color: currentColor; }
+a:hover, a:focus {
+  color: var(--acid-green-dark);
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+}
+/* The wash is prose-only. On nav, footer, cards and the pager the link already
+   has a container to hover against, and a second highlight there reads as noise. */
+.blog-post a:hover, .blog-post a:focus { background-color: var(--acid-green-wash); }
+
+/* Chrome/Safari support color-mix; the fallback keeps a visible underline rather
+   than silently dropping to `transparent`, which is the state being fixed. */
+@supports not (color: color-mix(in srgb, currentColor 40%, transparent)) {
+  a { text-decoration-color: currentColor; }
+}
 
 /* ---------- §2.3 Interaction states — focus ---------- */
 
@@ -818,7 +850,18 @@ h2.linked-section .fa { display: none; }
    h3 titles from stacking four lines deep. Widening past col-lg-8 would buy
    a third column back, but that is a layout change, not a grid change. */
 
+/* The whole card is the target. It used to be 16.1% of one: on a 363x416 card
+   the title and arrow covered 24,241px of 150,965px, and the arrow itself was an
+   8x21px hit area — under WCAG 2.5.8's 24x24 floor and effectively untappable on
+   a phone. Two anchors also pointed at the same href, so the destination was
+   announced twice.
+   The fix is a stretched pseudo-element on the ONE real anchor, not an <a>
+   wrapping the card. Wrapping would make the accessible name the card's whole
+   text — "Essay The Company as a Codebase Every workflow ships... August 17,
+   2026 7 min read" — where this keeps it the title alone, and leaves the dek
+   selectable. The arrow is a <span> in the markup for the same reason. */
 .index-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
@@ -827,8 +870,28 @@ h2.linked-section .fa { display: none; }
   border-radius: 6px;
   padding: var(--space-5);
   box-shadow: 0 2px 8px rgba(8, 9, 9, 0.06), 0 1px 2px rgba(8, 9, 9, 0.05);
+  transition: border-color 150ms ease;
 }
 .index-card--featured { padding: var(--space-6); }
+
+.index-card-title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+}
+/* Hairline promoted to the structural rule on hover — the same mechanic
+   baltoenergy.com uses (group-hover -> --v4-line-strong), on tokens this system
+   already declares. No lift, no shadow change: §2.4 permits property
+   transitions and nothing else, and a border that firms up reads as affordance
+   without becoming motion. */
+.index-card:hover { border-color: var(--rule-strong); }
+.index-card:hover .index-card-title a { color: var(--acid-green-dark); }
+.index-card:hover .index-card-arrow { color: var(--acid-green-dark); }
+/* The stretched link means the anchor's own ring would trace the whole card
+   anyway; stating it on the card keeps the radius correct and the intent clear. */
+.index-card:focus-within { outline: 2px solid var(--focus-ring-light); outline-offset: 2px; }
+.index-card-title a:focus-visible { outline: none; }
 
 /* ---------- §4.13 Artifact sprite ---------- */
 /* Presentation for the hand-authored inline SVG symbols defined once in
@@ -887,13 +950,15 @@ h2.linked-section .fa { display: none; }
   margin-top: auto;
   padding-top: var(--space-2);
 }
+/* A mark, not a link — the card is the link now. It keeps the green because it
+   still reads as "this goes somewhere", and it is aria-hidden in the markup so
+   it is never announced as a second route to the same place. */
 .index-card-arrow {
   margin-left: auto;
-  color: var(--acid-green-dark);
-  text-decoration: none;
+  color: var(--field-gray);
   font-family: var(--font-mono);
+  transition: color 150ms ease;
 }
-.index-card-arrow:hover, .index-card-arrow:focus-visible { text-decoration: underline; }
 
 /* ---------- §4.14 Simple list ---------- */
 
