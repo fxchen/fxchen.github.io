@@ -9,6 +9,14 @@ subtitle: A very incomplete list of projects, references, etc
 
 Talks, podcasts, book chapters, and open-source projects by Frank Chen, co-founder and CTO of Balto Energy. A very incomplete list of projects, references, etc. Roughly ordered chronologically.
 
+## 2026
+
+O'Reilly's Observability Engineering, 2nd Edition [[oreilly](https://www.oreilly.com/library/view/observability-engineering-2nd/9781098179915/)] [[free copy via honeycomb](https://www.honeycomb.io/observability-engineering-oreilly-book)]. Contributor, returning from the 2022 first edition. This time on ontologies as a shared language for humans and AI: a shared semantic model of a sociotechnical system lets people and agents describe the same reality, which is what makes an AI workflow debuggable rather than merely instrumented. Ontologies give the vocabulary, evals give the feedback, and together they are a reliability practice rather than a modeling exercise.
+
+## 2025
+
+Agile Electrification [[agileelectrification.org](https://agileelectrification.org/)]. Co-started with the [UC San Diego Design Lab](https://designlab.ucsd.edu/) and sponsored by the UC San Diego Foundation — clean, abundant, distributed energy for California homes. It runs as a living laboratory rather than a conference: contractors and researchers simulate how homeowner batteries actually respond to the grid under different policy conditions, so questions about market design get answered from first principles instead of inherited from utility program design. Open and non-pay-to-play. The annual convening was October 3, 2025, with a fireside between Katherine Ellison and Don Norman on humanity-centered design for energy abundance.
+
 ## 2023
 
 AI Powered Development Workflows: Sharing initial experiments with generative models and their challenges in developer workflows [[Developer Experience Summit](/ai-dev)]. I delved into the integration of generative artificial intelligence (AI) models into the developer workflow, exploring initial experiments with AI-powered code review in open source repositories at Slack.
