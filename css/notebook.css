@@ -176,7 +176,14 @@ h1, h2, h3, h4, h5, h6 {
 .h4, h4 { font-size: 1.375rem !important; font-weight: 500; }
 .h5, h5 { font-size: 1.125rem !important; font-weight: 500; }
 
-p { line-height: 1.6; margin: 0 0 var(--space-5); max-width: 68ch; }
+/* The 68ch measure is scoped to prose on the next line, deliberately. It used to
+   be set here on every `p` as well, which is both redundant and a trap: a capped
+   block box keeps `margin-left: 0`, so `text-align: center` centres the text
+   inside the stranded box rather than inside its container. That is exactly what
+   put the footer copyright 120px left of centre at wide viewports — the cap
+   binds at 530px inside an 800px column, and only at wide viewports, which is
+   why it read as a full-screen-only bug. Cap prose where prose lives. */
+p { line-height: 1.6; margin: 0 0 var(--space-5); }
 .blog-post p, .blog-post li { max-width: 68ch; }
 
 a {
