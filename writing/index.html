@@ -28,7 +28,7 @@ show-avatar : true
         <span>{{ post.date | date: "%B %-d, %Y" }}</span>
         <span aria-hidden="true">&middot;</span>
         <span>{{ post.content | strip_html | number_of_words | divided_by: 200 | at_least: 1 }} min read</span>
-        <a class="index-card-arrow" href="{{ post.url | prepend: site.baseurl }}" aria-label="Read {{ post.title }}">&rarr;</a>
+        <span class="index-card-arrow" aria-hidden="true">&rarr;</span>
       </p>
     </article>
   {% endfor %}
@@ -51,7 +51,7 @@ show-avatar : true
           <span>{{ post.date | date: "%B %-d, %Y" }}</span>
           <span aria-hidden="true">&middot;</span>
           <span>{{ post.content | strip_html | number_of_words | divided_by: 200 | at_least: 1 }} min read</span>
-          <a class="index-card-arrow" href="{{ post.url | prepend: site.baseurl }}" aria-label="Read {{ post.title }}">&rarr;</a>
+          <span class="index-card-arrow" aria-hidden="true">&rarr;</span>
         </p>
       </article>
     {% endunless %}
