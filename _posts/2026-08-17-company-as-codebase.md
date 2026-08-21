@@ -47,9 +47,9 @@ So by the time agents were writing into the brain at volume, the checks already 
 
 The two-artifact rule would be a nice engineering habit if it stopped at Foundry sessions. At Northern Pacific Power, our operations company, the frontline runs the same loop without anyone touching a keyboard.
 
-The moment a judgment happens — why a permit got held, what an inspector actually wanted, why the team made a call on a hard roof — the operator gets prompted, inside the tool they already work in, and the job doesn't advance until they answer. Thirty seconds of talk-to-text. Each capture is a small pull request against the company brain: here's the result, and here's the why that would otherwise have lived in one person's head until they left.
+The moment a judgment happens—why a permit got held, what an inspector actually wanted, why the team made a call on a hard roof—the operator gets prompted, inside the tool they already work in, and the job doesn't advance until they answer. Thirty seconds of talk-to-text. Each capture is a small pull request against the company brain: here's the result, and here's the why that would otherwise have lived in one person's head until they left.
 
-Then the human gate. Twice a week an agent clusters everything captured, and a human decides what becomes doctrine. The bar is three jobs saying the same thing, or one job that was expensive enough on its own. What clears the bar gets written down once, where the next job inherits it. An inspector's preference at a single install is now a line in a county permitting guide. A change order that hurt once — a question nobody thought to ask during sales — is now a checklist line, and it doesn't get to happen twice. Nobody rediscovers it, because nobody has to.
+Then the human gate. Twice a week an agent clusters everything captured, and a human decides what becomes doctrine. The bar is three jobs saying the same thing, or one job that was expensive enough on its own. What clears the bar gets written down once, where the next job inherits it. An inspector's preference at a single install is now a line in a county permitting guide. A change order that hurt once—a question nobody thought to ask during sales—is now a checklist line, and it doesn't get to happen twice. Nobody rediscovers it, because nobody has to.
 
 ## The thesis in one workflow
 
@@ -79,7 +79,7 @@ Inside a sandbox, let the agent iterate. Before production, keep human judgment 
 
 ![Three status rows under the heading "a gate that can fail": BLOCKS MERGE for sensitive PII, a missing verdict, or an unverified review model; SELF-PUBLISHES for ordinary content once the checks pass; HUMAN APPROVAL for changes to the gate itself.](/img-posts/company-as-codebase-gate.webp){: width="1200" height="630" loading="lazy" decoding="async"}
 
-The first failure mode is boredom. CI works in software because a red build is loud and public. Our gates are software in some places — the modal that won't let a job advance, the review agent that fails a pull request on sensitive PII — and culture in others, like the session writeback a tired person could skip on a Friday. The software gates will hold. The human ones are what I watch, because most knowledge systems die the same death: not disproven, just quietly unattended. A couple months of novelty is not evidence against boredom.
+The first failure mode is boredom. CI works in software because a red build is loud and public. Our gates are software in some places—the modal that won't let a job advance, the review agent that fails a pull request on sensitive PII—and culture in others, like the session writeback a tired person could skip on a Friday. The software gates will hold. The human ones are what I watch, because most knowledge systems die the same death: not disproven, just quietly unattended. A couple months of novelty is not evidence against boredom.
 
 The second is closing Carl's gate too early. The cost of a wrong diagnosis merging into doctrine is not symmetric with the cost of a slow one, and "the agent is usually right" is exactly the sentence I'd expect to hear right before doctrine rots. So the gate stays until the diagnostics can catch the agent being wrong, not just the models.
 
@@ -87,6 +87,6 @@ Back to the Compass endpoint. The manual work it saved was gone by lunch. The sk
 
 [^writeback]: The actual fields, because the specifics are the discipline: what changed in the data source, what the prompt got wrong, which ontology descriptions were missing or misleading, and which functions need tags before agents can find them. A few minutes at the end of a session. It felt like a tax for about two weeks; now a session without one feels unfinished.
 
-[^ci]: Continuous integration was a discipline before it was a product. Teams committed to integrating daily — and dropping everything when the build broke — years before build servers existed to enforce it; the tools encoded a practice that already worked. That order, practice first and automation second, is the entire bet here.
+[^ci]: Continuous integration was a discipline before it was a product. Teams committed to integrating daily—and dropping everything when the build broke—years before build servers existed to enforce it; the tools encoded a practice that already worked. That order, practice first and automation second, is the entire bet here.
 
 [^gate]: The self-publish default is deliberate: required automated checks review ordinary content, while CODEOWNERS requires human approval for changes to `.github/`, `REVIEW.md`, and `AGENTS.md`. Production-changing operational loops stay human-gated for a different reason: a wrong change costs more than a slow one.
