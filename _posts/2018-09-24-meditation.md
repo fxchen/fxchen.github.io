@@ -156,7 +156,7 @@ The assistant teacher has open periods to ask questions (think of an academic of
 
 One thing I would bring next time is to prepare myself to stretch with roller balls throughout the ten days. I will bring sport bands and a roller or therapy balls so I have the tools to massage and stretch muscles that are knoted.
 
-> [dhamma.org][link-vipassana-questions]…<br> All students attending the course observe "noble silence" — that is, silence of body, speech and mind. They agree to refrain from communicating with their co-meditators. However, students are free to contact the management about their material needs, and to speak with the instructor. Silence is observed for the first nine full days. On the tenth day, speech is resumed as a way of re-establishing the normal pattern of daily life. Continuity of practice is the secret of success in this course; silence is an essential component in maintaining this continuity.
+> [dhamma.org][link-vipassana-questions]…<br> All students attending the course observe "noble silence"—that is, silence of body, speech and mind. They agree to refrain from communicating with their co-meditators. However, students are free to contact the management about their material needs, and to speak with the instructor. Silence is observed for the first nine full days. On the tenth day, speech is resumed as a way of re-establishing the normal pattern of daily life. Continuity of practice is the secret of success in this course; silence is an essential component in maintaining this continuity.
 
 **"How do you get there? This workshop appears to be in the middle of nowehere."**
 

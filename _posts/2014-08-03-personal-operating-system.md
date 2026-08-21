@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Design your Personal Operating System — Habits
+title: Design your Personal Operating System—Habits
 <!-- subtitle: Secrets to habit change -->
 permalink: personal-operating-system
 image: https://farm3.staticflickr.com/2182/2328737233_9cd46fe0f2_b.jpg

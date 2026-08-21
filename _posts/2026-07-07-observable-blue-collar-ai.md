@@ -16,7 +16,7 @@ The thesis, stated plainly: blue-collar AI is an observability problem, not a mo
 
 And forward-deployed engineering doesn't solve it. I say that as the forward-deployed party. You can deploy engineers to build the graph. You can't deploy anyone to keep it true. Keeping it true is the experience of running the business, field note to customer promise, and it has to be owned end-to-end from inside.
 
-![Woodcut engraving: a dense stone lattice of graph nodes and edges fills the frame, and a single work-gloved hand reaches in from the edge to land one decisive acid-green check on a node — the field correcting the graph, trust flowing from the edge in.](/img-posts/observable-blue-collar-ai-corrected-node.webp){: width="1536" height="1024" loading="lazy" decoding="async"}
+![Woodcut engraving: a dense stone lattice of graph nodes and edges fills the frame, and a single work-gloved hand reaches in from the edge to land one decisive acid-green check on a node—the field correcting the graph, trust flowing from the edge in.](/img-posts/observable-blue-collar-ai-corrected-node.webp){: width="1536" height="1024" loading="lazy" decoding="async"}
 
 ## The wrong story
 
@@ -30,7 +30,7 @@ The frame that stuck, the one Andrew now explains to other people without us in 
 
 On one side, deterministic layers prepare context before the model sees anything: the ontology, the canonical records, the permit data that's been cleaned and cross-checked. On the other side, deterministic layers evaluate, route, and constrain what the model produces before any of it touches a customer. The model sits in the middle, doing the flexible work models are actually good at.
 
-![Woodcut cutaway: a heavy mechanical press, its two machined plates traced by a single verdigris line, clamps a soft half-formed haze in the middle — deterministic layers on both sides of the flexible part, the trust living in the plates, stamped CHECKED.](/img-posts/observable-blue-collar-ai-ai-sandwich.webp){: width="1536" height="1024" loading="lazy" decoding="async"}
+![Woodcut cutaway: a heavy mechanical press, its two machined plates traced by a single verdigris line, clamps a soft half-formed haze in the middle—deterministic layers on both sides of the flexible part, the trust living in the plates, stamped CHECKED.](/img-posts/observable-blue-collar-ai-ai-sandwich.webp){: width="1536" height="1024" loading="lazy" decoding="async"}
 
 The middle is where the demos live. The bread is where the trust lives. That's the difference between an AI wrapper and a system an operator will stake his company's reputation on.[^honeycomb] The sandwich is also what makes the context graph safe to build experiments on.
 
@@ -48,7 +48,7 @@ The phrase I want to keep is blue-collar AI. The field doesn't need a chatbot. T
 
 A crew sees why an install got weird. A sales lead hears why the customer hesitated. A permit specialist knows which jurisdiction changed its intake process last month, and a manager can tell whether a delay is noise or the first sign of a broken workflow. That's the ground truth everything above depends on, and in most companies it lives in heads and Slack threads, where it decays.
 
-![Early woodcut engraving: an open, hand-written field notebook at the base of the frame, its ink dissolving upward into a dense constellation of graph nodes, one gold thread tracing a single written line up to a single illuminated node above — the field's observation becoming the system's memory.](/img-posts/observable-blue-collar-ai-field-writes-back.webp){: width="1536" height="1024" loading="lazy" decoding="async"}
+![Early woodcut engraving: an open, hand-written field notebook at the base of the frame, its ink dissolving upward into a dense constellation of graph nodes, one gold thread tracing a single written line up to a single illuminated node above—the field's observation becoming the system's memory.](/img-posts/observable-blue-collar-ai-field-writes-back.webp){: width="1536" height="1024" loading="lazy" decoding="async"}
 
 So we gave it somewhere to land. Field observations, written as plain markdown journal entries, go into the company's shared context, link to the jobs and equipment they describe, and compound.[^journals] Before: a crew's read on a weird install died in the truck cab on the drive back. After: it's context the next estimate reasons against, and the crew can see that it is.
 

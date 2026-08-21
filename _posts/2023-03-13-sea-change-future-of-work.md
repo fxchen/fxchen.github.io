@@ -51,7 +51,7 @@ I find this space fascinating to study how human experts and human amateurs coll
 
 The full play-by-play can be found in the link. In individual measurements, the amateur group seemed to be the underdog in Chess Elo (players on average had 1000 fewer Elo points) and AI (both hardware and software were inferior). Yet, the amateur group prevailed - potentially due to their efficacy on using AI.
 
-![A chrome centaur hunched over a keyboard at an office desk in front of computer monitors — half horse, half knowledge worker.](/img-posts/future-of-work-centaur-office-worker.webp){: width="1024" height="1024" loading="lazy" decoding="async"}
+![A chrome centaur hunched over a keyboard at an office desk in front of computer monitors—half horse, half knowledge worker.](/img-posts/future-of-work-centaur-office-worker.webp){: width="1024" height="1024" loading="lazy" decoding="async"}
 <p class="text-muted">Generated via dalle</p>
 
 Magnus Carlsen, the current world chess champion, has spoken about how he uses AI in his own chess practice, saying that it "opens up new avenues for analyzing games and potential outcomes." This is just one example of how AI can be used to augment human abilities rather than replacing them.
