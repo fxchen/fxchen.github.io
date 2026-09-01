@@ -3,7 +3,7 @@ layout: post
 title: "Steering Beats Scale"
 subtitle: "When scale outruns the feedback loop, numbers rot."
 permalink: number-rot
-share-img: "https://frankc.net/img-posts/number-rot.jpg"
+share-img: "https://frankc.net/img-posts/number-rot-quote.jpg"
 bigimg: /img-posts/number-rot-banner.webp
 categories: ['selected']
 ---
