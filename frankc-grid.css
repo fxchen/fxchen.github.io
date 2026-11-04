@@ -133,3 +133,46 @@
   :root { --fg-ruler-size: 5px; --fg-tick-minor-len: 3px; }
 }
 @media print { .fg-layer { display: none !important; } }
+
+/* ---------- inspect: hold ⌥ for redlines (frankc-grid.js) ---------- */
+
+:root {
+  --fg-redline: #FF5A3D;     /* coral: the one red on frankc.net */
+  --fg-redline-ink: #080909; /* ink on coral is 7:1; white on coral is only 3:1 */
+}
+
+.fg-inspect { position: absolute; top: 0; left: 0; width: 0; height: 0; z-index: 2147483000; pointer-events: none; }
+.fg-inspect > div { position: absolute; }
+.fg-i-spec { box-shadow: 0 0 0 1px var(--fg-redline); }
+.fg-i-body { outline: 1px dashed var(--fg-redline); outline-offset: 3px; box-shadow: none; }
+.fg-i-label,
+.fg-i-badge {
+  font: 500 10px/1.4 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  color: var(--fg-redline-ink);
+  background: var(--fg-redline);
+  border-radius: 3px;
+  padding: 1px 4px;
+}
+.fg-i-spec > .fg-i-label { position: absolute; left: -1px; bottom: 100%; margin-bottom: 3px; }
+.fg-i-body > .fg-i-label { bottom: auto; top: 100%; margin: 6px 0 0; } /* below: the space above is the heading's */
+
+/* Vertical dimension line with end caps; the number sits to its right */
+.fg-i-gap { width: 1px; background: var(--fg-redline); display: flex; align-items: center; }
+.fg-i-gap::before, .fg-i-gap::after { content: ""; position: absolute; left: -3px; width: 7px; height: 1px; background: var(--fg-redline); }
+.fg-i-gap::before { top: 0; }
+.fg-i-gap::after { bottom: 0; }
+.fg-i-gap > .fg-i-label { margin-left: 6px; }
+
+.fg-i-badge { position: fixed; right: 16px; bottom: 16px; padding: 4px 8px; font-size: 11px; border: 0; cursor: pointer; pointer-events: auto; }
+
+/* Footer hint (optional): any element with data-fg-inspect toggles inspect on click */
+button[data-fg-inspect] { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+button[data-fg-inspect]:hover { text-decoration: underline; text-underline-offset: 3px; }
+.fg-touch { display: none; }
+@media (hover: none) { .fg-hover { display: none; } .fg-touch { display: inline; } }
+[data-fg-inspect] kbd {
+  font: inherit; padding: 0 4px; border: 1px solid currentColor; border-radius: 3px; box-shadow: none; background: none; color: inherit;
+}
+@media print { .fg-inspect { display: none !important; } }
