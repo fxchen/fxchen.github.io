@@ -1,0 +1,135 @@
+/* frankc-grid.css — "blueprint grid" background kit for frankc.net
+   Pure CSS gradients. Pair with frankc-grid.js (auto-injects layers),
+   or use the .fg-* utility classes directly. All tokens are --fg-* vars. */
+
+:root {
+  /* ink: r,g,b triplet so opacities can vary per layer */
+  --fg-ink: 22, 22, 21;
+  --fg-tick-major-a: .12;   /* long ruler tick */
+  --fg-tick-minor-a: .07;   /* short ruler tick */
+  --fg-dot-a: .16;
+  --fg-hatch-a: .07;
+
+  --fg-tick-major: 64px;    /* long tick spacing */
+  --fg-tick-minor: 8px;     /* short tick spacing */
+  --fg-ruler-size: 7px;     /* ruler thickness */
+  --fg-tick-minor-len: 4px; /* short tick length */
+  --fg-dot-size: 1px;
+  --fg-dot-gap: 22px;
+  --fg-hatch-gap: 7px;
+
+  --fg-glow-1: rgba(18, 100, 163, .06);
+  --fg-glow-2: rgba(130, 80, 223, .05);
+
+  --fg-accent-1: rgb(18, 100, 163);
+  --fg-accent-2: rgb(46, 125, 107);
+  --fg-accent-3: rgb(130, 80, 223);
+
+  --fg-mask: radial-gradient(60% 70% at 50% 45%, #000, transparent 75%);
+}
+
+/* Dark tokens: OS dark (unless forced light) or forced dark */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-fg-theme="light"]) {
+    --fg-ink: 236, 236, 230;
+    --fg-tick-major-a: .14;
+    --fg-tick-minor-a: .08;
+    --fg-dot-a: .14;
+    --fg-hatch-a: .06;
+    --fg-glow-1: rgba(64, 150, 220, .10);
+    --fg-glow-2: rgba(160, 120, 240, .08);
+    --fg-accent-1: rgb(88, 166, 224);
+    --fg-accent-2: rgb(84, 180, 150);
+    --fg-accent-3: rgb(170, 130, 245);
+  }
+}
+:root[data-theme="dark"], :root[data-fg-theme="dark"], [data-theme="dark"] {
+  --fg-ink: 236, 236, 230;
+  --fg-tick-major-a: .14;
+  --fg-tick-minor-a: .08;
+  --fg-dot-a: .14;
+  --fg-hatch-a: .06;
+  --fg-glow-1: rgba(64, 150, 220, .10);
+  --fg-glow-2: rgba(160, 120, 240, .08);
+  --fg-accent-1: rgb(88, 166, 224);
+  --fg-accent-2: rgb(84, 180, 150);
+  --fg-accent-3: rgb(170, 130, 245);
+}
+
+/* ---------- utility classes ---------- */
+
+/* Masked dot grid (fades out toward edges) */
+.fg-dots {
+  background-image: radial-gradient(rgba(var(--fg-ink), var(--fg-dot-a)) var(--fg-dot-size), transparent var(--fg-dot-size));
+  background-size: var(--fg-dot-gap) var(--fg-dot-gap);
+  -webkit-mask-image: var(--fg-mask);
+          mask-image: var(--fg-mask);
+}
+
+/* 135deg diagonal hatch */
+.fg-hatch {
+  background-image: repeating-linear-gradient(135deg,
+    rgba(var(--fg-ink), var(--fg-hatch-a)) 0 1px, transparent 1px var(--fg-hatch-gap));
+}
+
+/* Two soft color glows */
+.fg-glow {
+  background-image:
+    radial-gradient(40% 50% at 18% 30%, var(--fg-glow-1), transparent 70%),
+    radial-gradient(35% 45% at 84% 62%, var(--fg-glow-2), transparent 70%);
+}
+
+/* 1px tri-color accent rule; use on an <hr> or empty <div> */
+.fg-accent-line {
+  display: block;
+  height: 1px;
+  border: 0;
+  margin: 0;
+  background: linear-gradient(90deg, transparent, var(--fg-accent-1) 22%,
+    var(--fg-accent-2) 50%, var(--fg-accent-3) 78%, transparent);
+}
+
+/* Horizontal ruler: long tick every 64px, short every 8px */
+.fg-ruler-x {
+  height: var(--fg-ruler-size);
+  background-image:
+    linear-gradient(90deg, rgba(var(--fg-ink), var(--fg-tick-major-a)) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--fg-ink), var(--fg-tick-minor-a)) 1px, transparent 1px);
+  background-size: var(--fg-tick-major) var(--fg-ruler-size), var(--fg-tick-minor) var(--fg-tick-minor-len);
+  background-repeat: repeat-x;
+}
+
+/* Vertical ruler */
+.fg-ruler-y {
+  width: var(--fg-ruler-size);
+  background-image:
+    linear-gradient(rgba(var(--fg-ink), var(--fg-tick-major-a)) 1px, transparent 1px),
+    linear-gradient(rgba(var(--fg-ink), var(--fg-tick-minor-a)) 1px, transparent 1px);
+  background-size: var(--fg-ruler-size) var(--fg-tick-major), var(--fg-tick-minor-len) var(--fg-tick-minor);
+  background-repeat: repeat-y;
+}
+/* Right-edge ruler: ticks hang from the right side */
+.fg-ruler-y.fg-right { background-position: right top, right top; }
+
+/* Decorative layers never catch clicks */
+.fg-dots, .fg-hatch, .fg-glow, .fg-accent-line, .fg-ruler-x, .fg-ruler-y,
+.fg-layer, .fg-layer * { pointer-events: none; }
+
+/* ---------- page-level layers (injected by frankc-grid.js) ---------- */
+
+/* Fixed full-viewport backdrop, painted behind content */
+.fg-layer { position: fixed; z-index: -1; }
+.fg-bg { inset: 0; overflow: hidden; }
+.fg-bg > .fg-glow, .fg-bg > .fg-dots { position: absolute; inset: 0; }
+
+/* Edge rulers; left/right/inset instead of 100vw = no horizontal scroll */
+.fg-edge-top    { top: 0; left: 0; right: 0; z-index: 0; }
+.fg-edge-left   { top: 0; bottom: 0; left: 0; z-index: 0; }
+.fg-edge-right  { top: 0; bottom: 0; right: 0; z-index: 0; }
+.fg-edge-accent { top: var(--fg-ruler-size); left: 0; right: 0; z-index: 0; }
+
+/* Thin rulers on small screens */
+@media (max-width: 600px) {
+  :root { --fg-ruler-size: 5px; --fg-tick-minor-len: 3px; }
+}
+@media print { .fg-layer { display: none !important; } }
